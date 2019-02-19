@@ -18,6 +18,11 @@ namespace ContosoUniversity.Controllers.api
     public class StudentsController : ApiController
     {
         private SchoolContext db = new SchoolContext();
+        public SchoolContext DbContext
+        {
+            get { return db; }
+            set { db = value; }
+        }
 
         // GET: api/Students
         public IQueryable<Student> GetPeople()

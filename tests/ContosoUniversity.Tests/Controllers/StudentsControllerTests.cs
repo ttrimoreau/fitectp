@@ -1,4 +1,5 @@
 ﻿using ContosoUniversity.Controllers;
+using ContosoUniversity.Controllers.api;
 using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 using ContosoUniversity.Tests.Tools;
@@ -7,6 +8,9 @@ using NUnit.Framework;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+
+
+
 namespace ContosoUniversity.Tests.Controllers
 {
     class StudentsControllerTests : IntegrationTestsBase
@@ -20,7 +24,9 @@ namespace ContosoUniversity.Tests.Controllers
         {
             httpContext = new MockHttpContextWrapper();
             controllerToTest = new StudentsController();
-            controllerToTest.ControllerContext = new ControllerContext(httpContext.Context.Object, new RouteData(), controllerToTest);
+            //controllerToTest.ControllerContext = new ControllerContext(httpContext.Context.Object, new RouteData(), controllerToTest);
+            //controllerToTestError
+            //What is this line needed for?
             dbContext = new DAL.SchoolContext(this.ConnectionString);
             controllerToTest.DbContext = dbContext;
         }
