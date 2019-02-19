@@ -1,4 +1,5 @@
 ﻿
+using ContosoUniversity.BL;
 using ContosoUniversity.DAL;
 using ContosoUniversity.Enum;
 using ContosoUniversity.Models;
@@ -153,6 +154,31 @@ namespace ContosoUniversity.Controllers
                 {
                     if (upload != null && upload.ContentLength > 0)
                     {
+                        #region CheckImage
+                        CheckImage check = new CheckImage();
+                        //getting the image
+                        string fileName = System.IO.Path.GetExtension(upload.FileName);
+                        //call of the verification Extension method
+                        bool extensionIsTrue = check.checkExtension(fileName);
+
+                        if (extensionIsTrue == false)
+                        {
+                            ViewBag.ErrorType = ErrorMessages.ErrorExtension();
+                            Student student = db.Students.Include(s => s.FileImage).SingleOrDefault(s => s.ID == id);
+                            return View(student);
+                        }
+
+                        //call of the verfication Size method
+                        bool sizeIsCorrect = check.checkSize(upload.ContentLength);
+
+                        if (sizeIsCorrect == false)
+                        {
+                            ViewBag.ErrorSize = ErrorMessages.ErrorSize();
+                            Student student = db.Students.Include(s => s.FileImage).SingleOrDefault(s => s.ID == id);
+                            return View(student);
+                        }
+                        #endregion
+                        //Remove the the previous image
                         if (studentToUpdate.FileImage.Any(f => f.FileType == FileType.Avatar))
                         {
                             db.FileImages.Remove(studentToUpdate.FileImage.First(f => f.FileType == FileType.Avatar));
