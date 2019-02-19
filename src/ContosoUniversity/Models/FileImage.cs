@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ContosoUniversity.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,10 +8,7 @@ using System.Web;
 namespace ContosoUniversity.Models
 {
 
-    public enum FileType
-    {
-
-    }
+    
     public class FileImage
     {
 
@@ -18,7 +16,7 @@ namespace ContosoUniversity.Models
         public int ID { get; set; }
 
         public FileType FileType { get; set; }
-
+        [StringLength(100)]
         public string ContentType { get; set; }
 
         public byte[] Content { get; set; }

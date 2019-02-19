@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ContosoUniversity.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,15 +7,6 @@ using System.Web;
 
 namespace ContosoUniversity.Models
 {
-
-    public enum Day
-    {
-        Lundi,
-        Mardi,
-        Mercredi,
-        Jeudi,
-        Vendredi
-    }
 
     public class Lessons
     {
