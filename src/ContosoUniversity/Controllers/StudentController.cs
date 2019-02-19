@@ -94,7 +94,7 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "LastName, FirstMidName, EnrollmentDate")]Student student)
         {
-            try
+            try 
             {
                 if (ModelState.IsValid)
                 {
