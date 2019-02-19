@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ContosoUniversity.Models
@@ -17,6 +18,24 @@ namespace ContosoUniversity.Models
         [Display(Name = "First Name")]
         public string FirstMidName { get; set; }
 
+
+
+        [Required]
+        [MinLength(3, ErrorMessage = "Username  must be at least 3 characters long.")]
+        [MaxLength(15, ErrorMessage = "Username cannot be longer than 15 characters.")]
+        public string UserName { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [StringLength(64, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        public string PassWord { get; set; }
+
+
+        [Required]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [StringLength(30, ErrorMessage = "Email cannot be longer than 30 characters.")]
+        public string Email { get; set; }
+
         [Display(Name = "Full Name")]
         public string FullName
         {
@@ -25,5 +44,6 @@ namespace ContosoUniversity.Models
                 return LastName + ", " + FirstMidName;
             }
         }
+        public virtual ICollection<FileImage> FileImage { get; set; }
     }
 }
