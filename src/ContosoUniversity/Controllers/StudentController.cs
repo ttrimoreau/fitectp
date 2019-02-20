@@ -94,32 +94,16 @@ namespace ContosoUniversity.Controllers
         }
 
 
+
         //Post
         [HttpPost]
         public ActionResult Details(int courseID)
         {
             SchoolContext db = new SchoolContext();
-            if (Session["UserId"] == null)
+            if (Session["UserID"] == null)
             {
                 return View();
             }
-            int id = int.Parse(Session["UserId"].ToString());
-            db.Enrollments.Add(new Enrollment { StudentID = id, CourseID = courseID });
-            db.SaveChanges();
-            ViewBag.Message = "Subscription successful !";
-            return RedirectToAction("Details");
-        }
-
-
-        //Post
-        [HttpPost]
-        public ActionResult Details(int courseID)
-        {
-            SchoolContext db = new SchoolContext();
-            //if (Session["UserID"] == null)
-            //{
-            //    return View();
-            //}
             int id = int.Parse(Session["UserId"].ToString());
             db.Enrollments.Add(new Enrollment { StudentID = id, CourseID = courseID });
             db.SaveChanges();
