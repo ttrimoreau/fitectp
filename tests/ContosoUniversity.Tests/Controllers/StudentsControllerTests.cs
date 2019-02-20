@@ -3,12 +3,14 @@ using ContosoUniversity.Controllers.api;
 using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 using ContosoUniversity.Tests.Tools;
+using ContosoUniversity.ViewModels;
 using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -18,14 +20,14 @@ namespace ContosoUniversity.Tests.Controllers
 {
     class StudentsControllerTests : IntegrationTestsBase
     {
-        private MockHttpContextWrapper httpContext;
+        //private MockHttpContextWrapper httpContext;
         private StudentsController controllerToTest;
         private SchoolContext dbContext;
 
         [SetUp]
         public void Initialize()
         {
-            httpContext = new MockHttpContextWrapper();
+            //httpContext = new MockHttpContextWrapper();
             controllerToTest = new StudentsController();
             //controllerToTest.ControllerContext = new ControllerContext(httpContext.Context.Object, new RouteData(), controllerToTest);
             //controllerToTestError
@@ -57,17 +59,37 @@ namespace ContosoUniversity.Tests.Controllers
             testEnrollments.Add(testEnrollment1);
             testEnrollments.Add(testEnrollment2);
 
+            
+
+
             EntityGenerator generator = new EntityGenerator(dbContext);
-            Student student = generator.CreateStudentFull(testID, testLastName, testFirstName, testEnrollmentDate, testEnrollments);
+            Student studentTest = generator.CreateStudentFull(testID, testLastName, testFirstName, testEnrollmentDate, testEnrollments);
+            //Student savedStudent = dbContext.Students.Find(studentTest.ID);
+
+            //Create a list of enrollments - only Course ID
+            List<EnrollmentApiVM> testEnrollmentsAPI = new List<EnrollmentApiVM>();
+            foreach (Enrollment enrollment in studentTest.Enrollments)
+            {
+                EnrollmentApiVM enrollmentApiVM = new EnrollmentApiVM();
+                enrollmentApiVM.CourseId = enrollment.CourseID;
+                testEnrollmentsAPI.Add(enrollmentApiVM);
+            }
 
             IHttpActionResult okResult = controllerToTest.GetStudent(100);
-            //var contentResult =
+            var contentResult = okResult as OkNegotiatedContentResult<StudentApiVM>;
 
-            //Assert.IsNotNull(contentResult);
-            
-            
+            Assert.IsNotNull(contentResult);
+            Assert.AreEqual(studentTest.LastName, contentResult.Content.Lastname);
+            Assert.AreEqual(studentTest.FirstMidName, contentResult.Content.Firstname);
+            Assert.AreEqual(studentTest.ID, contentResult.Content.id);
+            Assert.AreEqual(studentTest.EnrollmentDate.ToString("yyyy-MM-dd"), contentResult.Content.EnrollmentDate);
+
+            Assert.IsNotNull(contentResult.Content.enrollments);
+            Assert.IsNotEmpty(contentResult.Content.enrollments);
+            //Assert.AreEqual(testEnrollmentsAPI, contentResult.Content.enrollments);
+
             //type of file, json or xml?
-            //not null
+
             //action result? - verifier url?
             //compare strings
         }
