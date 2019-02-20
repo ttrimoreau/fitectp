@@ -110,6 +110,23 @@ namespace ContosoUniversity.Controllers
             return RedirectToAction("Details");
         }
 
+
+        //Post
+        [HttpPost]
+        public ActionResult Details(int courseID)
+        {
+            SchoolContext db = new SchoolContext();
+            //if (Session["UserID"] == null)
+            //{
+            //    return View();
+            //}
+            int id = int.Parse(Session["UserId"].ToString());
+            db.Enrollments.Add(new Enrollment { StudentID = id, CourseID = courseID });
+            db.SaveChanges();
+            ViewBag.Message = "Subscription successful !";
+            return RedirectToAction("Index");
+        }
+
         // GET: Student/Create
         public ActionResult Create()
         {
