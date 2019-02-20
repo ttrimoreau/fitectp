@@ -126,6 +126,7 @@
     <Compile Include="DAL\SchoolInitializer.cs" />
     <Compile Include="DAL\SchoolInterceptorLogging.cs" />
     <Compile Include="DAL\SchoolInterceptorTransientErrors.cs" />
+    <Compile Include="Enum\Role.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -155,13 +156,9 @@
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902191139217_Initial.cs" />
-    <Compile Include="Migrations\201902191139217_Initial.Designer.cs">
-      <DependentUpon>201902191139217_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902191239363_Initial1.cs" />
-    <Compile Include="Migrations\201902191239363_Initial1.Designer.cs">
-      <DependentUpon>201902191239363_Initial1.cs</DependentUpon>
+    <Compile Include="Migrations\201902200817250_ModificationPersonCS.cs" />
+    <Compile Include="Migrations\201902200817250_ModificationPersonCS.Designer.cs">
+      <DependentUpon>201902200817250_ModificationPersonCS.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -270,11 +267,8 @@
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902191139217_Initial.resx">
-      <DependentUpon>201902191139217_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902191239363_Initial1.resx">
-      <DependentUpon>201902191239363_Initial1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902200817250_ModificationPersonCS.resx">
+      <DependentUpon>201902200817250_ModificationPersonCS.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

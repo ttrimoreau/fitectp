@@ -20,21 +20,21 @@ namespace ContosoUniversity.Migrations
             var students = new List<Student>
             {
                 new Student { FirstMidName = "Carson",   LastName = "Alexander", 
-                    EnrollmentDate = DateTime.Parse("2010-09-01"), UserName ="CAmexander", Email = "cldudouyt@live.fr", PassWord = "123456" },
+                    EnrollmentDate = DateTime.Parse("2010-09-01"), UserName ="CAmexander", Email = "cldudouyt@live.fr", Password = "123456" },
                 new Student { FirstMidName = "Meredith", LastName = "Alonso",
-                    EnrollmentDate = DateTime.Parse("2012-09-01"),UserName="Meredith", Email="Meredith@Meredith.com", PassWord="Meredith" },
+                    EnrollmentDate = DateTime.Parse("2012-09-01"),UserName="Meredith", Email="Meredith@Meredith.com", Password="Meredith" },
                 new Student { FirstMidName = "Arturo",   LastName = "Anand",
-                    EnrollmentDate = DateTime.Parse("2013-09-01"),UserName="Arturo", Email="Arturo@Arturo.com", PassWord="Arturo" },
+                    EnrollmentDate = DateTime.Parse("2013-09-01"),UserName="Arturo", Email="Arturo@Arturo.com", Password="Arturo" },
                 new Student { FirstMidName = "Gytis",    LastName = "Barzdukas",
-                    EnrollmentDate = DateTime.Parse("2012-09-01"),UserName="Gytis", Email="Gytis@Gytis.com", PassWord="Gytis1" },
+                    EnrollmentDate = DateTime.Parse("2012-09-01"),UserName="Gytis", Email="Gytis@Gytis.com", Password="Gytis1" },
                 new Student { FirstMidName = "Yan",      LastName = "Li",
-                    EnrollmentDate = DateTime.Parse("2012-09-01"),UserName="Yan", Email="Yan@Yan.com", PassWord="Yan123" },
+                    EnrollmentDate = DateTime.Parse("2012-09-01"),UserName="Yan", Email="Yan@Yan.com", Password="Yan123" },
                 new Student { FirstMidName = "Peggy",    LastName = "Justice",
-                    EnrollmentDate = DateTime.Parse("2011-09-01"),UserName="Peggy", Email="Peggy@Peggy.com", PassWord="Peggy1" },
+                    EnrollmentDate = DateTime.Parse("2011-09-01"),UserName="Peggy", Email="Peggy@Peggy.com", Password="Peggy1" },
                 new Student { FirstMidName = "Laura",    LastName = "Norman",
-                    EnrollmentDate = DateTime.Parse("2013-09-01"),UserName="Laura", Email="Laura@Laura.com", PassWord="Laura1" },
+                    EnrollmentDate = DateTime.Parse("2013-09-01"),UserName="Laura", Email="Laura@Laura.com", Password="Laura1" },
                 new Student { FirstMidName = "Nino",     LastName = "Olivetto",
-                    EnrollmentDate = DateTime.Parse("2005-09-01"),UserName="Nino", Email="Nino@Nino.com", PassWord="Nino12" }
+                    EnrollmentDate = DateTime.Parse("2005-09-01"),UserName="Nino", Email="Nino@Nino.com", Password="Nino12" }
             };
 
 
@@ -44,15 +44,15 @@ namespace ContosoUniversity.Migrations
             var instructors = new List<Instructor>
             {
                 new Instructor { FirstMidName = "Kim",     LastName = "Abercrombie", 
-                    HireDate = DateTime.Parse("1995-03-11"),UserName ="CAFexander", Email = "cldudouyt@live.fr", PassWord = "123456"},
+                    HireDate = DateTime.Parse("1995-03-11"),UserName ="CAFexander", Email = "cldudouyt@live.fr", Password = "123456"},
                 new Instructor { FirstMidName = "Fadi",    LastName = "Fakhouri",
-                    HireDate = DateTime.Parse("2002-07-06"), UserName="Fadi", Email="Fadi@Fadi.com", PassWord="Fadi12" },
+                    HireDate = DateTime.Parse("2002-07-06"), UserName="Fadi", Email="Fadi@Fadi.com", Password="Fadi12" },
                 new Instructor { FirstMidName = "Roger",   LastName = "Harui",
-                    HireDate = DateTime.Parse("1998-07-01"),UserName="Roger", Email="Roger@Roger.com", PassWord="Roger1" },
+                    HireDate = DateTime.Parse("1998-07-01"),UserName="Roger", Email="Roger@Roger.com", Password="Roger1" },
                 new Instructor { FirstMidName = "Candace", LastName = "Kapoor",
-                    HireDate = DateTime.Parse("2001-01-15"),UserName="Candace", Email="Candace@Candace.com", PassWord="Candace" },
+                    HireDate = DateTime.Parse("2001-01-15"),UserName="Candace", Email="Candace@Candace.com", Password="Candace" },
                 new Instructor { FirstMidName = "Roger",   LastName = "Zheng",
-                    HireDate = DateTime.Parse("2004-02-12"),UserName="Zheng", Email="Zheng@Zheng.com", PassWord="Zheng1" }
+                    HireDate = DateTime.Parse("2004-02-12"),UserName="Zheng", Email="Zheng@Zheng.com", Password="Zheng1" }
             };
             instructors.ForEach(s => context.Instructors.AddOrUpdate(p => p.LastName, s));
             context.SaveChanges();

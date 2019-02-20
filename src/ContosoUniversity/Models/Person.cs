@@ -18,18 +18,16 @@ namespace ContosoUniversity.Models
         [Display(Name = "First Name")]
         public string FirstMidName { get; set; }
 
-
-
         [Required]
         [MinLength(3, ErrorMessage = "Username  must be at least 3 characters long.")]
         [MaxLength(15, ErrorMessage = "Username cannot be longer than 15 characters.")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [StringLength(64, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        public string PassWord { get; set; }
-
+        public string Password { get; set; }
 
         [Required]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
@@ -45,5 +43,6 @@ namespace ContosoUniversity.Models
             }
         }
         public virtual ICollection<FileImage> FileImage { get; set; }
+
     }
 }
