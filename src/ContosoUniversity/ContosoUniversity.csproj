@@ -169,6 +169,10 @@
     <Compile Include="Migrations\201902201200052_New.Designer.cs">
       <DependentUpon>201902201200052_New.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902201527207_AfterMerge.cs" />
+    <Compile Include="Migrations\201902201527207_AfterMerge.Designer.cs">
+      <DependentUpon>201902201527207_AfterMerge.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
@@ -282,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902201200052_New.resx">
       <DependentUpon>201902201200052_New.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902201527207_AfterMerge.resx">
+      <DependentUpon>201902201527207_AfterMerge.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

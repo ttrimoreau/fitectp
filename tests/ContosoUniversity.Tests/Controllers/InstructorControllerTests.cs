@@ -58,7 +58,7 @@ namespace ContosoUniversity.Tests.Controllers
 
             FormDataHelper.PopulateFormData(controllerToTest, instructor);
 
-            var result = controllerToTest.EditPost(instructor.ID) as ViewResult;
+            var result = controllerToTest.Edit(instructor.ID) as ViewResult;
 
             Instructor savedInstructor = dbContext.Instructors.Find(instructor.ID);
 

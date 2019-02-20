@@ -41,14 +41,14 @@ namespace ContosoUniversity.Tests.Tools
         }
 
         #region Course
-        public Course createCourse(int instructorId)
-        {
-            var course = new Course()
-            {
-                DepartmentID
+        //public Course createCourse(int instructorId)
+        //{
+        //    var course = new Course()
+        //    {
+        //        DepartmentID
 
-            }
-        }
+        //    };
+        //}
         #endregion
 
         public Student CreateStudentUser(string login, string password)
@@ -60,7 +60,7 @@ namespace ContosoUniversity.Tests.Tools
                 EnrollmentDate = DateTime.Now,
                 Email = "email@address.com",
                 UserName = login,
-                PassWord = password,
+                Password = password,
                 ID = 25
             };
 
