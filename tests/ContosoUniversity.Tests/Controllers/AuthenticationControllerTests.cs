@@ -76,6 +76,7 @@ namespace ContosoUniversity.Tests.Controllers
         {
             RedirectToRouteResult result = controllerToTest.Register(RegisterStudent) as RedirectToRouteResult;
             Assert.That(result, Is.Not.Null);
+            Assert.That(result.RouteValues["controller"], Is.EqualTo("Authentication"));
             Assert.That(result.RouteValues["action"], Is.EqualTo("Login"));
         }
 
@@ -84,6 +85,7 @@ namespace ContosoUniversity.Tests.Controllers
         {
             RedirectToRouteResult result = controllerToTest.Register(RegisterInstructor) as RedirectToRouteResult;
             Assert.That(result, Is.Not.Null);
+            Assert.That(result.RouteValues["controller"], Is.EqualTo("Authentication"));
             Assert.That(result.RouteValues["action"], Is.EqualTo("Login"));
         }
 
@@ -92,6 +94,7 @@ namespace ContosoUniversity.Tests.Controllers
         {
             RedirectToRouteResult result = controllerToTest.Login(LoginStudent) as RedirectToRouteResult;
             Assert.That(result, Is.Not.Null);
+            Assert.That(result.RouteValues["controller"], Is.EqualTo("Authentication"));
             Assert.That(result.RouteValues["action"], Is.EqualTo("Index"));
         }
 
@@ -100,6 +103,7 @@ namespace ContosoUniversity.Tests.Controllers
         {
             RedirectToRouteResult result = controllerToTest.Login(LoginInstructor) as RedirectToRouteResult;
             Assert.That(result, Is.Not.Null);
+            Assert.That(result.RouteValues["controller"], Is.EqualTo("Authentication"));
             Assert.That(result.RouteValues["action"], Is.EqualTo("Index"));
         }
     }
