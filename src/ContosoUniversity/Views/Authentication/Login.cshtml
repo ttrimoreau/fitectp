@@ -9,8 +9,17 @@
 
         <h2>Sign in</h2>
         <p>
+            @*link to account creation*@
             or @Html.ActionLink("register new account", "Register", "Authentication")
         </p>
+
+        @*if wrong login/password, display error message*@
+        @if(ViewData["Error"] != null)
+        {
+            <p>
+                @ViewData["Error"]
+            </p>
+        }
 
         @using (Html.BeginForm())
         {
@@ -19,7 +28,7 @@
             <div class="form-horizontal">
 
 
-
+                @*Login*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -28,6 +37,7 @@
                     </div>
                 </div>
 
+                @*Password*@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -36,6 +46,7 @@
                     </div>
                 </div>
 
+                @*Submit button*@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Login" class="btn btn-default" />

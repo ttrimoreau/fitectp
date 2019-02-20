@@ -31,10 +31,17 @@ namespace ContosoUniversity.Controllers
             return View();
         }
 
+        // GET: Authentication
+        public ActionResult Logout()
+        {
+            Session["UserId"] = null;
+            return RedirectToAction("Index","Home");
+        }
+
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginVM vmlogin)
+        public ActionResult Login([Bind(Include = "UserName,Password")]LoginVM vmlogin)
         {
             if (ModelState.IsValid)
             {
@@ -42,6 +49,10 @@ namespace ContosoUniversity.Controllers
                 if(db.People.Any(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword))
                 {
                     Session["UserId"] = db.People.Single(x => x.UserName == vmlogin.UserName).ID;
+                } else
+                {
+                    ViewData["Error"] = "Invalid login or password.";
+                    return View();
                 }
             }
 
@@ -58,7 +69,7 @@ namespace ContosoUniversity.Controllers
         // POST: Authentication
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterVM registerVM)
+        public ActionResult Register([Bind(Include = "LastName,FirstMidName,UserName,Password,Email,HireDate,ConfirmPassword")]RegisterVM registerVM)
         {
             if (ModelState.IsValid)
             {
