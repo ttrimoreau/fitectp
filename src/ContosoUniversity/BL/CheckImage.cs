@@ -15,7 +15,8 @@ namespace ContosoUniversity.BL
         bool testExt = false;
         public bool checkExtension(string fileName)
         {
-            string fileNameTest = fileName.ToLower();
+            string fileNameTest = System.IO.Path.GetExtension(fileName.ToLower());
+            
             if (fileNameTest == ".png" || fileNameTest == ".jpeg" || fileNameTest==".jpg")
             {
                 testExt = true;

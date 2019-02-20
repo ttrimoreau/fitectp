@@ -188,6 +188,7 @@
     <Compile Include="Tools\FormDataHelper.cs" />
     <Compile Include="Tools\IntegrationTestsBase.cs" />
     <Compile Include="Tools\MockHttpContextWrapper.cs" />
+    <Compile Include="Tools\MyTestPostedFileBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

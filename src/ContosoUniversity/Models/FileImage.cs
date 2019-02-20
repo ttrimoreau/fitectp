@@ -12,6 +12,7 @@ namespace ContosoUniversity.Models
     public class FileImage
     {
 
+        #region Properties
         [Key]
         public int ID { get; set; }
 
@@ -21,8 +22,11 @@ namespace ContosoUniversity.Models
 
         public byte[] Content { get; set; }
         public int PersonID { get; set; }
+        #endregion
 
-        public virtual Person Person { get; set; }
+        #region Navigations
+        public virtual Person Person { get; set; } 
+        #endregion
 
     }
 }
