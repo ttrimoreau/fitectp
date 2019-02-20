@@ -45,6 +45,7 @@ namespace ContosoUniversity.ViewModels
         [DataType(DataType.Password)]
         [StringLength(64, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [Display(Name = "Confirm password")]
+        [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
         public enum Role
