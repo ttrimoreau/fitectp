@@ -29,6 +29,7 @@ namespace ContosoUniversity.Controllers
 
         //POST
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginVM vmlogin)
         {
             if (ModelState.IsValid)
@@ -52,8 +53,24 @@ namespace ContosoUniversity.Controllers
 
         // POST: Authentication
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterVM registerVM)
         {
+            if (ModelState.IsValid)
+            {
+                //if UserName is already taken
+                if(db.People.Any(x => x.UserName == registerVM.UserName))
+                {
+                    ViewData["Error"] = "This UserName is already taken";
+                    return View();
+                }
+                else
+                {
+                    Authentication.CreatePerson(registerVM);
+                    return RedirectToAction("Login","Authentication");
+                }
+            }
+
             return View();
         }
 

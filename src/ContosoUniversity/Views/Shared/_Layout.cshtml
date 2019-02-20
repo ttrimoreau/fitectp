@@ -36,6 +36,14 @@
                     <li>@Html.ActionLink("Courses", "Index", "Course")</li>
                     <li>@Html.ActionLink("Instructors", "Index", "Instructor")</li>
                     <li>@Html.ActionLink("Departments", "Index", "Department")</li>
+                    @if (Session["UserId"] == null)
+                    {
+                        <li>@Html.ActionLink("Connexion", "Index", "Authentication")</li>
+                    }
+                    @if (Session["UserId"] != null)
+                    {
+                        <li>@Html.ActionLink(Session["UserId"].ToString(), "Index", "Authentication")</li>
+                    }
                 </ul>
             </div>
         </div>
