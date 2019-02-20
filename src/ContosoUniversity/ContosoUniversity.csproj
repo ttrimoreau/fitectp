@@ -192,6 +192,7 @@
     <Compile Include="ViewModels\RegisterVM.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\StudentApiVM.cs" />
+    <Compile Include="ViewModels\StudentApiVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
