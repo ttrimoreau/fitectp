@@ -5,12 +5,63 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using ContosoUniversity.ViewModels;
+using ContosoUniversity.Models;
+using ContosoUniversity.DAL;
 
 namespace ContosoUniversity.BusinessLayer
 {
+
     public static class Authentication
     {
         public const string SALT = "Contoso";
+        private static SchoolContext db = new SchoolContext();
+
+
+        public static void CreatePerson(RegisterVM vm)
+        {
+            switch (vm.PersonRole)
+            {
+                case Role.Student:
+                    CreateStudent(vm);
+                    break;
+                case Role.Instructor:
+                    CreateInstructor(vm);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public static void CreateStudent(RegisterVM vm)
+        {
+            Student p = new Student();
+            //EnrollmentDate is particular to Student
+            p.EnrollmentDate = vm.HireDate;
+            p.Email = vm.Email;
+            p.FirstMidName = vm.FirstMidName;
+            p.LastName = vm.LastName;
+            p.Password = SaltAndHash(vm.Password);
+            p.UserName = vm.UserName;
+            db.Students.Add(p);
+            db.SaveChanges();
+        }
+
+        public static void CreateInstructor(RegisterVM vm)
+        {
+            Instructor p = new Instructor();
+            //HireDate is particular to Instructor
+            p.HireDate = vm.HireDate;
+            p.Email = vm.Email;
+            p.FirstMidName = vm.FirstMidName;
+            p.LastName = vm.LastName;
+            p.Password = SaltAndHash(vm.Password);
+            p.UserName = vm.UserName;
+            db.Instructors.Add(p);
+            db.SaveChanges();
+        }
+
+
 
         //Returns the salted and hashed string of inputString (usual use: salted and hashed password)
         public static string SaltAndHash(string inputString)

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ContosoUniversity.DAL;
 using ContosoUniversity.BusinessLayer;
+using ContosoUniversity.ViewModels;
 
 namespace ContosoUniversity.Controllers
 {
@@ -28,16 +29,19 @@ namespace ContosoUniversity.Controllers
 
         //POST
         [HttpPost]
-        public ActionResult Login(VMLogin vmlogin)
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginVM vmlogin)
         {
-            if (vmlogin.isvalid)
+            if (ModelState.IsValid)
             {
                 string HashedAndSaltedPassword = Authentication.SaltAndHash(vmlogin.Password);
                 if(db.People.Any(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword))
                 {
-                    Session["UserId"] = db.People.Find(x => x.UserName == vmlogin.UserName).ID;
+                    Session["UserId"] = db.People.Single(x => x.UserName == vmlogin.UserName).ID;
                 }
             }
+
+
             return View();
         }
 
@@ -49,8 +53,24 @@ namespace ContosoUniversity.Controllers
 
         // POST: Authentication
         [HttpPost]
-        public ActionResult Register()
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(RegisterVM registerVM)
         {
+            if (ModelState.IsValid)
+            {
+                //if UserName is already taken
+                if(db.People.Any(x => x.UserName == registerVM.UserName))
+                {
+                    ViewData["Error"] = "This UserName is already taken";
+                    return View();
+                }
+                else
+                {
+                    Authentication.CreatePerson(registerVM);
+                    return RedirectToAction("Login","Authentication");
+                }
+            }
+
             return View();
         }
 
