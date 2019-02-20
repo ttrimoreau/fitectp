@@ -12,6 +12,7 @@ using ContosoUniversity.ViewModels;
 using System.Data.Entity.Infrastructure;
 using ContosoUniversity.BL;
 using ContosoUniversity.Enum;
+using ContosoUniversity.BusinessLayer;
 
 namespace ContosoUniversity.Controllers
 {
@@ -220,23 +221,17 @@ namespace ContosoUniversity.Controllers
                         {
                             db.FileImages.Remove(instructorToUpdate.FileImage.First(f => f.FileType == FileType.Avatar));
                         }
-                        var avatar = new FileImage
-                        {
-                            //FileName = System.IO.Path.GetFileName(upload.FileName),
-                            FileType = FileType.Avatar,
-                            ContentType = upload.ContentType
-                        };
-                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
-                        {
-                            avatar.Content = reader.ReadBytes(upload.ContentLength);
-                        }
+
+                        UploadImage uploadImage = new UploadImage();
+                        FileImage avatar = uploadImage.Upload(upload);
+
                         instructorToUpdate.FileImage = new List<FileImage> { avatar };
                     }
                     db.Entry(instructorToUpdate).State = EntityState.Modified;
 
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return View(viewName:"Details", model: instructorToUpdate);
                 }
                 catch (RetryLimitExceededException /* dex */)
                 {
