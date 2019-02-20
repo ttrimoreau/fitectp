@@ -10,6 +10,15 @@
     <h4>Instructor</h4>
     <hr />
     <dl class="dl-horizontal">
+        @if (Model.FileImage.Any(f => f.FileType == ContosoUniversity.Enum.FileType.Avatar))
+        {
+            <dt>
+                Avatar
+            </dt>
+            <dd>
+                <img src="~/File?id=@Model.FileImage.First(f => f.FileType == ContosoUniversity.Enum.FileType.Avatar).ID" alt="avatar" style="height:100px" />
+            </dd>
+        }
         <dt>
             @Html.DisplayNameFor(model => model.OfficeAssignment.Location)
         </dt>

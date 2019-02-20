@@ -116,8 +116,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BL\CheckImage.cs" />
+    <Compile Include="BL\ErrorMessages.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -126,6 +129,8 @@
     <Compile Include="DAL\SchoolInitializer.cs" />
     <Compile Include="DAL\SchoolInterceptorLogging.cs" />
     <Compile Include="DAL\SchoolInterceptorTransientErrors.cs" />
+    <Compile Include="Enum\Day.cs" />
+    <Compile Include="Enum\FileType.cs" />
     <Compile Include="Enum\Role.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -156,9 +161,13 @@
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902201302012_New.cs" />
-    <Compile Include="Migrations\201902201302012_New.Designer.cs">
-      <DependentUpon>201902201302012_New.cs</DependentUpon>
+    <Compile Include="Migrations\201902191650367_updateDB.cs" />
+    <Compile Include="Migrations\201902191650367_updateDB.Designer.cs">
+      <DependentUpon>201902191650367_updateDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902201200052_New.cs" />
+    <Compile Include="Migrations\201902201200052_New.Designer.cs">
+      <DependentUpon>201902201200052_New.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -243,6 +252,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\File\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -267,8 +277,11 @@
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902201302012_New.resx">
-      <DependentUpon>201902201302012_New.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902191650367_updateDB.resx">
+      <DependentUpon>201902191650367_updateDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902201200052_New.resx">
+      <DependentUpon>201902201200052_New.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
