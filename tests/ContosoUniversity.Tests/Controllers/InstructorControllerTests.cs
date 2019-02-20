@@ -23,7 +23,7 @@ namespace ContosoUniversity.Tests.Controllers
             controllerToTest = new InstructorController();
             controllerToTest.ControllerContext = new ControllerContext(httpContext.Context.Object, new RouteData(), controllerToTest);
             dbContext = new DAL.SchoolContext(this.ConnectionString);
-            controllerToTest. = dbContext;
+            controllerToTest.DbContext = dbContext;
         }
     }
 }

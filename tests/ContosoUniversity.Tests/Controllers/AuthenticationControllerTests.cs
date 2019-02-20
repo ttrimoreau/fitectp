@@ -5,6 +5,7 @@ using ContosoUniversity.Tests.Tools;
 using ContosoUniversity.ViewModels;
 using Moq;
 using NUnit.Framework;
+using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -25,10 +26,12 @@ namespace ContosoUniversity.Tests.Controllers
             UserName = "instructeur",
             Password = "instructeur",
             ConfirmPassword = "instructeur",
-            Role = Role.Instructor
+            PersonRole = Role.Instructor,
+            Email = "Email@Instructeur.com",
+            HireDate = DateTime.Now
         };
 
-        private readonly RegisterVM LoginInstructor = new RegisterVM()
+        private readonly LoginVM LoginInstructor = new LoginVM()
         {
             UserName = "instructeur",
             Password = "instructeur"
@@ -40,10 +43,12 @@ namespace ContosoUniversity.Tests.Controllers
             UserName = "student",
             Password = "student",
             ConfirmPassword = "student",
-            Role = Role.Instructor
+            PersonRole = Role.Student,
+            Email = "Email@Student.com",
+            HireDate = DateTime.Now
         };
 
-        private readonly RegisterVM LoginStudent = new RegisterVM()
+        private readonly LoginVM LoginStudent = new LoginVM()
         {
             UserName = "student",
             Password = "student"
@@ -70,28 +75,32 @@ namespace ContosoUniversity.Tests.Controllers
         public void Register_RegisterStudent_ViewLogin()
         {
             RedirectToRouteResult result = controllerToTest.Register(RegisterStudent) as RedirectToRouteResult;
-            //Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.RouteValues["action"], Is.EqualTo("Login"));
         }
 
         [Test]
         public void Register_RegisterInstructor_ViewLogin()
         {
             RedirectToRouteResult result = controllerToTest.Register(RegisterInstructor) as RedirectToRouteResult;
-            //Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.RouteValues["action"], Is.EqualTo("Login"));
         }
 
         [Test]
         public void Login_LoginStudent_ViewHomeIndex()
         {
             RedirectToRouteResult result = controllerToTest.Login(LoginStudent) as RedirectToRouteResult;
-            //Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.RouteValues["action"], Is.EqualTo("Index"));
         }
 
         [Test]
         public void Login_LoginInstructor_ViewHomeIndex()
         {
-            RedirectToRouteResult result = controllerToTest.Register(LoginInstructor) as RedirectToRouteResult;
-            //Assert.That(result, Is.Not.Null);
+            RedirectToRouteResult result = controllerToTest.Login(LoginInstructor) as RedirectToRouteResult;
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.RouteValues["action"], Is.EqualTo("Index"));
         }
     }
 }

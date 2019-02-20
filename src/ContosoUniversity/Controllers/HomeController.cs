@@ -12,6 +12,11 @@ namespace ContosoUniversity.Controllers
     public class HomeController : Controller
     {
         private SchoolContext db = new SchoolContext();
+        public SchoolContext DbContext
+        {
+            get { return db; }
+            set { db = value; }
+        }
 
         public ActionResult Index()
         {
