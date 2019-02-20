@@ -39,12 +39,11 @@ namespace ContosoUniversity.Controllers.api
 
             List<EnrollmentApiVM> CourseIdList = new List<EnrollmentApiVM>();
 
-            EnrollmentApiVM enrollmentApiVM = new EnrollmentApiVM();
-
             StudentApiVM studentApiVM = new StudentApiVM();
 
             foreach(Enrollment enrollment in enrollments)
             {
+                EnrollmentApiVM enrollmentApiVM = new EnrollmentApiVM();
                 enrollmentApiVM.CourseId = enrollment.CourseID;
                 CourseIdList.Add(enrollmentApiVM);
             }
