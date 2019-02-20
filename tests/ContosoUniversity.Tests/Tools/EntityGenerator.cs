@@ -39,9 +39,6 @@ namespace ContosoUniversity.Tests.Tools
                 FirstMidName = firstname,
                 EnrollmentDate = enrollmentDate,
                 Enrollments = enrollments,
-
-
-
             };
 
             this.dbContext.Students.Add(student);

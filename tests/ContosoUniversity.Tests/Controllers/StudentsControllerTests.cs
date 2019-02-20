@@ -16,7 +16,6 @@ using System.Web.Mvc;
 using System.Web.Routing;
 
 
-
 namespace ContosoUniversity.Tests.Controllers
 {
     class StudentsControllerTests : IntegrationTestsBase
@@ -31,8 +30,6 @@ namespace ContosoUniversity.Tests.Controllers
             //httpContext = new MockHttpContextWrapper();
             controllerToTest = new StudentsController();
             //controllerToTest.ControllerContext = new ControllerContext(httpContext.Context.Object, new RouteData(), controllerToTest);
-            //controllerToTestError
-            //What is this line needed for?
             dbContext = new DAL.SchoolContext(this.ConnectionString);
             controllerToTest.DbContext = dbContext;
         }
@@ -60,9 +57,6 @@ namespace ContosoUniversity.Tests.Controllers
             testEnrollments.Add(testEnrollment1);
             testEnrollments.Add(testEnrollment2);
 
-            
-
-
             EntityGenerator generator = new EntityGenerator(dbContext);
             Student studentTest = generator.CreateStudentFull(testID, testLastName, testFirstName, testEnrollmentDate, testEnrollments);
             //Student savedStudent = dbContext.Students.Find(studentTest.ID);
@@ -76,14 +70,20 @@ namespace ContosoUniversity.Tests.Controllers
                 testEnrollmentsAPI.Add(enrollmentApiVM);
             }
 
-            IHttpActionResult okResult = controllerToTest.GetStudent(100);
+            IHttpActionResult okResult = controllerToTest.GetStudent(studentTest.ID);
             var contentResult = okResult as OkNegotiatedContentResult<StudentApiVM>;
+            
+            
+            string expectedResult = "{\"id\":" + studentTest.ID + ",\"lastname\":" + studentTest.LastName + ",\"firstname\":" + studentTest.FirstMidName + 
+                ",\"enrollmentDate\":" + studentTest.EnrollmentDate.ToString("yyyy-MM-dd") + ",\"enrollments\":[{\"CourseId\":" + testEnrollmentsAPI[0].CourseId +
+                "},{\"CourseId\":" + testEnrollmentsAPI[1].CourseId + "}]}";
+
 
             Assert.IsNotNull(contentResult);
-            Assert.AreEqual(studentTest.LastName, contentResult.Content.Lastname);
-            Assert.AreEqual(studentTest.FirstMidName, contentResult.Content.Firstname);
+            Assert.AreEqual(studentTest.LastName, contentResult.Content.lastname);
+            Assert.AreEqual(studentTest.FirstMidName, contentResult.Content.firstname);
             Assert.AreEqual(studentTest.ID, contentResult.Content.id);
-            Assert.AreEqual(studentTest.EnrollmentDate.ToString("yyyy-MM-dd"), contentResult.Content.EnrollmentDate);
+            Assert.AreEqual(studentTest.EnrollmentDate.ToString("yyyy-MM-dd"), contentResult.Content.enrollmentDate);
 
             Assert.IsNotNull(contentResult.Content.enrollments);
             Assert.IsNotEmpty(contentResult.Content.enrollments);
@@ -91,10 +91,13 @@ namespace ContosoUniversity.Tests.Controllers
             Assert.AreEqual(testEnrollmentsAPI[1], contentResult.Content.enrollments[1]);
             Assert.AreEqual(testEnrollmentsAPI, contentResult.Content.enrollments);
             
+            //Assert.IsInstanceOf<OkResult>(okResult);
+            //Assert.AreEqual(expectedResult, stringResult);
+
 
             //type of file, json or xml?
 
-            //action result? - verifier url?
+            //result type ok
             //compare strings
         }
 
@@ -104,6 +107,12 @@ namespace ContosoUniversity.Tests.Controllers
             //404
             //null?
             //action result?
+        }
+
+        [Test]
+        public void APIStudent_NoEnrollments()
+        {
+            //liste vide
         }
 
         [Test]

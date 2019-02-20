@@ -40,7 +40,8 @@ namespace ContosoUniversity.Controllers.api
                 return NotFound();
             }
 
-            //List<Enrollment> enrollments = db.Enrollments.Where(s => s.StudentID == id).ToList();
+            List<Enrollment> enrollments = db.Enrollments.Where(s => s.StudentID == id).ToList();
+            
 
             List<EnrollmentApiVM> CourseIdList = new List<EnrollmentApiVM>();
 
@@ -54,9 +55,9 @@ namespace ContosoUniversity.Controllers.api
             }
 
             studentApiVM.id = student.ID;
-            studentApiVM.Lastname = student.LastName;
-            studentApiVM.Firstname = student.FirstMidName;
-            studentApiVM.EnrollmentDate = student.EnrollmentDate.ToString("yyyy-MM-dd");
+            studentApiVM.lastname = student.LastName;
+            studentApiVM.firstname = student.FirstMidName;
+            studentApiVM.enrollmentDate = student.EnrollmentDate.ToString("yyyy-MM-dd");
             studentApiVM.enrollments = CourseIdList;
 
             //return ViewModel
