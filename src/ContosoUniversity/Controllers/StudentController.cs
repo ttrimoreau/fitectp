@@ -2,6 +2,7 @@
 using ContosoUniversity.Models;
 using PagedList;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -69,6 +70,7 @@ namespace ContosoUniversity.Controllers
         // GET: Student/Details/5
         public ActionResult Details(int? id)
         {
+            SchoolContext db = new SchoolContext();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -78,7 +80,31 @@ namespace ContosoUniversity.Controllers
             {
                 return HttpNotFound();
             }
+      
+            var query1 = db.Courses.Select(c => c.CourseID);
+            var query2 = db.Enrollments.Where(s => s.StudentID == id).Select(s => s.CourseID);
+            var finalQuery = query1.Except(query2);
+            var available = db.Courses.Where(c => finalQuery.Contains(c.CourseID)).Select(c => new { c.CourseID, c.Title });
+            ViewBag.ApplyCourse = available;
+
             return View(student);
+        }
+
+
+        //Post
+        [HttpPost]
+        public ActionResult Details(int courseID)
+        {
+            SchoolContext db = new SchoolContext();
+            //if (Session["UserID"] == null)
+            //{
+            //    return View();
+            //}
+            int id = int.Parse(Session["UserId"].ToString());
+            db.Enrollments.Add(new Enrollment { StudentID = id, CourseID = courseID });
+            db.SaveChanges();
+            ViewBag.Message = "Subscription successful !";
+            return RedirectToAction("Index");
         }
 
         // GET: Student/Create
