@@ -17,6 +17,10 @@ namespace ContosoUniversity.BusinessLayer
         public const string SALT = "Contoso";
         private static SchoolContext db = new SchoolContext();
 
+        public static string UserNameFromId(int id)
+        {
+            return db.People.Find(id).UserName;
+        }
 
         public static void CreatePerson(RegisterVM vm)
         {

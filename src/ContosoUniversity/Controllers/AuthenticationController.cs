@@ -27,6 +27,13 @@ namespace ContosoUniversity.Controllers
             return View();
         }
 
+        // GET: Authentication
+        public ActionResult Logout()
+        {
+            Session["UserId"] = null;
+            return RedirectToAction("Index","Home");
+        }
+
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -38,6 +45,10 @@ namespace ContosoUniversity.Controllers
                 if(db.People.Any(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword))
                 {
                     Session["UserId"] = db.People.Single(x => x.UserName == vmlogin.UserName).ID;
+                } else
+                {
+                    ViewData["Error"] = "Invalid login or password.";
+                    return View();
                 }
             }
 
