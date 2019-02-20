@@ -3,7 +3,7 @@ namespace ContosoUniversity.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class ModificationPersonCS : DbMigration
     {
         public override void Up()
         {
@@ -25,19 +25,19 @@ namespace ContosoUniversity.Migrations
                 "dbo.Lessons",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        ID = c.Int(nullable: false, identity: true),
                         Day = c.Int(nullable: false),
                         HourStart = c.DateTime(nullable: false),
                         Duration = c.Int(nullable: false),
                         Course_CourseID = c.Int(),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Course", t => t.Course_CourseID)
                 .Index(t => t.Course_CourseID);
             
             AddColumn("dbo.Course", "StartDate", c => c.DateTime(nullable: false));
             AddColumn("dbo.Person", "UserName", c => c.String(nullable: false, maxLength: 15));
-            AddColumn("dbo.Person", "PassWord", c => c.String(nullable: false, maxLength: 64));
+            AddColumn("dbo.Person", "Password", c => c.String(nullable: false, maxLength: 64));
             AddColumn("dbo.Person", "Email", c => c.String(nullable: false, maxLength: 30));
         }
         
@@ -48,7 +48,7 @@ namespace ContosoUniversity.Migrations
             DropIndex("dbo.Lessons", new[] { "Course_CourseID" });
             DropIndex("dbo.FileImage", new[] { "PersonID" });
             DropColumn("dbo.Person", "Email");
-            DropColumn("dbo.Person", "PassWord");
+            DropColumn("dbo.Person", "Password");
             DropColumn("dbo.Person", "UserName");
             DropColumn("dbo.Course", "StartDate");
             DropTable("dbo.Lessons");

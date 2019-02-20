@@ -29,7 +29,7 @@ namespace ContosoUniversity.ViewModels
         [Required]
         [DataType(DataType.Password)]
         [StringLength(64, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        public string PassWord { get; set; }
+        public string Password { get; set; }
 
         [Required]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
@@ -40,5 +40,17 @@ namespace ContosoUniversity.ViewModels
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Hire Date")]
         public DateTime HireDate { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [StringLength(64, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Confirm password")]
+        public string ConfirmPassword { get; set; }
+
+        public enum Role
+        {
+            Student = 0,
+            Instructor = 1
+        }
     }
 }
