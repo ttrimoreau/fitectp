@@ -45,10 +45,8 @@ namespace ContosoUniversity.Tests.Tools
             };
 
             this.dbContext.Students.Add(student);
-            //dbContext.SaveChanges();
             return student;
         }
-
-        
+       
     }
 }

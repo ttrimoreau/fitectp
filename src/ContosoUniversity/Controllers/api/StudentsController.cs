@@ -40,13 +40,13 @@ namespace ContosoUniversity.Controllers.api
                 return NotFound();
             }
 
-            List<Enrollment> enrollments = db.Enrollments.Where(s => s.StudentID == id).ToList();
+            //List<Enrollment> enrollments = db.Enrollments.Where(s => s.StudentID == id).ToList();
 
             List<EnrollmentApiVM> CourseIdList = new List<EnrollmentApiVM>();
 
             StudentApiVM studentApiVM = new StudentApiVM();
 
-            foreach(Enrollment enrollment in enrollments)
+            foreach(Enrollment enrollment in student.Enrollments)
             {
                 EnrollmentApiVM enrollmentApiVM = new EnrollmentApiVM();
                 enrollmentApiVM.CourseId = enrollment.CourseID;

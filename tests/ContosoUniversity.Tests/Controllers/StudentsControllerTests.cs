@@ -8,6 +8,7 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
@@ -86,7 +87,10 @@ namespace ContosoUniversity.Tests.Controllers
 
             Assert.IsNotNull(contentResult.Content.enrollments);
             Assert.IsNotEmpty(contentResult.Content.enrollments);
-            //Assert.AreEqual(testEnrollmentsAPI, contentResult.Content.enrollments);
+            Assert.AreEqual(testEnrollmentsAPI[0], contentResult.Content.enrollments[0]);
+            Assert.AreEqual(testEnrollmentsAPI[1], contentResult.Content.enrollments[1]);
+            Assert.AreEqual(testEnrollmentsAPI, contentResult.Content.enrollments);
+            
 
             //type of file, json or xml?
 
