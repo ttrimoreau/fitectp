@@ -124,9 +124,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BusinessLayer\Authentication.cs" />
+    <Compile Include="BusinessLayer\UploadImage.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
-    <Compile Include="BL\CheckImage.cs" />
-    <Compile Include="BL\ErrorMessages.cs" />
+    <Compile Include="BusinessLayer\CheckImage.cs" />
+    <Compile Include="BusinessLayer\ErrorMessages.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\FileController.cs" />

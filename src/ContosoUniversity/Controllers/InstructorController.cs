@@ -24,11 +24,7 @@ namespace ContosoUniversity.Controllers
             set { db = value; }
         }
 
-        public SchoolContext DbContext
-        {
-            get { return db; }
-            set { db = value; }
-        }
+       
 
         // GET: Instructor
         public ActionResult Index(int? id, int? courseID)

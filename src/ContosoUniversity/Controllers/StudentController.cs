@@ -170,7 +170,7 @@ namespace ContosoUniversity.Controllers
 
                         //call of the verfication Size method
                         bool sizeIsCorrect = check.checkSize(upload.ContentLength);
-
+                        
                         if (sizeIsCorrect == false)
                         {
                             ViewBag.ErrorSize = ErrorMessages.ErrorSize();
@@ -185,7 +185,6 @@ namespace ContosoUniversity.Controllers
                         }
                         var avatar = new FileImage
                         {
-                            //FileName = System.IO.Path.GetFileName(upload.FileName),
                             FileType = FileType.Avatar,
                             ContentType = upload.ContentType
                         };
