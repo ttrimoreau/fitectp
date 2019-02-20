@@ -1,0 +1,59 @@
+﻿@model ContosoUniversity.ViewModels.LoginVM
+
+
+@{
+    ViewBag.Title = "Sign in";
+}
+
+    <div>
+
+        <h2>Sign in</h2>
+        <p>
+            @*link to account creation*@
+            or @Html.ActionLink("register new account", "Register", "Authentication")
+        </p>
+
+        @*if wrong login/password, display error message*@
+        @if(ViewData["Error"] != null)
+        {
+            <p>
+                @ViewData["Error"]
+            </p>
+        }
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+
+                @*Login*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*Password*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*Submit button*@
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Login" class="btn btn-default" />
+                    </div>
+                </div>
+
+            </div>
+
+                }
+            </div>

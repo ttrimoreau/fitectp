@@ -1,0 +1,11 @@
+﻿@using ContosoUniversity.BusinessLayer
+
+@if (Session["UserId"] == null)
+{
+    <li>@Html.ActionLink("Connexion", "Login", "Authentication")</li>
+}
+@if (Session["UserId"] != null)
+{
+    string UserName = Authentication.UserNameFromId((int)Session["UserId"]);
+    <li>@Html.ActionLink("Logout " + UserName, "Logout", "Authentication")</li>
+}

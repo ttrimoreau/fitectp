@@ -7,6 +7,11 @@ using System.Web;
 
 namespace ContosoUniversity.ViewModels
 {
+    public enum Role
+    {
+        Student = 0,
+        Instructor = 1
+    }
     public class RegisterVM
     {
         public int ID { get; set; }
@@ -48,10 +53,8 @@ namespace ContosoUniversity.ViewModels
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
-        public enum Role
-        {
-            Student = 0,
-            Instructor = 1
-        }
+        public Role PersonRole { get; set; }
+
+        
     }
 }

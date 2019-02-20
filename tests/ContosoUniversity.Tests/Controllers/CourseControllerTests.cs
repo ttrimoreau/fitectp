@@ -13,14 +13,14 @@ namespace ContosoUniversity.Tests.Controllers
     public class CourseControllerTests : IntegrationTestsBase
     {
         private MockHttpContextWrapper httpContext;
-        private StudentController controllerToTest;
+        private CourseController controllerToTest;
         private SchoolContext dbContext;
 
         [SetUp]
         public void Initialize()
         {
             httpContext = new MockHttpContextWrapper();
-            controllerToTest = new StudentController();
+            controllerToTest = new CourseController();
             controllerToTest.ControllerContext = new ControllerContext(httpContext.Context.Object, new RouteData(), controllerToTest);
             dbContext = new DAL.SchoolContext(this.ConnectionString);
             controllerToTest.DbContext = dbContext;

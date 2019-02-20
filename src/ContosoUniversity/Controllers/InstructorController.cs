@@ -18,6 +18,11 @@ namespace ContosoUniversity.Controllers
     public class InstructorController : Controller
     {
         private SchoolContext db = new SchoolContext();
+        public SchoolContext DbContext
+        {
+            get { return db; }
+            set { db = value; }
+        }
 
         public SchoolContext DbContext
         {
