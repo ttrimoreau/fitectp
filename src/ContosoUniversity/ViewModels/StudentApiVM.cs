@@ -15,17 +15,17 @@ namespace ContosoUniversity.ViewModels
         [Required]
         [StringLength(50)]
         [Display(Name = "Last Name")]
-        public string Lastname { get; set; }
+        public string lastname { get; set; }
         [Required]
         [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
         [Column("FirstName")]
         [Display(Name = "First Name")]
-        public string Firstname { get; set; }
+        public string firstname { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Enrollment Date")]
-        public string EnrollmentDate { get; set; }
+        public string enrollmentDate { get; set; }
 
         public List<EnrollmentApiVM> enrollments { get; set; }
 

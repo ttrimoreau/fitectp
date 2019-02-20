@@ -7,6 +7,6 @@ namespace ContosoUniversity.ViewModels
 {
     public class EnrollmentApiVM
     {
-        public int CourseId { get; set; }
+        public int courseId { get; set; }
     }
 }
