@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ContosoUniversity.DAL;
 using ContosoUniversity.BusinessLayer;
+using ContosoUniversity.ViewModels;
 
 namespace ContosoUniversity.Controllers
 {
@@ -28,16 +29,18 @@ namespace ContosoUniversity.Controllers
 
         //POST
         [HttpPost]
-        public ActionResult Login(VMLogin vmlogin)
+        public ActionResult Login(LoginVM vmlogin)
         {
-            if (vmlogin.isvalid)
+            if (ModelState.IsValid)
             {
-                string HashedAndSaltedPassword = Authentication.SaltAndHash(vmlogin.Password);
-                if(db.People.Any(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword))
+                string HashedAndSaltedPassword = Authentication.SaltAndHash(vmlogin.PassWord);
+                if(db.People.Any(x => x.UserName == vmlogin.UserName && x.PassWord == HashedAndSaltedPassword))
                 {
-                    Session["UserId"] = db.People.Find(x => x.UserName == vmlogin.UserName).ID;
+                    Session["UserId"] = db.People.Single(x => x.UserName == vmlogin.UserName).ID;
                 }
             }
+
+
             return View();
         }
 
@@ -49,7 +52,7 @@ namespace ContosoUniversity.Controllers
 
         // POST: Authentication
         [HttpPost]
-        public ActionResult Register()
+        public ActionResult Register(RegisterVM registerVM)
         {
             return View();
         }
