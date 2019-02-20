@@ -71,15 +71,18 @@ namespace ContosoUniversity.Controllers
         public ActionResult Details(int? id)
         {
             SchoolContext db = new SchoolContext();
+            if(Session["UserId"]== null)
+            {
+                TempData["ErrorMessage"] = " Vous n'êtes pas autorisés à accéder à la section Détail. Veuillez vous loggez.";
+                return RedirectToAction("Index");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Student student = db.Students.Find(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
+          
       
             var query1 = db.Courses.Select(c => c.CourseID);
             var query2 = db.Enrollments.Where(s => s.StudentID == id).Select(s => s.CourseID);
@@ -96,15 +99,15 @@ namespace ContosoUniversity.Controllers
         public ActionResult Details(int courseID)
         {
             SchoolContext db = new SchoolContext();
-            //if (Session["UserID"] == null)
-            //{
-            //    return View();
-            //}
+            if (Session["UserId"] == null)
+            {
+                return View();
+            }
             int id = int.Parse(Session["UserId"].ToString());
             db.Enrollments.Add(new Enrollment { StudentID = id, CourseID = courseID });
             db.SaveChanges();
             ViewBag.Message = "Subscription successful !";
-            return RedirectToAction("Index");
+            return RedirectToAction("Details");
         }
 
         // GET: Student/Create
