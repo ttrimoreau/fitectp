@@ -13,17 +13,17 @@ namespace ContosoUniversity.Tests.Controllers
     public class InstructorControllerTests : IntegrationTestsBase
     {
         private MockHttpContextWrapper httpContext;
-        private StudentController controllerToTest;
+        private InstructorController controllerToTest;
         private SchoolContext dbContext;
 
         [SetUp]
         public void Initialize()
         {
             httpContext = new MockHttpContextWrapper();
-            controllerToTest = new StudentController();
+            controllerToTest = new InstructorController();
             controllerToTest.ControllerContext = new ControllerContext(httpContext.Context.Object, new RouteData(), controllerToTest);
             dbContext = new DAL.SchoolContext(this.ConnectionString);
-            controllerToTest.DbContext = dbContext;
+            controllerToTest. = dbContext;
         }
     }
 }
