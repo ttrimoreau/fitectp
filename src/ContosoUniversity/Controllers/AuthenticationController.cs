@@ -33,8 +33,8 @@ namespace ContosoUniversity.Controllers
         {
             if (ModelState.IsValid)
             {
-                string HashedAndSaltedPassword = Authentication.SaltAndHash(vmlogin.PassWord);
-                if(db.People.Any(x => x.UserName == vmlogin.UserName && x.PassWord == HashedAndSaltedPassword))
+                string HashedAndSaltedPassword = Authentication.SaltAndHash(vmlogin.Password);
+                if(db.People.Any(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword))
                 {
                     Session["UserId"] = db.People.Single(x => x.UserName == vmlogin.UserName).ID;
                 }
