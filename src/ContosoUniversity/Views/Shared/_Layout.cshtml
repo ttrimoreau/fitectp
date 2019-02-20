@@ -42,6 +42,9 @@
                     }
                     @if (Session["UserId"] != null)
                     {
+                        @*@{
+
+                         }*@
                         <li>@Html.ActionLink(Session["UserId"].ToString(), "Index", "Authentication")</li>
                     }
                 </ul>

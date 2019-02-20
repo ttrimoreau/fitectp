@@ -18,7 +18,7 @@ namespace ContosoUniversity.Controllers
         // GET: Authentication
         public ActionResult Index()
         {
-            return View();
+            return View("Login","Authentication");
         }
 
         // GET: Authentication
@@ -42,7 +42,7 @@ namespace ContosoUniversity.Controllers
             }
 
 
-            return View();
+            return RedirectToAction("Index","Home");
         }
 
         // GET: Authentication
