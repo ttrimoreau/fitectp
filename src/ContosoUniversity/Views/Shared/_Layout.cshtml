@@ -37,8 +37,9 @@
                     <li>@Html.ActionLink("Instructors", "Index", "Instructor")</li>
                     <li>@Html.ActionLink("Departments", "Index", "Department")</li>
                     @*Navigation menu item for connexion (either "connexion" or UserName)*@
-                    @Html.Partial("_NavBarConnexion")
+                    @*@Html.Partial("_NavBarConnexion")*@
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>

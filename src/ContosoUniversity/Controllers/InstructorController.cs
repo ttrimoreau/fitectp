@@ -16,6 +16,7 @@ using ContosoUniversity.BusinessLayer;
 
 namespace ContosoUniversity.Controllers
 {
+    [AuthorizedRoleFilter(Role = "Instructor")]
     public class InstructorController : Controller
     {
         private SchoolContext db = new SchoolContext();

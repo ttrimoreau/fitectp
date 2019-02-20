@@ -19,6 +19,7 @@ using System.Web.Mvc;
 
 namespace ContosoUniversity.Controllers
 {
+    [AuthorizedRoleFilter(Role = "Student")]
     public class StudentController : Controller
     {
         private SchoolContext db = new SchoolContext();

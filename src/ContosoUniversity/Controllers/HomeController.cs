@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ContosoUniversity.BusinessLayer;
 using ContosoUniversity.DAL;
 using ContosoUniversity.ViewModels;
 
 
 namespace ContosoUniversity.Controllers
 {
+    [AuthorizedRoleFilter(Role = "Instructor",Roles ="Student")]
     public class HomeController : Controller
     {
         private SchoolContext db = new SchoolContext();
@@ -17,7 +19,7 @@ namespace ContosoUniversity.Controllers
             get { return db; }
             set { db = value; }
         }
-
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();

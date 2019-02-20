@@ -16,7 +16,7 @@ namespace ContosoUniversity.BusinessLayer
         }
         #endregion
 
-        #region MyRegion
+        #region UploadImage
         public FileImage Upload(HttpPostedFileBase upload)
         {
             var avatar = new FileImage
