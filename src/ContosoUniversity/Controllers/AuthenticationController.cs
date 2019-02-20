@@ -13,7 +13,11 @@ namespace ContosoUniversity.Controllers
     public class AuthenticationController : Controller
     {
         private SchoolContext db = new SchoolContext();
-
+        public SchoolContext DbContext
+        {
+            get { return db; }
+            set { db = value; }
+        }
 
         // GET: Authentication
         public ActionResult Index()
