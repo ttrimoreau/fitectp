@@ -28,5 +28,27 @@ namespace ContosoUniversity.Tests.Tools
             this.dbContext.Students.Add(student);
             return student;
         }
+
+        public Instructor CreateInstructor(string lastname, string firstname)
+        {
+            var instructor = new Instructor()
+            {
+                LastName = lastname,
+                FirstMidName = firstname
+            };
+            this.dbContext.Instructors.Add(instructor);
+            return instructor;
+        }
+
+        #region Course
+        public Course createCourse(int instructorId)
+        {
+            var course = new Course()
+            {
+                DepartmentID
+
+            }
+        }
+        #endregion
     }
 }

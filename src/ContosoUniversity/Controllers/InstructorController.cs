@@ -17,6 +17,12 @@ namespace ContosoUniversity.Controllers
     {
         private SchoolContext db = new SchoolContext();
 
+        public SchoolContext DbContext
+        {
+            get { return db; }
+            set { db = value; }
+        }
+
         // GET: Instructor
         public ActionResult Index(int? id, int? courseID)
         {
@@ -143,7 +149,7 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int? id, string[] selectedCourses)
+        public ActionResult EditPost(int? id, string[] selectedCourses)
         {
             if (id == null)
             {

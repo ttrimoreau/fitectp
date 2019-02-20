@@ -156,9 +156,9 @@
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902200817250_ModificationPersonCS.cs" />
-    <Compile Include="Migrations\201902200817250_ModificationPersonCS.Designer.cs">
-      <DependentUpon>201902200817250_ModificationPersonCS.cs</DependentUpon>
+    <Compile Include="Migrations\201902201302012_New.cs" />
+    <Compile Include="Migrations\201902201302012_New.Designer.cs">
+      <DependentUpon>201902201302012_New.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -267,8 +267,8 @@
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902200817250_ModificationPersonCS.resx">
-      <DependentUpon>201902200817250_ModificationPersonCS.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902201302012_New.resx">
+      <DependentUpon>201902201302012_New.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
