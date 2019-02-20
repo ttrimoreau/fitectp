@@ -94,13 +94,12 @@ namespace ContosoUniversity.Controllers
         }
 
 
-
         //Post
         [HttpPost]
         public ActionResult Details(int courseID)
         {
             SchoolContext db = new SchoolContext();
-            if (Session["UserID"] == null)
+            if (Session["UserId"] == null)
             {
                 return View();
             }
