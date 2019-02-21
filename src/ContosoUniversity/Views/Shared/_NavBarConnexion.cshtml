@@ -2,10 +2,11 @@
 
 @if (Session["UserId"] == null)
 {
-    <li>@Html.ActionLink("Connexion", "Login", "Authentication")</li>
+    <button type="button" class="btn btn-light pull-right" id="connexion"><i class="fas fa-user-circle"></i> @Html.ActionLink("Connexion", "Login", "Authentication")</button>
 }
 @if (Session["UserId"] != null)
 {
     string UserName = Authentication.UserNameFromId((int)Session["UserId"]);
-    <li>@Html.ActionLink("Logout " + UserName, "Logout", "Authentication")</li>
+    <li>@Html.ActionLink("Welcome " + UserName, "Index", "Home")</li>
+    <button type="button" class="btn btn-light pull-right" id="connexion"><i class="fas fa-sign-out-alt"></i> @Html.ActionLink("Logout ", "Logout", "Authentication")</button>
 }

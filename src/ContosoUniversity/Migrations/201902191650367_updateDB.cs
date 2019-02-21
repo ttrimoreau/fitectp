@@ -10,17 +10,17 @@ namespace ContosoUniversity.Migrations
             CreateTable(
                 "dbo.FileImage",
                 c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        FileType = c.Int(nullable: false),
-                        ContentType = c.String(maxLength: 100),
-                        Content = c.Binary(),
-                        PersonID = c.Int(nullable: false),
-                    })
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    FileType = c.Int(nullable: false),
+                    ContentType = c.String(maxLength: 100),
+                    Content = c.Binary(),
+                    PersonID = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Person", t => t.PersonID, cascadeDelete: true)
                 .Index(t => t.PersonID);
-            
+
             CreateTable(
                 "dbo.Lessons",
                 c => new
