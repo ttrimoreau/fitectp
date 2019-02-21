@@ -1,25 +1,14 @@
-﻿using System;
+﻿using ContosoUniversity.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace ContosoUniversity.Models
+namespace ContosoUniversity.ViewModels
 {
-
-    public enum Day
+    public class LessonsVM
     {
-        Lundi,
-        Mardi,
-        Mercredi,
-        Jeudi,
-        Vendredi
-    }
-
-    public class Lessons
-    {
-
-        [Key]
         public int ID { get; set; }
         public Day Day { get; set; }
         [DataType(DataType.Time)]
@@ -29,5 +18,6 @@ namespace ContosoUniversity.Models
         public int CourseID { get; set; }
 
         public virtual Course Course { get; set; }
+
     }
 }

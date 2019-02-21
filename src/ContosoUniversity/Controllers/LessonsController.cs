@@ -2,23 +2,40 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ContosoUniversity.BusinessLayer;
 using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
+using ContosoUniversity.ViewModels;
 
 namespace ContosoUniversity.Controllers
 {
     public class LessonsController : Controller
     {
-        private SchoolContext db = new SchoolContext();
 
-        // GET: Lessons
-        public ActionResult Index()
+
+        private SchoolContext db = new SchoolContext();
+        LessonsBusiness lessonB = new LessonsBusiness();
+  private void DropDownList(object selectedCourse = null)
         {
-            return View(db.Lessons.ToList());
+            List<Course> courseQuery = lessonB.CourseList();
+            ViewBag.CourseID = new SelectList(courseQuery, "CourseID", "Title", selectedCourse);
+        }
+        
+        // GET: Lessons
+
+        public ActionResult Index(int? SelectedCourse)
+        {
+
+            List<Course> courses = lessonB.CourseList();
+            ViewBag.SelectedCourse = new SelectList(courses, "CourseID", "Title", SelectedCourse);
+            int courseID = SelectedCourse.GetValueOrDefault();
+
+            return View(lessonB.ListeFiltreLesson(SelectedCourse, courseID).ToList());
         }
 
         // GET: Lessons/Details/5
@@ -39,24 +56,35 @@ namespace ContosoUniversity.Controllers
         // GET: Lessons/Create
         public ActionResult Create()
         {
+            DropDownList();
             return View();
         }
+
+
 
         // POST: Lessons/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Day,HourStart,Duration")] Lessons lessons)
+        public ActionResult Create(Lessons lessons)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Lessons.Add(lessons);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    lessonB.AddLesson(lessons);
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+    
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
 
-            return View(lessons);
+            DropDownList(lessons.ID);
+                return View(lessons);    
         }
 
         // GET: Lessons/Edit/5
@@ -66,29 +94,46 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Lessons lessons = db.Lessons.Find(id);
+
+            Lessons lessons = lessonB.FindLesson(id);
+
             if (lessons == null)
             {
                 return HttpNotFound();
             }
+
+            DropDownList(lessons.ID);
             return View(lessons);
         }
 
-        // POST: Lessons/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Day,HourStart,Duration")] Lessons lessons)
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(lessons).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            Lessons lessons = lessonB.FindLesson(id);
+        
+
+                try
+                {
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+        
+            DropDownList(lessons.ID);
             return View(lessons);
         }
+
 
         // GET: Lessons/Delete/5
         public ActionResult Delete(int? id)

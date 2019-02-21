@@ -9,8 +9,22 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Select Course: @Html.DropDownList("SelectedCourse", "All")
+        <input type="submit" value="Filter" />
+    </p>
+}
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.StartDate)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Day)
         </th>
@@ -23,8 +37,15 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.Title)
+        </td>
+        <th>
+            @Html.DisplayFor(modelItem => item.Course.StartDate)
+        </th>
         <td>
             @Html.DisplayFor(modelItem => item.Day)
         </td>
@@ -35,11 +56,10 @@
             @Html.DisplayFor(modelItem => item.Duration)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
         </td>
     </tr>
-}
+    }
 
 </table>

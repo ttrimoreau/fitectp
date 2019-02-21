@@ -167,9 +167,13 @@
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902200817250_ModificationPersonCS.cs" />
-    <Compile Include="Migrations\201902200817250_ModificationPersonCS.Designer.cs">
-      <DependentUpon>201902200817250_ModificationPersonCS.cs</DependentUpon>
+    <Compile Include="Migrations\201902211443357_AjoutCourseID.cs" />
+    <Compile Include="Migrations\201902211443357_AjoutCourseID.Designer.cs">
+      <DependentUpon>201902211443357_AjoutCourseID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902211447164_AjoutDataTypedansLesson.cs" />
+    <Compile Include="Migrations\201902211447164_AjoutDataTypedansLesson.Designer.cs">
+      <DependentUpon>201902211447164_AjoutDataTypedansLesson.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -186,6 +190,7 @@
     <Compile Include="ViewModels\CourseSubscriptionVM.cs" />
     <Compile Include="ViewModels\EnrollmentDateGroup.cs" />
     <Compile Include="ViewModels\InstructorIndexData.cs" />
+    <Compile Include="ViewModels\LessonsVM.cs" />
     <Compile Include="ViewModels\RegisterVM.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
   </ItemGroup>
@@ -255,11 +260,10 @@
     <Content Include="Views\Authentication\Register.cshtml" />
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Shared\_NavBarConnexion.cshtml" />
+    <Content Include="Views\Lessons\Index.cshtml" />
     <Content Include="Views\Lessons\Create.cshtml" />
     <Content Include="Views\Lessons\Delete.cshtml" />
-    <Content Include="Views\Lessons\Details.cshtml" />
     <Content Include="Views\Lessons\Edit.cshtml" />
-    <Content Include="Views\Lessons\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -287,8 +291,11 @@
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902200817250_ModificationPersonCS.resx">
-      <DependentUpon>201902200817250_ModificationPersonCS.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902211443357_AjoutCourseID.resx">
+      <DependentUpon>201902211443357_AjoutCourseID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902211447164_AjoutDataTypedansLesson.resx">
+      <DependentUpon>201902211447164_AjoutDataTypedansLesson.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
