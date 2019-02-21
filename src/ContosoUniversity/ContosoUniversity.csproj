@@ -171,29 +171,9 @@
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902191650367_updateDB.cs" />
-    <Compile Include="Migrations\201902191650367_updateDB.Designer.cs">
-      <DependentUpon>201902191650367_updateDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902201200052_New.cs" />
-    <Compile Include="Migrations\201902201200052_New.Designer.cs">
-      <DependentUpon>201902201200052_New.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902201527207_AfterMerge.cs" />
-    <Compile Include="Migrations\201902201527207_AfterMerge.Designer.cs">
-      <DependentUpon>201902201527207_AfterMerge.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902211431200_UpdatedboLessons.cs" />
-    <Compile Include="Migrations\201902211431200_UpdatedboLessons.Designer.cs">
-      <DependentUpon>201902211431200_UpdatedboLessons.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902211440448_UpdatedboLessonsDateTime.cs" />
-    <Compile Include="Migrations\201902211440448_UpdatedboLessonsDateTime.Designer.cs">
-      <DependentUpon>201902211440448_UpdatedboLessonsDateTime.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902211509330_UpdatedboLessonsDateTime1.cs" />
-    <Compile Include="Migrations\201902211509330_UpdatedboLessonsDateTime1.Designer.cs">
-      <DependentUpon>201902211509330_UpdatedboLessonsDateTime1.cs</DependentUpon>
+    <Compile Include="Migrations\201902211624452_newupdate.cs" />
+    <Compile Include="Migrations\201902211624452_newupdate.Designer.cs">
+      <DependentUpon>201902211624452_newupdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -306,23 +286,8 @@
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902191650367_updateDB.resx">
-      <DependentUpon>201902191650367_updateDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902201200052_New.resx">
-      <DependentUpon>201902201200052_New.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902201527207_AfterMerge.resx">
-      <DependentUpon>201902201527207_AfterMerge.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902211431200_UpdatedboLessons.resx">
-      <DependentUpon>201902211431200_UpdatedboLessons.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902211440448_UpdatedboLessonsDateTime.resx">
-      <DependentUpon>201902211440448_UpdatedboLessonsDateTime.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902211509330_UpdatedboLessonsDateTime1.resx">
-      <DependentUpon>201902211509330_UpdatedboLessonsDateTime1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902211624452_newupdate.resx">
+      <DependentUpon>201902211624452_newupdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
