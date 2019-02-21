@@ -33,7 +33,8 @@ namespace ContosoUniversity.Controllers.api
         // GET: api/Students/5
         [ResponseType(typeof(Student))]
         public IHttpActionResult GetStudent(int id)
-        {
+        {   
+            // find instead of any: any searches the database, find searches the context
             if(db.People.Find(id) is Instructor)
             //if (db.Instructors.Any(x => x.ID == id))
             {
