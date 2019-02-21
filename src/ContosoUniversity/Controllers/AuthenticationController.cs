@@ -68,23 +68,38 @@ namespace ContosoUniversity.Controllers
             {
                 string HashedAndSaltedPassword = Authentication.SaltAndHash(vmlogin.Password);
                 Person user = db.People.SingleOrDefault(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword);
-                if (user!=null)
+                if (db.People.Any(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword))
                 {
+                    Session["UserId"] = user.ID;
+                    if ((db.Students.FirstOrDefault(p => p.ID == user.ID)) != null)
+                    {
 
-                    int id = db.People.Single(x => x.UserName == vmlogin.UserName).ID;
-
-                    Session["UserId"] = id;
-                    if (id != 0)
+                        Session["UserRole"] = "Student";
+                    }
+                    else
                     {
                         Session["UserRole"] = "Instructor";
                     }
-
-                    if (db.Students.Single(i => i.ID == id) != null)
-                    {
-                        Session["UserRole"] = "Student";
-                    }
                     FormsAuthentication.SetAuthCookie(user.ID.ToString(), false);
                 }
+
+                //if (user!=null)
+                //{
+
+                //    int id = db.People.Single(x => x.UserName == vmlogin.UserName).ID;
+
+                //    Session["UserId"] = id;
+                //    if (id != 0)
+                //    {
+                //        Session["UserRole"] = "Instructor";
+                //    }
+
+                //    if (db.Students.Single(i => i.ID == id) != null)
+                //    {
+                //        Session["UserRole"] = "Student";
+                //    }
+                    
+                //}
                 else
                 {
                     ViewData["Error"] = "Invalid login or password.";
@@ -107,7 +122,7 @@ namespace ContosoUniversity.Controllers
         // POST: Authentication
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "LastName,FirstMidName,UserName,Password,Email,HireDate,ConfirmPassword")]RegisterVM registerVM)
+        public ActionResult Register([Bind(Include = "LastName,FirstMidName,UserName,Password,Email,HireDate,ConfirmPassword,PersonRole")]RegisterVM registerVM)
         {
             if (ModelState.IsValid)
             {
