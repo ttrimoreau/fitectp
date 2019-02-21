@@ -29,6 +29,19 @@ namespace ContosoUniversity.Tests.Tools
             return student;
         }
 
+        public Student CreateStudentForUploadImage(string lastname, string firstname)
+        {
+            var student = new Student()
+            {
+                LastName = lastname,
+                FirstMidName = firstname,
+                EnrollmentDate =DateTime.Now
+            };
+
+            this.dbContext.Students.Add(student);
+            return student;
+        }
+
         public Instructor CreateInstructor(string lastname, string firstname)
         {
             var instructor = new Instructor()
