@@ -10,6 +10,9 @@ using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 using ContosoUniversity.ViewModels;
 using System.Data.Entity.Infrastructure;
+using ContosoUniversity.BL;
+using ContosoUniversity.Enum;
+using ContosoUniversity.BusinessLayer;
 
 namespace ContosoUniversity.Controllers
 {
@@ -21,6 +24,8 @@ namespace ContosoUniversity.Controllers
             get { return db; }
             set { db = value; }
         }
+
+       
 
         // GET: Instructor
         public ActionResult Index(int? id, int? courseID)
@@ -114,7 +119,9 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Instructor instructor = db.Instructors
+                .Include(s => s.FileImage)
                 .Include(i => i.OfficeAssignment)
                 .Include(i => i.Courses)
                 .Where(i => i.ID == id)
@@ -148,7 +155,7 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int? id, string[] selectedCourses)
+        public ActionResult Edit(int? id, string[] selectedCourses, HttpPostedFileBase upload)
         {
             if (id == null)
             {
@@ -171,10 +178,60 @@ namespace ContosoUniversity.Controllers
                     }
 
                     UpdateInstructorCourses(selectedCourses, instructorToUpdate);
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        #region CheckImage
+                        CheckImage check = new CheckImage();
+                        //getting the image
+                        string fileName = System.IO.Path.GetExtension(upload.FileName);
+                        //call of the verification Extension method
+                        bool extensionIsTrue = check.checkExtension(fileName);
+
+                        if (extensionIsTrue == false)
+                        {
+                            ViewBag.ErrorType = ErrorMessages.ErrorExtension();
+                            Instructor instructor = db.Instructors
+                                                        .Include(s => s.FileImage)
+                                                        .Include(i => i.OfficeAssignment)
+                                                        .Include(i => i.Courses)
+                                                        .Where(i => i.ID == id)
+                                                        .Single();
+                            PopulateAssignedCourseData(instructor);
+                            return View(instructor);
+                        }
+
+                        //call of the verfication Size method
+                        bool sizeIsCorrect = check.checkSize(upload.ContentLength);
+
+                        if (sizeIsCorrect == false)
+                        {
+                            ViewBag.ErrorSize = ErrorMessages.ErrorSize();
+                            Instructor instructor = db.Instructors
+                                                        .Include(s => s.FileImage)
+                                                        .Include(i => i.OfficeAssignment)
+                                                        .Include(i => i.Courses)
+                                                        .Where(i => i.ID == id)
+                                                        .Single();
+                            PopulateAssignedCourseData(instructor);
+                            return View(instructor);
+                        }
+                        #endregion
+                        //Remove the the previous image
+                        if (instructorToUpdate.FileImage.Any(f => f.FileType == FileType.Avatar))
+                        {
+                            db.FileImages.Remove(instructorToUpdate.FileImage.First(f => f.FileType == FileType.Avatar));
+                        }
+
+                        UploadImage uploadImage = new UploadImage();
+                        FileImage avatar = uploadImage.Upload(upload);
+
+                        instructorToUpdate.FileImage = new List<FileImage> { avatar };
+                    }
+                    db.Entry(instructorToUpdate).State = EntityState.Modified;
 
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return View(viewName:"Details", model: instructorToUpdate);
                 }
                 catch (RetryLimitExceededException /* dex */)
                 {

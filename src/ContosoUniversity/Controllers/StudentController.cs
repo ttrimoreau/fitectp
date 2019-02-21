@@ -1,11 +1,20 @@
-﻿using ContosoUniversity.DAL;
+﻿
+using ContosoUniversity.BL;
+using ContosoUniversity.BusinessLayer;
+using ContosoUniversity.DAL;
+using ContosoUniversity.Enum;
 using ContosoUniversity.Models;
+using ContosoUniversity.ViewModels;
 using PagedList;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace ContosoUniversity.Controllers
@@ -73,7 +82,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
+            Student student = db.Students.Include(s => s.FileImage).SingleOrDefault(s => s.ID == id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -119,7 +128,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
+            Student student = db.Students.Include(s => s.FileImage).SingleOrDefault(s => s.ID == id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -132,7 +141,7 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int? id)
+        public ActionResult EditPost(int? id, HttpPostedFileBase upload)
         {
             if (id == null)
             {
@@ -144,9 +153,47 @@ namespace ContosoUniversity.Controllers
             {
                 try
                 {
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        #region CheckImage
+                        CheckImage check = new CheckImage();
+                        //getting the image
+                        string fileName = System.IO.Path.GetExtension(upload.FileName);
+                        //call of the verification Extension method
+                        bool extensionIsTrue = check.checkExtension(fileName);
+
+                        if (extensionIsTrue == false)
+                        {
+                            ViewBag.ErrorType = ErrorMessages.ErrorExtension();
+                            Student student = db.Students.Include(s => s.FileImage).SingleOrDefault(s => s.ID == id);
+                            return View(student);
+                        }
+
+                        //call of the verfication Size method
+                        bool sizeIsCorrect = check.checkSize(upload.ContentLength);
+                        
+                        if (sizeIsCorrect == false)
+                        {
+                            ViewBag.ErrorSize = ErrorMessages.ErrorSize();
+                            Student student = db.Students.Include(s => s.FileImage).SingleOrDefault(s => s.ID == id);
+                            return View(student);
+                        }
+                        #endregion
+                        //Remove the the previous image
+                        if (studentToUpdate.FileImage.Any(f => f.FileType == FileType.Avatar))
+                        {
+                            db.FileImages.Remove(studentToUpdate.FileImage.First(f => f.FileType == FileType.Avatar));
+                        }
+
+                        UploadImage uploadImage = new UploadImage();
+                        FileImage avatar = uploadImage.Upload(upload);
+
+                        studentToUpdate.FileImage = new List<FileImage> { avatar };
+                    }
+                    db.Entry(studentToUpdate).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return View(viewName: "Details", model: studentToUpdate);
                 }
                 catch (RetryLimitExceededException /* dex */)
                 {
