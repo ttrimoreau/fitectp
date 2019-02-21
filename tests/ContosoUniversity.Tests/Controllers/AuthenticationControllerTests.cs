@@ -90,6 +90,9 @@ namespace ContosoUniversity.Tests.Controllers
         [Test]
         public void Login_LoginStudent_ViewHomeIndex()
         {
+            EntityGenerator generator = new EntityGenerator(dbContext);
+            generator.CreateStudent("Doe","John",LoginStudent.UserName,LoginStudent.Password,"johndoe@aol.com");
+
             RedirectToRouteResult result = controllerToTest.Login(LoginStudent) as RedirectToRouteResult;
             Assert.That(result, Is.Not.Null);
             Assert.That(result.RouteValues["action"], Is.EqualTo("Index"));
@@ -98,6 +101,9 @@ namespace ContosoUniversity.Tests.Controllers
         [Test]
         public void Login_LoginInstructor_ViewHomeIndex()
         {
+            EntityGenerator generator = new EntityGenerator(dbContext);
+            generator.CreateInstructor("Doe", "John", LoginInstructor.UserName, LoginInstructor.Password, "johndoe@aol.com");
+
             RedirectToRouteResult result = controllerToTest.Login(LoginInstructor) as RedirectToRouteResult;
             Assert.That(result, Is.Not.Null);
             Assert.That(result.RouteValues["action"], Is.EqualTo("Index"));
