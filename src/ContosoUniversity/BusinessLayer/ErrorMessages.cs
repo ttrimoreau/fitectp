@@ -15,7 +15,7 @@ namespace ContosoUniversity.BL
 
         public static string ErrorExtension()
         {
-            return "Image extention authorized is png or jpeg";
+            return "Image extention authorized is .png, .jpeg or .jpg";
         }
         #endregion
     }
