@@ -3,10 +3,11 @@ namespace ContosoUniversity.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ModificationPersonCS : DbMigration
+    public partial class UpdatedboLessonsDateTime : DbMigration
     {
         public override void Up()
         {
+            RenameColumn(table: "dbo.Person", name: "FirstName", newName: "FirstMidName");
             CreateTable(
                 "dbo.FileImage",
                 c => new
@@ -53,6 +54,7 @@ namespace ContosoUniversity.Migrations
             DropColumn("dbo.Course", "StartDate");
             DropTable("dbo.Lessons");
             DropTable("dbo.FileImage");
+            RenameColumn(table: "dbo.Person", name: "FirstMidName", newName: "FirstName");
         }
     }
 }

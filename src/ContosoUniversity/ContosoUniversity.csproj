@@ -124,10 +124,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BusinessLayer\Authentication.cs" />
-    <Compile Include="BusinessLayer\StudentBL.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\EnrollmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -166,13 +166,9 @@
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902200817250_ModificationPersonCS.cs" />
-    <Compile Include="Migrations\201902200817250_ModificationPersonCS.Designer.cs">
-      <DependentUpon>201902200817250_ModificationPersonCS.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902211311197_test.cs" />
-    <Compile Include="Migrations\201902211311197_test.Designer.cs">
-      <DependentUpon>201902211311197_test.cs</DependentUpon>
+    <Compile Include="Migrations\201902211603083_UpdatedboLessonsDateTime.cs" />
+    <Compile Include="Migrations\201902211603083_UpdatedboLessonsDateTime.Designer.cs">
+      <DependentUpon>201902211603083_UpdatedboLessonsDateTime.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -258,7 +254,12 @@
     <Content Include="Views\Authentication\Register.cshtml" />
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Shared\_NavBarConnexion.cshtml" />
-    <Content Include="Views\Student\_NotEnrolled.cshtml" />
+    <Content Include="Views\Student\_NewEnrollment.cshtml" />
+    <Content Include="Views\Enrollments\Create.cshtml" />
+    <Content Include="Views\Enrollments\Delete.cshtml" />
+    <Content Include="Views\Enrollments\Details.cshtml" />
+    <Content Include="Views\Enrollments\Edit.cshtml" />
+    <Content Include="Views\Enrollments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -286,11 +287,8 @@
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902200817250_ModificationPersonCS.resx">
-      <DependentUpon>201902200817250_ModificationPersonCS.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902211311197_test.resx">
-      <DependentUpon>201902211311197_test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902211603083_UpdatedboLessonsDateTime.resx">
+      <DependentUpon>201902211603083_UpdatedboLessonsDateTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
