@@ -34,11 +34,13 @@ namespace ContosoUniversity.Controllers.api
         [ResponseType(typeof(Student))]
         public IHttpActionResult GetStudent(int id)
         {
-            if(db.Instructors.Any(x => x.ID == id))
+            if(db.People.Find(id) is Instructor)
+            //if (db.Instructors.Any(x => x.ID == id))
             {
                 return NotFound();
             }
             Student student = db.Students.Find(id);
+            //Student student = db.Students.FirstOrDefault(s => s.ID == id);
             if (student == null)
             {
                 return NotFound();

@@ -93,20 +93,14 @@ namespace ContosoUniversity.Tests.Controllers
             
             Assert.IsInstanceOf(typeof(OkNegotiatedContentResult<StudentApiVM>), okResult);
 
-
-
-
         }
 
         [Test]
         public void APIStudent_Fail_nonExistantID()
         {
             IHttpActionResult notOkResult = controllerToTest.GetStudent(-1);
-            OkNegotiatedContentResult<StudentApiVM> contentResult = notOkResult as OkNegotiatedContentResult<StudentApiVM>;
 
-            Assert.IsNull(contentResult);
             Assert.IsInstanceOf(typeof(NotFoundResult), notOkResult);
-
 
         }
 
@@ -119,12 +113,8 @@ namespace ContosoUniversity.Tests.Controllers
             DateTime testEnrollmentDate = DateTime.Now;
             List<Enrollment> testEnrollments = new List<Enrollment>();
 
-
             EntityGenerator generator = new EntityGenerator(dbContext);
             Student studentTest = generator.CreateStudentFull(testID, testLastName, testFirstName, testEnrollmentDate, testEnrollments);
-
-
-          
 
             IHttpActionResult okResult = controllerToTest.GetStudent(studentTest.ID);
             OkNegotiatedContentResult<StudentApiVM> contentResult = okResult as OkNegotiatedContentResult<StudentApiVM>;
@@ -152,11 +142,8 @@ namespace ContosoUniversity.Tests.Controllers
             EntityGenerator generator = new EntityGenerator(dbContext);
             Instructor InstructorTest = generator.CreateInstructor(instrLastName, instrFirstName);
 
-
             IHttpActionResult notOkResult = controllerToTest.GetStudent(InstructorTest.ID);
-            OkNegotiatedContentResult<StudentApiVM> contentResult = notOkResult as OkNegotiatedContentResult<StudentApiVM>;
-
-            Assert.IsNull(contentResult);
+            
             Assert.IsInstanceOf(typeof(NotFoundResult), notOkResult);
 
 
