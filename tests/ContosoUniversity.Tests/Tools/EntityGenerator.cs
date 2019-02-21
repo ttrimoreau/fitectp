@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ContosoUniversity.ViewModels;
 
 namespace ContosoUniversity.Tests.Tools
 {
@@ -46,6 +47,10 @@ namespace ContosoUniversity.Tests.Tools
             this.dbContext.SaveChanges();
             return student;
         }
+        public Student CreateStudent(RegisterVM vm)
+        {
+            return CreateStudent(vm.LastName, vm.FirstMidName, vm.UserName, vm.Password, vm.Email);
+        }
 
         public Instructor CreateInstructor(string lastname, string firstname, string username, string password, string email)
         {
@@ -63,6 +68,27 @@ namespace ContosoUniversity.Tests.Tools
             this.dbContext.SaveChanges();
             return instructor;
         }
+
+        public Instructor CreateInstructor(RegisterVM vm)
+        {
+            return CreateInstructor(vm.LastName, vm.FirstMidName, vm.UserName, vm.Password, vm.Email);
+        }
+
+        public RegisterVM RegisterVM(ViewModels.Role role = ViewModels.Role.Student)
+        {
+            RegisterVM vm = new RegisterVM() {
+                FirstMidName = "Georges",
+                LastName = "Dubois",
+                UserName = "GDubois",
+                Password = "myPassword12",
+                ConfirmPassword = "myPassword12",
+                PersonRole = role,
+                Email = "Email@Student.com",
+                HireDate = DateTime.Now
+            };
+            return vm;
+        }
+
 
     }
 }

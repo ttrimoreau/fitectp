@@ -18,6 +18,13 @@ namespace ContosoUniversity.Tests.Controllers
         private AuthenticationController controllerToTest;
         private SchoolContext dbContext;
 
+        #region Constants
+        private readonly string REGISTER_ERROR_MSG = "This UserName is already taken";
+        private readonly string VALIDATION_ERROR_MSG = "Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.";
+
+        
+        #endregion
+
         #region Initialisation ViewModels
         private readonly RegisterVM RegisterInstructor = new RegisterVM()
         {
@@ -36,6 +43,7 @@ namespace ContosoUniversity.Tests.Controllers
             UserName = "instructeur",
             Password = "instructeur"
         };
+
         private readonly RegisterVM RegisterStudent = new RegisterVM()
         {
             FirstMidName = "PrenomStudent",
@@ -48,12 +56,39 @@ namespace ContosoUniversity.Tests.Controllers
             HireDate = DateTime.Now
         };
 
+        private readonly RegisterVM RegisterVM_Student_JohnDoe = new RegisterVM()
+        {
+            FirstMidName = "John",
+            LastName = "Doe",
+            UserName = "StudentJohnDoe",
+            Password = "JohnDoe2000",
+            ConfirmPassword = "JohnDoe2000",
+            PersonRole = Role.Student,
+            Email = "JohnDoeStudent@aol.com",
+            HireDate = DateTime.Now
+        };
+
+        private readonly RegisterVM RegisterVM_Instructor_JohnDoe = new RegisterVM()
+        {
+            FirstMidName = "John",
+            LastName = "Doe",
+            UserName = "InstructorJohnDoe",
+            Password = "JohnDoe33",
+            ConfirmPassword = "JohnDoe33",
+            PersonRole = Role.Instructor,
+            Email = "JohnDoeInstructor@clubinternet.com",
+            HireDate = DateTime.Now
+        };
+
         private readonly LoginVM LoginStudent = new LoginVM()
         {
             UserName = "student",
             Password = "student"
-        }; 
+        };
+
         #endregion
+
+
 
         [SetUp]
         public void Initialize()
@@ -83,6 +118,16 @@ namespace ContosoUniversity.Tests.Controllers
         [Test]
         public void Register_RegisterInstructor_ViewLogin()
         {
+            Assert.That(RegisterInstructor.FirstMidName, Is.Not.Null);
+            Assert.That(RegisterInstructor.LastName, Is.Not.Null);
+            Assert.That(RegisterInstructor.Password, Is.Not.Null);
+            Assert.That(RegisterInstructor.ConfirmPassword, Is.Not.Null);
+            Assert.That(RegisterInstructor.UserName, Is.Not.Null);
+            Assert.That(RegisterInstructor.HireDate, Is.Not.Null);
+            Assert.That(RegisterInstructor.Email, Is.Not.Null);
+            Assert.That(RegisterInstructor.PersonRole, Is.Not.Null);
+
+
             RedirectToRouteResult result = controllerToTest.Register(RegisterInstructor) as RedirectToRouteResult;
             Assert.That(result, Is.Not.Null);
             Assert.That(result.RouteValues["controller"], Is.EqualTo("Authentication"));
@@ -90,15 +135,108 @@ namespace ContosoUniversity.Tests.Controllers
         }
 
         [Test]
+        public void Register_Instructor_PropertyMissing_FirstName()
+        {
+            EntityGenerator generator = new EntityGenerator(dbContext);
+            RegisterVM vm = generator.RegisterVM(ViewModels.Role.Instructor);
+            vm.FirstMidName = null;
+            ViewResult result = new ViewResult();
+
+            Assert.That(() => result = controllerToTest.Register(vm) as ViewResult,
+                    Throws.TypeOf<System.Data.Entity.Validation.DbEntityValidationException>()
+                    .With.Message.EqualTo(VALIDATION_ERROR_MSG)
+                );
+        }
+
+        [Test]
+        public void Register_Instructor_PropertyMissing_LastName()
+        {
+            EntityGenerator generator = new EntityGenerator(dbContext);
+            RegisterVM vm = generator.RegisterVM(ViewModels.Role.Instructor);
+            vm.LastName = null;
+            ViewResult result = new ViewResult();
+
+            Assert.That(() => result = controllerToTest.Register(vm) as ViewResult,
+                    Throws.TypeOf<System.Data.Entity.Validation.DbEntityValidationException>()
+                    .With.Message.EqualTo(VALIDATION_ERROR_MSG)
+                );
+        }
+
+        [Test]
+        public void Register_Instructor_PropertyMissing_Password()
+        {
+            EntityGenerator generator = new EntityGenerator(dbContext);
+            RegisterVM vm = generator.RegisterVM(ViewModels.Role.Instructor);
+            vm.Password = null;
+            ViewResult result = new ViewResult();
+
+            Assert.That(() => result = controllerToTest.Register(vm) as ViewResult,
+                    Throws.TypeOf<System.Data.Entity.Validation.DbEntityValidationException>()
+                    .With.Message.EqualTo(VALIDATION_ERROR_MSG)
+                );
+        }
+
+        [Test]
+        public void Register_Instructor_PropertyMissing_UserName()
+        {
+            EntityGenerator generator = new EntityGenerator(dbContext);
+            RegisterVM vm = generator.RegisterVM(ViewModels.Role.Instructor);
+            vm.UserName = null;
+            ViewResult result = new ViewResult();
+
+            Assert.That(() => result = controllerToTest.Register(vm) as ViewResult,
+                    Throws.TypeOf<System.Data.Entity.Validation.DbEntityValidationException>()
+                    //.With.Message.EqualTo(VALIDATION_ERROR_MSG)
+                );
+        }
+
+        [Test]
         public void Login_LoginStudent_ViewHomeIndex()
         {
             EntityGenerator generator = new EntityGenerator(dbContext);
-            generator.CreateStudent("Doe","John",LoginStudent.UserName,LoginStudent.Password,"johndoe@aol.com");
+            Student s = new Student();
+
+            s = generator.CreateStudent("Doe", "John", LoginStudent.UserName, LoginStudent.Password, "johndoe@aol.com");
 
             RedirectToRouteResult result = controllerToTest.Login(LoginStudent) as RedirectToRouteResult;
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.RouteValues["controller"], Is.EqualTo("Authentication"));
+            Assert.That(result.RouteValues["controller"], Is.EqualTo("Home"));
             Assert.That(result.RouteValues["action"], Is.EqualTo("Index"));
+
+            Assert.That(httpContext.SessionState, Is.Not.Null);
+        }
+
+        [Test]
+        public void Login_LoginStudent_WrongPassword()
+        {
+            EntityGenerator generator = new EntityGenerator(dbContext);
+            Student student = new Student();
+            //s = generator.CreateStudent(RegisterVM_Student_JohnDoe);
+            student = generator.CreateStudent(RegisterStudent);
+
+            string wrongPassword = "wrong password";
+            LoginVM testStudent = new LoginVM { UserName = student.UserName, Password = wrongPassword };
+
+            ViewResult result = controllerToTest.Login(testStudent) as ViewResult;
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.ViewData["Error"], Is.EqualTo("Invalid login or password."));
+            //Any way to test that ViewResult result is the "Login" view???
+        }
+
+        [Test]
+        public void Login_LoginInstructor_WrongPassword()
+        {
+            EntityGenerator generator = new EntityGenerator(dbContext);
+            Instructor instructor = new Instructor();
+            instructor = generator.CreateInstructor(RegisterInstructor);
+
+            string wrongPassword = "wrong password";
+            LoginVM testInstructor = new LoginVM { UserName = instructor.UserName, Password = wrongPassword };
+
+            ViewResult result = controllerToTest.Login(testInstructor) as ViewResult;
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.ViewData["Error"], Is.EqualTo("Invalid login or password."));
+            //Any way to test that ViewResult result is the "Login" view???
         }
 
         [Test]
@@ -109,7 +247,7 @@ namespace ContosoUniversity.Tests.Controllers
 
             RedirectToRouteResult result = controllerToTest.Login(LoginInstructor) as RedirectToRouteResult;
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.RouteValues["controller"], Is.EqualTo("Authentication"));
+            Assert.That(result.RouteValues["controller"], Is.EqualTo("Home"));
             Assert.That(result.RouteValues["action"], Is.EqualTo("Index"));
         }
     }
