@@ -1,0 +1,21 @@
+﻿@model ContosoUniversity.ViewModels.CoursesNotEnrolledVM
+
+<dd>
+    <table class="table">
+        <tr>
+            <th>Course Title</th>
+            <th>Grade</th>
+        </tr>
+        @foreach (var item in Model.Enrollments)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Title)
+                </td>
+                <td>
+                    @Html.ActionLink("Subscribe", "Details", new { id = TempData["id"] }, new { value = item.CourseID })
+                </td>
+            </tr>
+        }
+    </table>
+</dd>

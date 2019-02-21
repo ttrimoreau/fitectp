@@ -1,5 +1,6 @@
 ﻿using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
+using ContosoUniversity.ViewModels;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -82,7 +83,8 @@ namespace ContosoUniversity.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Student student = db.Students.Find(id);
-          
+
+            TempData["id"] = id;
       
             var query1 = db.Courses.Select(c => c.CourseID);
             var query2 = db.Enrollments.Where(s => s.StudentID == id).Select(s => s.CourseID);
@@ -93,6 +95,20 @@ namespace ContosoUniversity.Controllers
             return View(student);
         }
 
+        public PartialViewResult _NotEnrolled()
+        {
+            CoursesNotEnrolledVM coursesNotEnrolledVM = new CoursesNotEnrolledVM();
+
+            Student student = db.Students.Find(TempData["id"]);
+
+            var query1 = db.Courses.Select(c => c.CourseID);
+            var query2 = db.Enrollments.Where(s => s.StudentID == (int)TempData["id"]).Select(s => s.CourseID);
+            var finalQuery = query1.Except(query2);
+            var available = db.Courses.Where(c => finalQuery.Contains(c.CourseID)).Select(c => new { c.CourseID, c.Title });
+
+            coursesNotEnrolledVM.Enrollments = (ICollection<Enrollment>)available;
+            return PartialView(coursesNotEnrolledVM);
+        }
 
         //Post
         [HttpPost]
@@ -108,23 +124,6 @@ namespace ContosoUniversity.Controllers
             db.SaveChanges();
             ViewBag.Message = "Subscription successful !";
             return RedirectToAction("Details");
-        }
-
-
-        //Post
-        [HttpPost]
-        public ActionResult Details(int courseID)
-        {
-            SchoolContext db = new SchoolContext();
-            //if (Session["UserID"] == null)
-            //{
-            //    return View();
-            //}
-            int id = int.Parse(Session["UserId"].ToString());
-            db.Enrollments.Add(new Enrollment { StudentID = id, CourseID = courseID });
-            db.SaveChanges();
-            ViewBag.Message = "Subscription successful !";
-            return RedirectToAction("Index");
         }
 
         // GET: Student/Create
