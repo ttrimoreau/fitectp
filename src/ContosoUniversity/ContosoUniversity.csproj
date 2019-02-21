@@ -191,6 +191,10 @@
     <Compile Include="Migrations\201902211440448_UpdatedboLessonsDateTime.Designer.cs">
       <DependentUpon>201902211440448_UpdatedboLessonsDateTime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902211509330_UpdatedboLessonsDateTime1.cs" />
+    <Compile Include="Migrations\201902211509330_UpdatedboLessonsDateTime1.Designer.cs">
+      <DependentUpon>201902211509330_UpdatedboLessonsDateTime1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
@@ -316,6 +320,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902211440448_UpdatedboLessonsDateTime.resx">
       <DependentUpon>201902211440448_UpdatedboLessonsDateTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902211509330_UpdatedboLessonsDateTime1.resx">
+      <DependentUpon>201902211509330_UpdatedboLessonsDateTime1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
