@@ -124,6 +124,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BusinessLayer\Authentication.cs" />
+    <Compile Include="BusinessLayer\StudentBL.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
@@ -169,6 +170,10 @@
     <Compile Include="Migrations\201902200817250_ModificationPersonCS.Designer.cs">
       <DependentUpon>201902200817250_ModificationPersonCS.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902211311197_test.cs" />
+    <Compile Include="Migrations\201902211311197_test.Designer.cs">
+      <DependentUpon>201902211311197_test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
@@ -183,9 +188,9 @@
     <Compile Include="ViewModels\AssignedCourseData.cs" />
     <Compile Include="ViewModels\EnrollmentDateGroup.cs" />
     <Compile Include="ViewModels\InstructorIndexData.cs" />
-    <Compile Include="ViewModels\CoursesNotEnrolledVM.cs" />
     <Compile Include="ViewModels\RegisterVM.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
+    <Compile Include="ViewModels\StudentDetailsVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -283,6 +288,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902200817250_ModificationPersonCS.resx">
       <DependentUpon>201902200817250_ModificationPersonCS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902211311197_test.resx">
+      <DependentUpon>201902211311197_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

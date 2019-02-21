@@ -1,4 +1,5 @@
-﻿@model ContosoUniversity.Models.Student
+﻿@model ContosoUniversity.ViewModels.StudentDetailsVM
+
 
 @{
     ViewBag.Title = "Details";
@@ -11,19 +12,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.Student.LastName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.Student.LastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FirstMidName)
+            @Html.DisplayNameFor(model => model.Student.FirstMidName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FirstMidName)
+            @Html.DisplayFor(model => model.Student.FirstMidName)
         </dd>
 
         <dt>
@@ -55,9 +56,25 @@
                 }
             </table>
         </dd>
-
-        @Html.Partial("_NotEnrolled")
-
+        @using (Html.BeginForm("Details", "Student", FormMethod.Post))
+        {
+            <dd>
+                <table>
+                    @foreach (var item in Model.CoursesList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </dd>
+        }
+        <!-- #region DROPDOWNLIST METHOD -->
         @*@using (Html.BeginForm("Details", "Student", FormMethod.Post))
             {
             <dd>
@@ -82,10 +99,11 @@
                 </div>
             </dd>
             }*@
+
+        <!-- #endregion -->
     </dl>
 </div>
-
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Student.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

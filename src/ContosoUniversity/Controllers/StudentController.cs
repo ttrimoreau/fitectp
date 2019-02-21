@@ -67,7 +67,6 @@ namespace ContosoUniversity.Controllers
             return View(students.ToPagedList(pageNumber, pageSize));
         }
 
-
         // GET: Student/Details/5
         public ActionResult Details(int? id)
         {
@@ -83,36 +82,31 @@ namespace ContosoUniversity.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Student student = db.Students.Find(id);
+            StudentDetailsVM model = new StudentDetailsVM();
 
-            TempData["id"] = id;
-      
-            var query1 = db.Courses.Select(c => c.CourseID);
-            var query2 = db.Enrollments.Where(s => s.StudentID == id).Select(s => s.CourseID);
-            var finalQuery = query1.Except(query2);
-            var available = db.Courses.Where(c => finalQuery.Contains(c.CourseID)).Select(c => new { c.CourseID, c.Title });
-            ViewBag.ApplyCourse = available;
+            List<Course> CourseEnrolled = new List<Course>();
+            foreach (Enrollment enrollment in student.Enrollments)
+            {
+                CourseEnrolled.Add(db.Courses.FirstOrDefault(c => c.CourseID == enrollment.CourseID));
+            }
 
-            return View(student);
-        }
+            List<int> CourseEnrolledID = CourseEnrolled.Select(c => c.CourseID).ToList();
 
-        public PartialViewResult _NotEnrolled()
-        {
-            CoursesNotEnrolledVM coursesNotEnrolledVM = new CoursesNotEnrolledVM();
+            var temp = db.Courses.Where(c => !CourseEnrolledID.Contains(c.CourseID));
 
-            Student student = db.Students.Find(TempData["id"]);
+            List<Course> CoursesNotEnrolled = temp.ToList();
 
-            var query1 = db.Courses.Select(c => c.CourseID);
-            var query2 = db.Enrollments.Where(s => s.StudentID == (int)TempData["id"]).Select(s => s.CourseID);
-            var finalQuery = query1.Except(query2);
-            var available = db.Courses.Where(c => finalQuery.Contains(c.CourseID)).Select(c => new { c.CourseID, c.Title });
-
-            coursesNotEnrolledVM.Enrollments = (ICollection<Enrollment>)available;
-            return PartialView(coursesNotEnrolledVM);
+            model.EnrollmentDate = student.EnrollmentDate;
+            model.Enrollments = student.Enrollments;
+            model.Student = student;
+            model.CoursesList = CoursesNotEnrolled;
+            
+            return View(model);
         }
 
         //Post
         [HttpPost]
-        public ActionResult Details(int courseID)
+        public ActionResult Details(int CourseID)
         {
             SchoolContext db = new SchoolContext();
             if (Session["UserID"] == null)
@@ -120,7 +114,7 @@ namespace ContosoUniversity.Controllers
                 return View();
             }
             int id = int.Parse(Session["UserId"].ToString());
-            db.Enrollments.Add(new Enrollment { StudentID = id, CourseID = courseID });
+            db.Enrollments.Add(new Enrollment { StudentID = id, CourseID = CourseID });
             db.SaveChanges();
             ViewBag.Message = "Subscription successful !";
             return RedirectToAction("Details");
@@ -155,7 +149,6 @@ namespace ContosoUniversity.Controllers
             }
             return View(student);
         }
-
 
         // GET: Student/Edit/5
         public ActionResult Edit(int? id)
