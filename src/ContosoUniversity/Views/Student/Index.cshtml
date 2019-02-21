@@ -46,10 +46,17 @@
                 @Html.DisplayFor(modelItem => item.EnrollmentDate)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
+                @Html.ActionLink("Details", "Details", new { id = item.ID })|
+                @if (item.ID == (int)Session["UserId"])
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                }|
+                @if (item.ID == (int)Session["UserId"])
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                }
+
+                </td>
         </tr>
     }
 

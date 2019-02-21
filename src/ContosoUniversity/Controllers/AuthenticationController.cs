@@ -6,10 +6,12 @@ using System.Web.Mvc;
 using ContosoUniversity.DAL;
 using ContosoUniversity.BusinessLayer;
 using ContosoUniversity.ViewModels;
+using ContosoUniversity.Models;
+using System.Web.Security;
 
 namespace ContosoUniversity.Controllers
 {
-
+    
     public class AuthenticationController : Controller
     {
         private SchoolContext db = new SchoolContext();
@@ -19,25 +21,44 @@ namespace ContosoUniversity.Controllers
             set { db = value; }
         }
 
+        #region ObtainUser
+        public Person ObtainUser(int id)
+        {
+            return db.People.FirstOrDefault(u => u.ID == id);
+        }
+
+        public Person ObtainUser(string idString)
+        {
+            int id;
+            if (int.TryParse(idString, out id))
+                return ObtainUser(id);
+            return null;
+        }
+        #endregion
+
         // GET: Authentication
         public ActionResult Index()
         {
             return View("Login","Authentication");
         }
 
+        #region Login
+        
         // GET: Authentication
         public ActionResult Login()
         {
-            return View();
+            LoginVM viewModel = new LoginVM() { Authentified = HttpContext.User.Identity.IsAuthenticated };
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                viewModel.Person = ObtainUser(HttpContext.User.Identity.Name);
+            }
+
+            return View(viewModel);
+            
         }
 
-        // GET: Authentication
-        public ActionResult Logout()
-        {
-            Session["UserId"] = null;
-            return RedirectToAction("Index","Home");
-        }
 
+        
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -46,10 +67,25 @@ namespace ContosoUniversity.Controllers
             if (ModelState.IsValid)
             {
                 string HashedAndSaltedPassword = Authentication.SaltAndHash(vmlogin.Password);
-                if(db.People.Any(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword))
+                Person user = db.People.SingleOrDefault(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword);
+                if (user!=null)
                 {
-                    Session["UserId"] = db.People.Single(x => x.UserName == vmlogin.UserName).ID;
-                } else
+
+                    int id = db.People.Single(x => x.UserName == vmlogin.UserName).ID;
+
+                    Session["UserId"] = id;
+                    if (id != 0)
+                    {
+                        Session["UserRole"] = "Instructor";
+                    }
+
+                    if (db.Students.Single(i => i.ID == id) != null)
+                    {
+                        Session["UserRole"] = "Student";
+                    }
+                    FormsAuthentication.SetAuthCookie(user.ID.ToString(), false);
+                }
+                else
                 {
                     ViewData["Error"] = "Invalid login or password.";
                     return View();
@@ -57,9 +93,11 @@ namespace ContosoUniversity.Controllers
             }
 
 
-            return RedirectToAction("Index","Home");
-        }
+            return RedirectToAction("Index", "Home");
+        } 
+        #endregion
 
+        #region Register
         // GET: Authentication
         public ActionResult Register()
         {
@@ -74,7 +112,7 @@ namespace ContosoUniversity.Controllers
             if (ModelState.IsValid)
             {
                 //if UserName is already taken
-                if(db.People.Any(x => x.UserName == registerVM.UserName))
+                if (db.People.Any(x => x.UserName == registerVM.UserName))
                 {
                     ViewData["Error"] = "This UserName is already taken";
                     return View();
@@ -82,14 +120,25 @@ namespace ContosoUniversity.Controllers
                 else
                 {
                     Authentication.CreatePerson(registerVM);
-                    return RedirectToAction("Login","Authentication");
+                    return RedirectToAction("Login", "Authentication");
                 }
             }
 
             return View();
         }
+        #endregion
 
+        #region LogOut
+       
+        // GET: Authentication
+        public ActionResult LogOut()
+        {
+            Session.RemoveAll();
+            FormsAuthentication.SignOut();
 
+            return RedirectToAction("Index", "Home");
+        }
+        #endregion
 
 
     }

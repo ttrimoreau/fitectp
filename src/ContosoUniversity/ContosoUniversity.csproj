@@ -124,6 +124,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BusinessLayer\Authentication.cs" />
+    <Compile Include="BusinessLayer\AuthorizedRoleFilter.cs" />
     <Compile Include="BusinessLayer\UploadImage.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="BusinessLayer\CheckImage.cs" />
@@ -258,6 +259,7 @@
     <Content Include="Views\Authentication\Register.cshtml" />
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Shared\_NavBarConnexion.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
