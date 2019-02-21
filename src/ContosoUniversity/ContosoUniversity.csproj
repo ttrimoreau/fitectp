@@ -125,7 +125,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BusinessLayer\Authentication.cs" />
     <Compile Include="BusinessLayer\AuthorizedRoleFilter.cs" />
-    <Compile Include="BusinessLayer\GetUser.cs" />
     <Compile Include="BusinessLayer\UploadImage.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="BusinessLayer\CheckImage.cs" />
@@ -173,17 +172,9 @@
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902191650367_updateDB.cs" />
-    <Compile Include="Migrations\201902191650367_updateDB.Designer.cs">
-      <DependentUpon>201902191650367_updateDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902201200052_New.cs" />
-    <Compile Include="Migrations\201902201200052_New.Designer.cs">
-      <DependentUpon>201902201200052_New.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902201527207_AfterMerge.cs" />
-    <Compile Include="Migrations\201902201527207_AfterMerge.Designer.cs">
-      <DependentUpon>201902201527207_AfterMerge.cs</DependentUpon>
+    <Compile Include="Migrations\201902211635082_newupdate.cs" />
+    <Compile Include="Migrations\201902211635082_newupdate.Designer.cs">
+      <DependentUpon>201902211635082_newupdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -297,14 +288,8 @@
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902191650367_updateDB.resx">
-      <DependentUpon>201902191650367_updateDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902201200052_New.resx">
-      <DependentUpon>201902201200052_New.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902201527207_AfterMerge.resx">
-      <DependentUpon>201902201527207_AfterMerge.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902211635082_newupdate.resx">
+      <DependentUpon>201902211635082_newupdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -10,7 +10,7 @@ using ContosoUniversity.ViewModels;
 
 namespace ContosoUniversity.Controllers
 {
-    [AuthorizedRoleFilter(Role = "Instructor",Roles ="Student")]
+    [AuthorizedRoleFilter(Role = "Instructor", Roles ="Student")]
     public class HomeController : Controller
     {
         private SchoolContext db = new SchoolContext();
