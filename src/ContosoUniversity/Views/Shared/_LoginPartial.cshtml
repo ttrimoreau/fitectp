@@ -1,11 +1,13 @@
-﻿
+﻿@using ContosoUniversity.BusinessLayer
+
 @if (Session["UserId"] != null)
 {
+   string UserName = Authentication.UserNameFromId((int)Session["UserId"]);
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Hello " + "" + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink("Hello " + UserName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
-        <li>@Html.ActionLink("LogOut", "LogOut", "Authentication", routeValues: null, htmlAttributes: new { id = "LogOutLink" })</li>
+        <li>@Html.ActionLink("Log Out", "LogOut", "Authentication", routeValues: null, htmlAttributes: new { id = "LogOutLink" })</li>
     </ul>
 
 }

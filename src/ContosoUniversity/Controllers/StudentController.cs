@@ -91,6 +91,7 @@ namespace ContosoUniversity.Controllers
             return View(student);
         }
 
+        
         // GET: Student/Create
         public ActionResult Create()
         {

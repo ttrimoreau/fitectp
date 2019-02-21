@@ -11,7 +11,7 @@ using System.Web.Security;
 
 namespace ContosoUniversity.Controllers
 {
-    [AuthorizedRoleFilter(Role = "Instructor", Roles = "Student")]
+    
     public class AuthenticationController : Controller
     {
         private SchoolContext db = new SchoolContext();
@@ -43,7 +43,7 @@ namespace ContosoUniversity.Controllers
         }
 
         #region Login
-        [AllowAnonymous]
+        
         // GET: Authentication
         public ActionResult Login()
         {
@@ -58,7 +58,7 @@ namespace ContosoUniversity.Controllers
         }
 
 
-        [AllowAnonymous]
+        
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -70,13 +70,11 @@ namespace ContosoUniversity.Controllers
                 Person user = db.People.SingleOrDefault(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword);
                 if (user!=null)
                 {
-                    
-                    
-                    
-                   int id = db.People.Single(x => x.UserName == vmlogin.UserName).ID;
+
+                    int id = db.People.Single(x => x.UserName == vmlogin.UserName).ID;
 
                     Session["UserId"] = id;
-                    if (id!=0)
+                    if (id != 0)
                     {
                         Session["UserRole"] = "Instructor";
                     }
@@ -127,18 +125,19 @@ namespace ContosoUniversity.Controllers
             }
 
             return View();
-        } 
+        }
         #endregion
 
         #region LogOut
+       
         // GET: Authentication
-        public ActionResult Logout()
+        public ActionResult LogOut()
         {
+            Session.RemoveAll();
             FormsAuthentication.SignOut();
 
-            Session.RemoveAll();
             return RedirectToAction("Index", "Home");
-        } 
+        }
         #endregion
 
 
