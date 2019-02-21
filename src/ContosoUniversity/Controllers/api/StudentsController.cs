@@ -34,13 +34,17 @@ namespace ContosoUniversity.Controllers.api
         [ResponseType(typeof(Student))]
         public IHttpActionResult GetStudent(int id)
         {
+            if(db.Instructors.Any(x => x.ID == id))
+            {
+                return NotFound();
+            }
             Student student = db.Students.Find(id);
             if (student == null)
             {
                 return NotFound();
             }
 
-            List<Enrollment> enrollments = db.Enrollments.Where(s => s.StudentID == id).ToList();
+            //List<Enrollment> enrollments = db.Enrollments.Where(s => s.StudentID == id).ToList();
             
 
             List<EnrollmentApiVM> CourseIdList = new List<EnrollmentApiVM>();

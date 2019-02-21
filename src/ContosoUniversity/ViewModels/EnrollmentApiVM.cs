@@ -11,11 +11,13 @@ namespace ContosoUniversity.ViewModels
 
         // Override equals (to be able to compare the lists of EnrollmentApiVM in the tests using AreEqual)
         public override bool Equals(object obj)
-        {
-            // Do not cast, compare types as well !!!
-            var toCompareWith = obj as EnrollmentApiVM;
-            if (toCompareWith == null)
+        {   if (!(obj is EnrollmentApiVM))
                 return false;
+            var toCompareWith = obj as EnrollmentApiVM;
+            // Not sure if this "if" is needed
+            if (toCompareWith == null)
+                  return false;
+            
             return this.CourseId == toCompareWith.CourseId;
         }
     }

@@ -38,12 +38,26 @@ namespace ContosoUniversity.Tests.Tools
                 LastName = lastname,
                 FirstMidName = firstname,
                 EnrollmentDate = enrollmentDate,
-                Enrollments = enrollments,
+                Enrollments = enrollments
             };
 
             this.dbContext.Students.Add(student);
             return student;
         }
-       
+
+    
+        // Instructor Generator
+        public Instructor CreateInstructor(string lastname, string firstname)
+        {
+            var instructor = new Instructor()
+            {
+                LastName = lastname,
+                FirstMidName = firstname
+            };
+
+            this.dbContext.Instructors.Add(instructor);
+            return instructor;
+        }
+
     }
 }

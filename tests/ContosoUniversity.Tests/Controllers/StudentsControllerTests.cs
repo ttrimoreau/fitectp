@@ -59,7 +59,7 @@ namespace ContosoUniversity.Tests.Controllers
 
             EntityGenerator generator = new EntityGenerator(dbContext);
             Student studentTest = generator.CreateStudentFull(testID, testLastName, testFirstName, testEnrollmentDate, testEnrollments);
-            //Student savedStudent = dbContext.Students.Find(studentTest.ID);
+            
 
             //Create a list of enrollments - only Course ID
             List<EnrollmentApiVM> testEnrollmentsAPI = new List<EnrollmentApiVM>();
@@ -71,12 +71,12 @@ namespace ContosoUniversity.Tests.Controllers
             }
 
             IHttpActionResult okResult = controllerToTest.GetStudent(studentTest.ID);
-            var contentResult = okResult as OkNegotiatedContentResult<StudentApiVM>;
+            OkNegotiatedContentResult<StudentApiVM> contentResult = okResult as OkNegotiatedContentResult<StudentApiVM>;
             
-            
-            string expectedResult = "{\"id\":" + studentTest.ID + ",\"lastname\":" + studentTest.LastName + ",\"firstname\":" + studentTest.FirstMidName + 
-                ",\"enrollmentDate\":" + studentTest.EnrollmentDate.ToString("yyyy-MM-dd") + ",\"enrollments\":[{\"CourseId\":" + testEnrollmentsAPI[0].CourseId +
-                "},{\"CourseId\":" + testEnrollmentsAPI[1].CourseId + "}]}";
+            // string to test the format - not used
+            //string expectedResult = "{\"id\":" + studentTest.ID + ",\"lastname\":" + studentTest.LastName + ",\"firstname\":" + studentTest.FirstMidName + 
+            //    ",\"enrollmentDate\":" + studentTest.EnrollmentDate.ToString("yyyy-MM-dd") + ",\"enrollments\":[{\"CourseId\":" + testEnrollmentsAPI[0].CourseId +
+            //    "},{\"CourseId\":" + testEnrollmentsAPI[1].CourseId + "}]}";
 
 
             Assert.IsNotNull(contentResult);
@@ -91,36 +91,76 @@ namespace ContosoUniversity.Tests.Controllers
             Assert.AreEqual(testEnrollmentsAPI[1], contentResult.Content.enrollments[1]);
             Assert.AreEqual(testEnrollmentsAPI, contentResult.Content.enrollments);
             
-            //Assert.IsInstanceOf<OkResult>(okResult);
-            //Assert.AreEqual(expectedResult, stringResult);
+            Assert.IsInstanceOf(typeof(OkNegotiatedContentResult<StudentApiVM>), okResult);
 
 
-            //type of file, json or xml?
 
-            //result type ok
-            //compare strings
+
         }
 
         [Test]
         public void APIStudent_Fail_nonExistantID()
         {
-            //404
-            //null?
-            //action result?
+            IHttpActionResult notOkResult = controllerToTest.GetStudent(-1);
+            OkNegotiatedContentResult<StudentApiVM> contentResult = notOkResult as OkNegotiatedContentResult<StudentApiVM>;
+
+            Assert.IsNull(contentResult);
+            Assert.IsInstanceOf(typeof(NotFoundResult), notOkResult);
+
+
         }
 
         [Test]
         public void APIStudent_NoEnrollments()
         {
-            //liste vide
+            int testID = 100;
+            string testLastName = "Petrolia";
+            string testFirstName = "Matoula";
+            DateTime testEnrollmentDate = DateTime.Now;
+            List<Enrollment> testEnrollments = new List<Enrollment>();
+
+
+            EntityGenerator generator = new EntityGenerator(dbContext);
+            Student studentTest = generator.CreateStudentFull(testID, testLastName, testFirstName, testEnrollmentDate, testEnrollments);
+
+
+          
+
+            IHttpActionResult okResult = controllerToTest.GetStudent(studentTest.ID);
+            OkNegotiatedContentResult<StudentApiVM> contentResult = okResult as OkNegotiatedContentResult<StudentApiVM>;
+
+            Assert.IsNotNull(okResult);
+            Assert.IsNotNull(contentResult);
+            Assert.AreEqual(studentTest.LastName, contentResult.Content.lastname);
+            Assert.AreEqual(studentTest.FirstMidName, contentResult.Content.firstname);
+            Assert.AreEqual(studentTest.ID, contentResult.Content.id);
+            Assert.AreEqual(studentTest.EnrollmentDate.ToString("yyyy-MM-dd"), contentResult.Content.enrollmentDate);
+            Assert.IsNotNull(contentResult.Content.enrollments);
+            Assert.IsEmpty(contentResult.Content.enrollments);
+            Assert.IsInstanceOf(typeof(OkNegotiatedContentResult<StudentApiVM>), okResult);
+ 
         }
+
+
 
         [Test]
         public void APIStudent_Fail_instructorID()
         {
-            //404
-            //null?
-            //action result?
+            string instrLastName = "Adjara";
+            string instrFirstName = "Maria";
+
+            EntityGenerator generator = new EntityGenerator(dbContext);
+            Instructor InstructorTest = generator.CreateInstructor(instrLastName, instrFirstName);
+
+
+            IHttpActionResult notOkResult = controllerToTest.GetStudent(InstructorTest.ID);
+            OkNegotiatedContentResult<StudentApiVM> contentResult = notOkResult as OkNegotiatedContentResult<StudentApiVM>;
+
+            Assert.IsNull(contentResult);
+            Assert.IsInstanceOf(typeof(NotFoundResult), notOkResult);
+
+
+
         }
 
     }
