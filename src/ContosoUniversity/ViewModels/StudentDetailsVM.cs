@@ -18,6 +18,8 @@ namespace ContosoUniversity.ViewModels
 
         public IEnumerable<Course> CoursesList { get; set; }
 
+        public virtual ICollection<FileImage> FileImage { get; set; }
+
         public int EnrollmentID { get; set; }
         public int CourseID { get; set; }
         public int StudentID { get; set; }

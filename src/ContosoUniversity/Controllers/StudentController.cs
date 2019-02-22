@@ -273,7 +273,8 @@ namespace ContosoUniversity.Controllers
                     db.Entry(studentToUpdate).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    return View(viewName: "Details", model: studentToUpdate);
+                    //return View(viewName: "Index"/*, model: studentToUpdate*/);
+                    return RedirectToAction("Index", "Home");
                 }
                 catch (RetryLimitExceededException /* dex */)
                 {

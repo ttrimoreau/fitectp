@@ -74,9 +74,9 @@
     </dl>
 </div>
 <p>
-    @if (Model.ID == (int)Session["UserId"])
+    @if (Model.StudentID == (int)Session["UserId"])
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID })
     }|
 @Html.ActionLink("Back to List", "Index")
 </p>
