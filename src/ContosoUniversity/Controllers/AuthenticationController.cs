@@ -68,7 +68,7 @@ namespace ContosoUniversity.Controllers
             {
                 string HashedAndSaltedPassword = Authentication.SaltAndHash(vmlogin.Password);
                 Person user = db.People.SingleOrDefault(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword);
-                if (db.People.Any(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword))
+                if (user!=null)
                 {
                     Session["UserId"] = user.ID;
                     if ((db.Students.FirstOrDefault(p => p.ID == user.ID)) != null)

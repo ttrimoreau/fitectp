@@ -125,6 +125,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BusinessLayer\Authentication.cs" />
     <Compile Include="BusinessLayer\AuthorizedRoleFilter.cs" />
+    <Compile Include="BusinessLayer\Session.cs" />
     <Compile Include="BusinessLayer\UploadImage.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="BusinessLayer\CheckImage.cs" />
