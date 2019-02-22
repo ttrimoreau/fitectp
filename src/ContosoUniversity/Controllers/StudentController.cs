@@ -91,7 +91,10 @@ namespace ContosoUniversity.Controllers
             }
             Student student = db.Students.Include(s => s.FileImage).SingleOrDefault(s => s.ID == id);
             if (student == null)
-            Student student = db.Students.Find(id);
+            {
+                return HttpNotFound();
+            }
+            
             StudentDetailsVM model = new StudentDetailsVM();
 
             List<Course> CourseEnrolled = new List<Course>();
@@ -108,16 +111,6 @@ namespace ContosoUniversity.Controllers
 
             List<EnrollmentVM> NotEnrolled = new List<EnrollmentVM>();
 
-            //foreach (var item in CoursesNotEnrolled)
-            //{
-            //    EnrollmentVM enrollment = new EnrollmentVM
-            //    {
-            //        StudentID = (int)id,
-            //        CourseID = item.CourseID,
-
-            //    };
-            //    NotEnrolled.Add(enrollment);
-            //}
             model.EnrollmentDate = student.EnrollmentDate;
             model.Enrollments = student.Enrollments;
             model.Student = student;
