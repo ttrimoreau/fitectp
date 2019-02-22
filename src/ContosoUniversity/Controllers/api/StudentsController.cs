@@ -12,12 +12,18 @@ using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 using System.Web.Routing;
 using ContosoUniversity.ViewModels;
+using ContosoUniversity.BusinessLayer;
 
 namespace ContosoUniversity.Controllers.api
 {
     public class StudentsController : ApiController
     {
         private SchoolContext db = new SchoolContext();
+        public SchoolContext DbContext
+        {
+            get { return db; }
+            set { db = value; }
+        }
 
         // GET: api/Students
         public IQueryable<Student> GetPeople()
@@ -28,21 +34,28 @@ namespace ContosoUniversity.Controllers.api
         // GET: api/Students/5
         [ResponseType(typeof(Student))]
         public IHttpActionResult GetStudent(int id)
-        {
+        {   
+            // find instead of any: any searches the database, find searches the context
+            if(db.People.Find(id) is Instructor)
+            //if (db.Instructors.Any(x => x.ID == id))
+            {
+                return NotFound();
+            }
             Student student = db.Students.Find(id);
+            //Student student = db.Students.FirstOrDefault(s => s.ID == id);
             if (student == null)
             {
                 return NotFound();
             }
 
-            List<Enrollment> enrollments = db.Enrollments.Where(s => s.StudentID == id).ToList();
+            //List<Enrollment> enrollments = db.Enrollments.Where(s => s.StudentID == id).ToList();
             
 
             List<EnrollmentApiVM> CourseIdList = new List<EnrollmentApiVM>();
 
             StudentApiVM studentApiVM = new StudentApiVM();
 
-            foreach(Enrollment enrollment in enrollments)
+            foreach(Enrollment enrollment in student.Enrollments)
             {
                 EnrollmentApiVM enrollmentApiVM = new EnrollmentApiVM();
                 enrollmentApiVM.courseId = enrollment.CourseID;
