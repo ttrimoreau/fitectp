@@ -66,7 +66,7 @@ namespace ContosoUniversity.Tests.Controllers
             foreach (Enrollment enrollment in studentTest.Enrollments)
             {
                 EnrollmentApiVM enrollmentApiVM = new EnrollmentApiVM();
-                enrollmentApiVM.CourseId = enrollment.CourseID;
+                enrollmentApiVM.courseId = enrollment.CourseID;
                 testEnrollmentsAPI.Add(enrollmentApiVM);
             }
 
