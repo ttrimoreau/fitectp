@@ -65,7 +65,7 @@ namespace ContosoUniversity.Controllers.api
             studentApiVM.id = student.ID;
             studentApiVM.lastname = student.LastName;
             studentApiVM.firstname = student.FirstMidName;
-            studentApiVM.enrollmentDate = student.EnrollmentDate.ToString();
+            studentApiVM.enrollmentDate = student.EnrollmentDate.ToString(CONSTANTS.SHORT_DATE);
             studentApiVM.enrollments = CourseIdList;
 
             //return ViewModel

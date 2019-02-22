@@ -7,7 +7,7 @@ namespace ContosoUniversity.ViewModels
 {
     public class EnrollmentApiVM
     {
-        public int CourseId { get; set; }
+        public int courseId { get; set; }
 
         // Override equals (to be able to compare the lists of EnrollmentApiVM in the tests using AreEqual)
         public override bool Equals(object obj)
@@ -18,7 +18,7 @@ namespace ContosoUniversity.ViewModels
             if (toCompareWith == null)
                   return false;
             
-            return this.CourseId == toCompareWith.CourseId;
+            return this.courseId == toCompareWith.courseId;
         }
     }
 }
