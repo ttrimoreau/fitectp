@@ -34,16 +34,17 @@
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Students", "Index", "Student")</li>
-                    
+
                     <li>@Html.ActionLink("Courses", "Index", "Course")</li>
                     <li>@Html.ActionLink("Instructors", "Index", "Instructor")</li>
                     <li>@Html.ActionLink("Departments", "Index", "Department")</li>
-                    </ul>
+                </ul>
                 <ul class="nav navbar-nav pull-right">
                     @*Navigation menu item for connexion (either "connexion" or UserName)*@
                     @*@Html.Partial("_NavBarConnexion")*@
                 </ul>
-</div>
+                @Html.Partial("_LoginPartial")
+            </div>
         </div>
     </div>
     <div class="container body-content">
