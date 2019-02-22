@@ -19,6 +19,7 @@ namespace ContosoUniversity.Models
         public string FirstMidName { get; set; }
 
         [Required]
+      //  [System.Web.Mvc.Remote("CheckExistingUserName", "Authentication", HttpMethod = "POST", ErrorMessage = "Username already exists")]
         [MinLength(3, ErrorMessage = "Username  must be at least 3 characters long.")]
         [MaxLength(15, ErrorMessage = "Username cannot be longer than 15 characters.")]
         [Display(Name = "Username")]

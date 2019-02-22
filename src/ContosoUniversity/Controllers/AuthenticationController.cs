@@ -19,10 +19,30 @@ namespace ContosoUniversity.Controllers
             set { db = value; }
         }
 
+        [HttpPost]
+        public JsonResult IsAlreadySigned(string username)
+        {
+           System.Threading.Thread.Sleep(1000);
+            UsernameAvailable  user = new UsernameAvailable();
+            bool available = user.UsernameIsAvailable(username);
+            return Json(available);
+            //bool prevUser = !db.People.ToList().Exists(c => c.UserName.Equals(username, StringComparison.CurrentCultureIgnoreCase));
+            //return Json(prevUser);
+
+            //if (prevUser. == username)
+            //{
+            //    return Json(false);
+            //}
+            //else
+            //{
+            //    return Json(true);
+            //}
+        }
+
         // GET: Authentication
         public ActionResult Index()
         {
-            return View("Login","Authentication");
+            return View("Login", "Authentication");
         }
 
         // GET: Authentication
@@ -35,7 +55,7 @@ namespace ContosoUniversity.Controllers
         public ActionResult Logout()
         {
             Session["UserId"] = null;
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         //POST
@@ -46,10 +66,11 @@ namespace ContosoUniversity.Controllers
             if (ModelState.IsValid)
             {
                 string HashedAndSaltedPassword = Authentication.SaltAndHash(vmlogin.Password);
-                if(db.People.Any(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword))
+                if (db.People.Any(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword))
                 {
                     Session["UserId"] = db.People.Single(x => x.UserName == vmlogin.UserName).ID;
-                } else
+                }
+                else
                 {
                     ViewData["Error"] = "Invalid login or password.";
                     return View();
@@ -57,7 +78,7 @@ namespace ContosoUniversity.Controllers
             }
 
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Authentication
@@ -74,7 +95,7 @@ namespace ContosoUniversity.Controllers
             if (ModelState.IsValid)
             {
                 //if UserName is already taken
-                if(db.People.Any(x => x.UserName == registerVM.UserName))
+                if (db.People.Any(x => x.UserName == registerVM.UserName))
                 {
                     ViewData["Error"] = "This UserName is already taken";
                     return View();
@@ -82,7 +103,7 @@ namespace ContosoUniversity.Controllers
                 else
                 {
                     Authentication.CreatePerson(registerVM);
-                    return RedirectToAction("Login","Authentication");
+                    return RedirectToAction("Login", "Authentication");
                 }
             }
 
