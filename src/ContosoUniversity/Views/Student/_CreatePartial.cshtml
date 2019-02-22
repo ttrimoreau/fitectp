@@ -3,71 +3,39 @@
 
 @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Enrollment</h4>
-    <hr />
+<div class="divider">
     <dl class="dl-horizontal">
-
         <dd>
             <table class="table">
-                <tr>
-                    <th>Course Title</th>
-                    <th></th>
+                <tr class="row">
+                    <th class="text-center">Subscribe to new courses :</th>
                 </tr>
                 @foreach (var item in Model.CoursesList)
                 {
                     using (Html.BeginForm("StudentEnrollment", "Student", FormMethod.Post))
                     {
-                <tr>
-                    <td>
-                        @*<div class="form-group">
-                            @Html.LabelFor(modelItem => item.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(modelItem => item.Title, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(modelItem => item.Title, "", new { @class = "text-danger" })
-                            </div>
-                        </div>*@
-
-                        
-                        <label>@item.Title</label>
-                    </td>
-                    <td>
-                        @*<div class="form-group">
-                            @Html.LabelFor(modelItem => item.CourseID, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(modelItem => item.CourseID, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(modelItem => item.CourseID, "", new { @class = "text-danger" })
-                            </div>
-                        </div>*@
-
-                        <input type="hidden" name="CourseID" value="@item.CourseID" />
-                    </td>
-
-                    <td>
-                        @*<div class="form-group">
-            @Html.LabelFor(model => Model.StudentID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(modelItem => Model.StudentID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(modelItem => Model.StudentID, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-                        <input type="hidden" name="StudentID" value="@Model.StudentID"/>
-
-                    </td>
-
-                    <td>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Create" class="btn btn-default" />
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+                        <tr>
+                            <td>
+                                <display>@item.Title</display>
+                            </td>
+                            <td>
+                                <input type="hidden" name="CourseID" value="@item.CourseID" />
+                            </td>
+                            <td>
+                                <input type="hidden" name="StudentID" value="@Model.StudentID" />
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Subscribe course" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
                     }
                 }
             </table>
         </dd>
-
     </dl>
 </div>
 
