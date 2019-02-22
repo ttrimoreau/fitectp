@@ -18,5 +18,9 @@ namespace ContosoUniversity.BL
             return "Image extention authorized is .png, .jpeg or .jpg";
         }
         #endregion
+
+        #region Login
+        public static string LoginMessage = "Invalid login or password.";
+        #endregion
     }
 }

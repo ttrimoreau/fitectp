@@ -16,9 +16,8 @@
         @*if wrong login/password, display error message*@
         @if(ViewData["Error"] != null)
         {
-            <p>
-                @ViewData["Error"]
-            </p>
+        <span class="text-danger">@ViewData["Error"]</span>
+   
         }
 
         @using (Html.BeginForm())

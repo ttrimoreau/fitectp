@@ -8,6 +8,7 @@ using ContosoUniversity.BusinessLayer;
 using ContosoUniversity.ViewModels;
 using ContosoUniversity.Models;
 using System.Web.Security;
+using ContosoUniversity.BL;
 
 namespace ContosoUniversity.Controllers
 {
@@ -81,9 +82,15 @@ namespace ContosoUniversity.Controllers
                 
                 else
                 {
-                    ViewData["Error"] = "Invalid login or password.";
+                    ViewData["Error"] = ErrorMessages.LoginMessage;
                     return View();
                 }
+
+            }
+            else
+            {
+                ViewData["Error"] = ErrorMessages.LoginMessage;
+                return View();
             }
 
 
