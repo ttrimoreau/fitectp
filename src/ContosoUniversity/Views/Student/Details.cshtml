@@ -3,20 +3,26 @@
 @{
     ViewBag.Title = "Details";
 }
+<div class="bloc">
+    <h2>Details</h2>
 
-<h2>Details</h2>
 
-<div class="student">
     <h4>Student</h4>
     <hr />
+    
     <dl class="dl-horizontal">
+        <dt>
+            Avatar
+        </dt>
+
+            @*<dd id="default_avatar">
+                <img src="~/Images/default_avatar.png" />
+            </dd>*@
+        
         @if (Model.FileImage.Any(f => f.FileType == ContosoUniversity.Enum.FileType.Avatar))
         {
-            <dt>
-                Avatar
-            </dt>
-            <dd>
-                <img src="~/File?id=@Model.FileImage.First(f => f.FileType == ContosoUniversity.Enum.FileType.Avatar).ID" alt="avatar" style="height:100px" />
+            <dd class="avatar">
+                <img src="~/File?id=@Model.FileImage.First(f => f.FileType == ContosoUniversity.Enum.FileType.Avatar).ID" alt="avatar" />
             </dd>
         }
         <dt>
@@ -65,8 +71,9 @@
             </table>
         </dd>
     </dl>
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

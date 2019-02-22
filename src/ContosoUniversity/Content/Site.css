@@ -72,22 +72,6 @@ textarea {
 
 /******** Sign In *********/
 
-.SignIn {
-    background-color: white;
-    border-radius: 5px;
-    padding: 0;
-}
-
-.SignIn p {
-    padding: 15px;
-}
-
-.SignIn h2 {
-    text-align: center;
-    border-bottom: 1px solid grey;
-    padding: 5px;
-}
-
 #register a {
     color: black;
     text-decoration: none;
@@ -121,22 +105,6 @@ textarea {
 
 /************ Register ************/
 
-.registerAccount {
-    background-color: white;
-    border-radius: 5px;
-    padding: 0;
-}
-
-.registerAccount p {
-    padding: 15px;
-}
-
-.registerAccount h2 {
-    text-align: center;
-    border-bottom: 1px solid grey;
-    padding: 5px;
-}
-
 .submit {
     padding: 0;
     padding-bottom: 30px;
@@ -144,22 +112,23 @@ textarea {
 
 /*********** Students ***********/
 
-.table {
-    background-color: white;
+
+
+/********** Edit ************/
+
+#default_avatar img{
+    width: 150px;
+    border-radius: 50%;
+    border: 1px solid lightgrey;
 }
 
-.student {
-    background-color: white;
-    border-radius: 5px;
-    padding: 0;
+.avatar img{
+    width: 150px;
+    border-radius: 50%;
 }
 
-.student p {
-    padding: 15px;
-}
-
-.student h2 {
-    text-align: center;
-    border-bottom: 1px solid grey;
-    padding: 5px;
+.small_avatar img {
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 5px;
 }
