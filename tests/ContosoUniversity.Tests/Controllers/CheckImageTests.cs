@@ -40,16 +40,34 @@ namespace ContosoUniversity.Tests.Controllers
         }
 
 
+
         [Test]
         public void UploadImage_Student_Success()
         {
-            //var stream = new MemoryStream(Encoding.UTF8.GetBytes("whatever"));
+            string expectedLastName = "Wood";
+            string previousLastName = "Dubois";
+            string previousFirstName = "George";
 
-            //MyTestPostedFileBase test = new MyTestPostedFileBase(stream, "whatever", "testImage.png");
-            //var result = controllerToTest.EditPost(25, test) as RedirectToRouteResult;
-            //Assert.AreEqual("Index", result.RouteValues["action"]);
-            //Assert.AreEqual("Student", result.RouteValues["controller"]);
-            Assert.True(false);
+
+
+            EntityGenerator generator = new EntityGenerator(dbContext);
+            Student student = generator.CreateStudentForUploadImage(previousLastName, previousFirstName);
+            student.LastName = expectedLastName;
+
+            FormDataHelper.PopulateFormData(controllerToTest, student);
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes("whatever"));
+
+            MyTestPostedFileBase test = new MyTestPostedFileBase(stream, "whatever", "testImage.png");
+
+            var result = controllerToTest.EditPost(student.ID, test) as ViewResult;
+
+            Student savedStudent = dbContext.Students.Find(student.ID);
+            FileImage savedImage = dbContext.FileImages.Find(student.ID);
+
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(savedStudent, Is.Not.Null);
+            Assert.That(savedImage, Is.Not.Null);
         }
         [Test]
         public void UploadImage_Instructor_Success()

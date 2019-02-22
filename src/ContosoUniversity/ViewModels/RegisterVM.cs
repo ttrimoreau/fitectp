@@ -16,19 +16,20 @@ namespace ContosoUniversity.ViewModels
     {
         public int ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Last Name is required")]
         [StringLength(50)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "First Name is required")]
         [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
         [Column("FirstName")]
         [Display(Name = "First Name")]
         public string FirstMidName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Username is required")]
         [MinLength(3, ErrorMessage = "Username  must be at least 3 characters long.")]
         [MaxLength(15, ErrorMessage = "Username cannot be longer than 15 characters.")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
         [Required]

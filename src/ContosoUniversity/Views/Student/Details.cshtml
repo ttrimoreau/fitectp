@@ -1,5 +1,5 @@
-﻿@model ContosoUniversity.Models.Student
-@using ContosoUniversity.Models
+﻿@model ContosoUniversity.ViewModels.StudentDetailsVM
+
 @{
     ViewBag.Title = "Details";
 }
@@ -26,19 +26,19 @@
             </dd>
         }
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.Student.LastName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.Student.LastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FirstMidName)
+            @Html.DisplayNameFor(model => model.Student.FirstMidName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FirstMidName)
+            @Html.DisplayFor(model => model.Student.FirstMidName)
         </dd>
 
         <dt>
@@ -70,10 +70,13 @@
                 }
             </table>
         </dd>
+        @Html.Partial("_CreatePartial",model:Model)
     </dl>
-
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
 </div>
+<p>
+    @if (Model.ID == (int)Session["UserId"])
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+    }|
+@Html.ActionLink("Back to List", "Index")
+</p>

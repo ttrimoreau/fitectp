@@ -9,13 +9,12 @@
 
     <h2>Sign in</h2>
 
-    @*if wrong login/password, display error message*@
-    @if (ViewData["Error"] != null)
-    {
-        <p>
-            @ViewData["Error"]
-        </p>
-    }
+        @*if wrong login/password, display error message*@
+        @if(ViewData["Error"] != null)
+        {
+        <span class="text-danger">@ViewData["Error"]</span>
+   
+        }
 
     @using (Html.BeginForm())
     {

@@ -14,7 +14,8 @@ namespace ContosoUniversity.Models
         [Key]
         public int ID { get; set; }
         public Day Day { get; set; }
-        //[DataType(DataType.Time)]
+        public int CourseID { get; set; }
+        [DataType(DataType.Time)]
         public DateTime HourStart { get; set; }
         public int Duration { get; set; }
 

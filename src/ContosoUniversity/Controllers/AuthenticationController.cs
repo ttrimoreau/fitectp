@@ -6,10 +6,13 @@ using System.Web.Mvc;
 using ContosoUniversity.DAL;
 using ContosoUniversity.BusinessLayer;
 using ContosoUniversity.ViewModels;
+using ContosoUniversity.Models;
+using System.Web.Security;
+using ContosoUniversity.BL;
 
 namespace ContosoUniversity.Controllers
 {
-
+    
     public class AuthenticationController : Controller
     {
         private SchoolContext db = new SchoolContext();
@@ -19,47 +22,83 @@ namespace ContosoUniversity.Controllers
             set { db = value; }
         }
 
+        #region ObtainUser
+        public Person ObtainUser(int id)
+        {
+            return db.People.FirstOrDefault(u => u.ID == id);
+        }
+
+        public Person ObtainUser(string idString)
+        {
+            int id;
+            if (int.TryParse(idString, out id))
+                return ObtainUser(id);
+            return null;
+        }
+        #endregion
+
         // GET: Authentication
         public ActionResult Index()
         {
             return View("Login","Authentication");
         }
 
+        #region Login
+        
         // GET: Authentication
         public ActionResult Login()
         {
-            return View();
+            LoginVM viewModel = new LoginVM();
+
+            return View(viewModel);
+            
         }
 
-        // GET: Authentication
-        public ActionResult Logout()
-        {
-            Session["UserId"] = null;
-            return RedirectToAction("Index","Home");
-        }
 
+        
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login([Bind(Include = "UserName,Password")]LoginVM vmlogin)
+        public ActionResult Login(LoginVM vmlogin)
         {
             if (ModelState.IsValid)
             {
                 string HashedAndSaltedPassword = Authentication.SaltAndHash(vmlogin.Password);
-                if(db.People.Any(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword))
+                Person user = db.People.SingleOrDefault(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword);
+                if (user!=null)
                 {
-                    Session["UserId"] = db.People.Single(x => x.UserName == vmlogin.UserName).ID;
-                } else
+                    Session[SessionMessage.UserID] = user.ID;
+                    if ((db.Students.FirstOrDefault(p => p.ID == user.ID)) != null)
+                    {
+
+                        Session[SessionMessage.UserRole] = SessionMessage.StudentRole;
+                    }
+                    else
+                    {
+                        Session[SessionMessage.UserRole] = SessionMessage.InstructorRole;
+                    }
+                    FormsAuthentication.SetAuthCookie(user.ID.ToString(), false);
+                }
+                
+                else
                 {
-                    ViewData["Error"] = "Invalid login or password.";
+                    ViewData["Error"] = ErrorMessages.LoginMessage;
                     return View();
                 }
+
+            }
+            else
+            {
+                ViewData["Error"] = ErrorMessages.LoginMessage;
+                return View();
             }
 
 
-            return RedirectToAction("Index","Home");
-        }
+            return RedirectToAction("Index", "Home");
+        } 
+        #endregion
 
+        #region Register
         // GET: Authentication
         public ActionResult Register()
         {
@@ -69,12 +108,12 @@ namespace ContosoUniversity.Controllers
         // POST: Authentication
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "LastName,FirstMidName,UserName,Password,Email,HireDate,ConfirmPassword")]RegisterVM registerVM)
+        public ActionResult Register([Bind(Include = "LastName,FirstMidName,UserName,Password,Email,HireDate,ConfirmPassword,PersonRole")]RegisterVM registerVM)
         {
             if (ModelState.IsValid)
             {
                 //if UserName is already taken
-                if(db.People.Any(x => x.UserName == registerVM.UserName))
+                if (db.People.Any(x => x.UserName == registerVM.UserName))
                 {
                     ViewData["Error"] = "This UserName is already taken";
                     return View();
@@ -82,14 +121,25 @@ namespace ContosoUniversity.Controllers
                 else
                 {
                     Authentication.CreatePerson(registerVM);
-                    return RedirectToAction("Login","Authentication");
+                    return RedirectToAction("Login", "Authentication");
                 }
             }
 
             return View();
         }
+        #endregion
 
+        #region LogOut
+        [AuthorizedRoleFilter(Role = "Student", Roles = "Instructor")]
+        // GET: Authentication
+        public ActionResult LogOut()
+        {
+            Session.RemoveAll();
+            FormsAuthentication.SignOut();
 
+            return RedirectToAction("Index", "Home");
+        }
+        #endregion
 
 
     }

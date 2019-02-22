@@ -29,6 +29,19 @@ namespace ContosoUniversity.Tests.Tools
             return student;
         }
 
+        public Student CreateStudentForUploadImage(string lastname, string firstname)
+        {
+            var student = new Student()
+            {
+                LastName = lastname,
+                FirstMidName = firstname,
+                EnrollmentDate =DateTime.Now
+            };
+
+            this.dbContext.Students.Add(student);
+            return student;
+        }
+
         public Instructor CreateInstructor(string lastname, string firstname)
         {
             var instructor = new Instructor()
@@ -68,5 +81,36 @@ namespace ContosoUniversity.Tests.Tools
             this.dbContext.SaveChanges();
             return student;
         }
+
+        //New generator for students, used for student API tests
+        public Student CreateStudentFull(int id, string lastname, string firstname, DateTime enrollmentDate, List<Enrollment> enrollments)
+        {
+            var student = new Student()
+            {
+                ID = id,
+                LastName = lastname,
+                FirstMidName = firstname,
+                EnrollmentDate = enrollmentDate,
+                Enrollments = enrollments
+            };
+
+            this.dbContext.Students.Add(student);
+            return student;
+        }
+
+    
+        // Instructor Generator
+        public Instructor CreateInstructor(string lastname, string firstname)
+        {
+            var instructor = new Instructor()
+            {
+                LastName = lastname,
+                FirstMidName = firstname
+            };
+
+            this.dbContext.Instructors.Add(instructor);
+            return instructor;
+        }
+
     }
 }
