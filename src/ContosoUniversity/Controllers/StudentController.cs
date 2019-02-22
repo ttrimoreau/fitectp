@@ -116,6 +116,7 @@ namespace ContosoUniversity.Controllers
             model.Student = student;
             model.StudentID = student.ID;
             model.CoursesList = CoursesNotEnrolled;
+            model.FileImage = student.FileImage;
 
             return View(model);
         }

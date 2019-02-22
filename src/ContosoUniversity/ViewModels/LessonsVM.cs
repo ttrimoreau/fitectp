@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Models;
+﻿using ContosoUniversity.Enum;
+using ContosoUniversity.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
