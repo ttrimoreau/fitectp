@@ -41,7 +41,7 @@ namespace ContosoUniversity.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login([Bind(Include = "UserName,Password")]LoginVM vmlogin)
+        public ActionResult Login(LoginVM vmlogin)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +69,7 @@ namespace ContosoUniversity.Controllers
         // POST: Authentication
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "LastName,FirstMidName,UserName,Password,Email,HireDate,ConfirmPassword")]RegisterVM registerVM)
+        public ActionResult Register(RegisterVM registerVM)
         {
             if (ModelState.IsValid)
             {

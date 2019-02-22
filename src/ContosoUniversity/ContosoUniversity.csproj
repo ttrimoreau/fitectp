@@ -171,17 +171,9 @@
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902191650367_updateDB.cs" />
-    <Compile Include="Migrations\201902191650367_updateDB.Designer.cs">
-      <DependentUpon>201902191650367_updateDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902201200052_New.cs" />
-    <Compile Include="Migrations\201902201200052_New.Designer.cs">
-      <DependentUpon>201902201200052_New.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902201527207_AfterMerge.cs" />
-    <Compile Include="Migrations\201902201527207_AfterMerge.Designer.cs">
-      <DependentUpon>201902201527207_AfterMerge.cs</DependentUpon>
+    <Compile Include="Migrations\201902211629304_newmigration.cs" />
+    <Compile Include="Migrations\201902211629304_newmigration.Designer.cs">
+      <DependentUpon>201902211629304_newmigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -294,14 +286,8 @@
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902191650367_updateDB.resx">
-      <DependentUpon>201902191650367_updateDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902201200052_New.resx">
-      <DependentUpon>201902201200052_New.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902201527207_AfterMerge.resx">
-      <DependentUpon>201902201527207_AfterMerge.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902211629304_newmigration.resx">
+      <DependentUpon>201902211629304_newmigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

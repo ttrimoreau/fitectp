@@ -24,6 +24,7 @@ namespace ContosoUniversity.BusinessLayer
 
         public static void CreatePerson(RegisterVM vm)
         {
+
             switch (vm.PersonRole)
             {
                 case Role.Student:
@@ -33,7 +34,7 @@ namespace ContosoUniversity.BusinessLayer
                     CreateInstructor(vm);
                     break;
                 default:
-                    break;
+                    throw new NotImplementedException("Attempting to register a non-Student / non-Instructor");
             }
         }
 
@@ -41,11 +42,11 @@ namespace ContosoUniversity.BusinessLayer
         {
             Student p = new Student();
             //EnrollmentDate is particular to Student
-            p.EnrollmentDate = vm.HireDate;
+            p.EnrollmentDate = DateTime.Now;
+            p.Password = SaltAndHash(vm.Password); //salt and hash password before saving in database
             p.Email = vm.Email;
             p.FirstMidName = vm.FirstMidName;
             p.LastName = vm.LastName;
-            p.Password = SaltAndHash(vm.Password);
             p.UserName = vm.UserName;
             db.Students.Add(p);
             db.SaveChanges();
@@ -56,10 +57,10 @@ namespace ContosoUniversity.BusinessLayer
             Instructor p = new Instructor();
             //HireDate is particular to Instructor
             p.HireDate = vm.HireDate;
+            p.Password = SaltAndHash(vm.Password); //salt and hash password before saving in database
             p.Email = vm.Email;
             p.FirstMidName = vm.FirstMidName;
             p.LastName = vm.LastName;
-            p.Password = SaltAndHash(vm.Password);
             p.UserName = vm.UserName;
             db.Instructors.Add(p);
             db.SaveChanges();
