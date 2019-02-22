@@ -127,6 +127,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\EnrollmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -165,9 +166,9 @@
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902211603083_UpdatedboLessonsDateTime.cs" />
-    <Compile Include="Migrations\201902211603083_UpdatedboLessonsDateTime.Designer.cs">
-      <DependentUpon>201902211603083_UpdatedboLessonsDateTime.cs</DependentUpon>
+    <Compile Include="Migrations\201902211959124_new.cs" />
+    <Compile Include="Migrations\201902211959124_new.Designer.cs">
+      <DependentUpon>201902211959124_new.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AssignedCourseData.cs" />
     <Compile Include="ViewModels\EnrollmentDateGroup.cs" />
+    <Compile Include="ViewModels\EnrollmentVM.cs" />
     <Compile Include="ViewModels\InstructorIndexData.cs" />
     <Compile Include="ViewModels\RegisterVM.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
@@ -253,15 +255,11 @@
     <Content Include="Views\Authentication\Register.cshtml" />
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Shared\_NavBarConnexion.cshtml" />
-    <Content Include="Views\Student\_NewEnrollment.cshtml" />
-    <Content Include="Views\Enrollments\Create.cshtml" />
-    <Content Include="Views\Enrollments\Delete.cshtml" />
-    <Content Include="Views\Enrollments\Details.cshtml" />
-    <Content Include="Views\Enrollments\Edit.cshtml" />
-    <Content Include="Views\Enrollments\Index.cshtml" />
+    <Content Include="Views\Student\_CreatePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Enrollments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -286,8 +284,8 @@
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902211603083_UpdatedboLessonsDateTime.resx">
-      <DependentUpon>201902211603083_UpdatedboLessonsDateTime.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902211959124_new.resx">
+      <DependentUpon>201902211959124_new.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
