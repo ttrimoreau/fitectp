@@ -47,11 +47,7 @@ namespace ContosoUniversity.Controllers
         // GET: Authentication
         public ActionResult Login()
         {
-            LoginVM viewModel = new LoginVM() { Authentified = HttpContext.User.Identity.IsAuthenticated };
-            if (HttpContext.User.Identity.IsAuthenticated)
-            {
-                viewModel.Person = ObtainUser(HttpContext.User.Identity.Name);
-            }
+            LoginVM viewModel = new LoginVM();
 
             return View(viewModel);
             
@@ -62,7 +58,7 @@ namespace ContosoUniversity.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login([Bind(Include = "UserName,Password")]LoginVM vmlogin)
+        public ActionResult Login(LoginVM vmlogin)
         {
             if (ModelState.IsValid)
             {
@@ -70,36 +66,19 @@ namespace ContosoUniversity.Controllers
                 Person user = db.People.SingleOrDefault(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword);
                 if (user!=null)
                 {
-                    Session["UserId"] = user.ID;
+                    Session[SessionMessage.UserID] = user.ID;
                     if ((db.Students.FirstOrDefault(p => p.ID == user.ID)) != null)
                     {
 
-                        Session["UserRole"] = "Student";
+                        Session[SessionMessage.UserRole] = SessionMessage.StudentRole;
                     }
                     else
                     {
-                        Session["UserRole"] = "Instructor";
+                        Session[SessionMessage.UserRole] = SessionMessage.InstructorRole;
                     }
                     FormsAuthentication.SetAuthCookie(user.ID.ToString(), false);
                 }
-
-                //if (user!=null)
-                //{
-
-                //    int id = db.People.Single(x => x.UserName == vmlogin.UserName).ID;
-
-                //    Session["UserId"] = id;
-                //    if (id != 0)
-                //    {
-                //        Session["UserRole"] = "Instructor";
-                //    }
-
-                //    if (db.Students.Single(i => i.ID == id) != null)
-                //    {
-                //        Session["UserRole"] = "Student";
-                //    }
-                    
-                //}
+                
                 else
                 {
                     ViewData["Error"] = "Invalid login or password.";
@@ -144,7 +123,7 @@ namespace ContosoUniversity.Controllers
         #endregion
 
         #region LogOut
-       
+        [AuthorizedRoleFilter(Role = "Student", Roles = "Instructor")]
         // GET: Authentication
         public ActionResult LogOut()
         {
