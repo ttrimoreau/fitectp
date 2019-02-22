@@ -126,6 +126,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BussinessLayer\CONSTANTS.cs" />
     <Compile Include="Controllers\api\StudentsController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
@@ -165,6 +166,14 @@
     <Compile Include="Migrations\201411022351064_Inheritance.cs" />
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902191139217_Initial.cs" />
+    <Compile Include="Migrations\201902191139217_Initial.Designer.cs">
+      <DependentUpon>201902191139217_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902191239363_Initial1.cs" />
+    <Compile Include="Migrations\201902191239363_Initial1.Designer.cs">
+      <DependentUpon>201902191239363_Initial1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201902201059458_newUpdate.cs" />
     <Compile Include="Migrations\201902201059458_newUpdate.Designer.cs">
@@ -278,6 +287,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902191139217_Initial.resx">
+      <DependentUpon>201902191139217_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902191239363_Initial1.resx">
+      <DependentUpon>201902191239363_Initial1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902201059458_newUpdate.resx">
       <DependentUpon>201902201059458_newUpdate.cs</DependentUpon>

@@ -45,14 +45,14 @@ namespace ContosoUniversity.Controllers.api
             foreach(Enrollment enrollment in enrollments)
             {
                 EnrollmentApiVM enrollmentApiVM = new EnrollmentApiVM();
-                enrollmentApiVM.CourseId = enrollment.CourseID;
+                enrollmentApiVM.courseId = enrollment.CourseID;
                 CourseIdList.Add(enrollmentApiVM);
             }
 
             studentApiVM.id = student.ID;
-            studentApiVM.Lastname = student.LastName;
-            studentApiVM.Firstname = student.FirstMidName;
-            studentApiVM.EnrollmentDate = student.EnrollmentDate.ToString("yyyy-MM-dd");
+            studentApiVM.lastname = student.LastName;
+            studentApiVM.firstname = student.FirstMidName;
+            studentApiVM.enrollmentDate = student.EnrollmentDate.ToString();
             studentApiVM.enrollments = CourseIdList;
 
             //return ViewModel
