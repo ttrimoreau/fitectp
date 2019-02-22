@@ -133,6 +133,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BusinessLayer\Authentication.cs" />
+    <Compile Include="BusinessLayer\LessonsBusiness.cs" />
     <Compile Include="BusinessLayer\AuthorizedRoleFilter.cs" />
     <Compile Include="BusinessLayer\SessionMessage.cs" />
     <Compile Include="BusinessLayer\AvatarView.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
+    <Compile Include="Controllers\LessonsController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DAL\SchoolConfiguration.cs" />
     <Compile Include="DAL\SchoolContext.cs" />
@@ -203,9 +205,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AssignedCourseData.cs" />
     <Compile Include="ViewModels\EnrollmentApiVM.cs" />
+    <Compile Include="ViewModels\CourseSubscriptionVM.cs" />
     <Compile Include="ViewModels\EnrollmentDateGroup.cs" />
     <Compile Include="ViewModels\EnrollmentVM.cs" />
     <Compile Include="ViewModels\InstructorIndexData.cs" />
+    <Compile Include="ViewModels\LessonsVM.cs" />
     <Compile Include="ViewModels\RegisterVM.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\StudentDetailsVM.cs" />
@@ -279,6 +283,10 @@
     <Content Include="Views\Shared\_NavBarConnexion.cshtml" />
     <Content Include="Views\Student\_CreatePartial.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Lessons\Index.cshtml" />
+    <Content Include="Views\Lessons\Create.cshtml" />
+    <Content Include="Views\Lessons\Delete.cshtml" />
+    <Content Include="Views\Lessons\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
