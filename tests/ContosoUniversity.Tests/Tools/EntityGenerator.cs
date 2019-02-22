@@ -100,17 +100,17 @@ namespace ContosoUniversity.Tests.Tools
 
     
         // Instructor Generator
-        public Instructor CreateInstructor(string lastname, string firstname)
-        {
-            var instructor = new Instructor()
-            {
-                LastName = lastname,
-                FirstMidName = firstname
-            };
+        //public Instructor CreateInstructor(string lastname, string firstname)
+        //{
+        //    var instructor = new Instructor()
+        //    {
+        //        LastName = lastname,
+        //        FirstMidName = firstname
+        //    };
 
-            this.dbContext.Instructors.Add(instructor);
-            return instructor;
-        }
+        //    this.dbContext.Instructors.Add(instructor);
+        //    return instructor;
+        //}
 
     }
 }
