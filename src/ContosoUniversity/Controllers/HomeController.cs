@@ -22,6 +22,7 @@ namespace ContosoUniversity.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
+            ViewBag.Courses = db.Courses.ToList();
             return View();
         }
 
