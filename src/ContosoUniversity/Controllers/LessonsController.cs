@@ -57,6 +57,8 @@ namespace ContosoUniversity.Controllers
         public ActionResult Create()
         {
             DropDownList();
+            ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "Title");
+            TempData["instructorId"] = Session[SessionMessage.UserID];
             return View();
         }
 
@@ -73,6 +75,7 @@ namespace ContosoUniversity.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    lessons.InstructorID = (int)TempData["InstructorID"];
                     lessonB.AddLesson(lessons);
                     return RedirectToAction("Index");
                 }

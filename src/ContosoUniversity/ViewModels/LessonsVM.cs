@@ -20,5 +20,6 @@ namespace ContosoUniversity.ViewModels
 
         public virtual Course Course { get; set; }
 
+
     }
 }

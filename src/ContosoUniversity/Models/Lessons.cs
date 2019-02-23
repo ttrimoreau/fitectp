@@ -14,11 +14,14 @@ namespace ContosoUniversity.Models
         [Key]
         public int ID { get; set; }
         public Day Day { get; set; }
+        public int InstructorID { get; set; }
         public int CourseID { get; set; }
         [DataType(DataType.Time)]
         public DateTime HourStart { get; set; }
         public int Duration { get; set; }
 
         public virtual Course Course { get; set; }
+
+       public virtual Instructor Instructor { get; set; }
     }
 }
