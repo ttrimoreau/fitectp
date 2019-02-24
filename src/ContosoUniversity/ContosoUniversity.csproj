@@ -138,6 +138,7 @@
     <Compile Include="BusinessLayer\SessionMessage.cs" />
     <Compile Include="BusinessLayer\AvatarView.cs" />
     <Compile Include="BusinessLayer\UploadImage.cs" />
+    <Compile Include="BusinessLayer\UserSession.cs" />
     <Compile Include="Controllers\api\InstructorsController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="BusinessLayer\CheckImage.cs" />
@@ -300,6 +301,7 @@
     <Content Include="Views\Lessons\Create.cshtml" />
     <Content Include="Views\Lessons\Delete.cshtml" />
     <Content Include="Views\Lessons\Edit.cshtml" />
+    <Content Include="Views\Home\InstructorHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

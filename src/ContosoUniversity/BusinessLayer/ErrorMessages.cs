@@ -22,5 +22,15 @@ namespace ContosoUniversity.BL
         #region Login
         public static string LoginMessage = "Invalid login or password.";
         #endregion
+
+        #region Lessons
+
+        public static string ErrorMessageSameCourse = "you have already this course";
+
+        public static string ErrorMessageNegativeTime = "Time can't be negative";
+
+        public static string ErrorMessageNotSameDay = "the day of the course and the start date are not same";
+        #endregion
+
     }
 }

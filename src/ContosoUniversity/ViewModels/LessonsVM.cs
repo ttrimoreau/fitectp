@@ -18,7 +18,8 @@ namespace ContosoUniversity.ViewModels
 
         public int CourseID { get; set; }
 
-        public virtual Course Course { get; set; }
+        public int InstructorID { get; set; }
+        public DateTime DateTime { get; set; }
 
 
     }

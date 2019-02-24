@@ -40,7 +40,7 @@ namespace ContosoUniversity.Controllers
         // GET: Authentication
         public ActionResult Index()
         {
-            return View("Login","Authentication");
+            return View(nameof(AuthenticationController.Login),"Authentication");
         }
 
         #region Login
@@ -63,12 +63,16 @@ namespace ContosoUniversity.Controllers
         {
             if (ModelState.IsValid)
             {
+                UserSession userSession = new UserSession();
+                Person userConnected = userSession.GetPersonByUserName(vmlogin.UserName, db);
+
                 string HashedAndSaltedPassword = Authentication.SaltAndHash(vmlogin.Password);
-                Person user = db.People.SingleOrDefault(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword);
-                if (user!=null)
+                //Person user = db.People.SingleOrDefault(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword);
+                if (userConnected!=null && userConnected.Password== HashedAndSaltedPassword)
                 {
-                    Session[SessionMessage.UserID] = user.ID;
-                    if ((db.Students.FirstOrDefault(p => p.ID == user.ID)) != null)
+                    Session[SessionMessage.User] = userConnected;
+                    Session[SessionMessage.UserID] = userConnected.ID;
+                    if ((db.Students.FirstOrDefault(p => p.ID == userConnected.ID)) != null)
                     {
 
                         Session[SessionMessage.UserRole] = SessionMessage.StudentRole;
@@ -77,7 +81,7 @@ namespace ContosoUniversity.Controllers
                     {
                         Session[SessionMessage.UserRole] = SessionMessage.InstructorRole;
                     }
-                    FormsAuthentication.SetAuthCookie(user.ID.ToString(), false);
+                    FormsAuthentication.SetAuthCookie(userConnected.ID.ToString(), false);
                 }
                 
                 else
@@ -94,7 +98,7 @@ namespace ContosoUniversity.Controllers
             }
 
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         } 
         #endregion
 
@@ -121,7 +125,7 @@ namespace ContosoUniversity.Controllers
                 else
                 {
                     Authentication.CreatePerson(registerVM);
-                    return RedirectToAction("Login", "Authentication");
+                    return RedirectToAction(nameof(AuthenticationController.Login), nameof(AuthenticationController));
                 }
             }
 
@@ -137,7 +141,7 @@ namespace ContosoUniversity.Controllers
             Session.RemoveAll();
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(HomeController.Index),"Home");
         }
         #endregion
 

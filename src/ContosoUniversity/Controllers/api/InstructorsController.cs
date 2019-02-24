@@ -42,7 +42,7 @@ namespace ContosoUniversity.Controllers.api
                     courseId = item.CourseID,
                     day = item.Day.ToString(),
                     duration = item.Duration.ToString(),
-                    startHour = item.HourStart.ToString()
+                    startHour = item.HourStart.ToString("HH'h'mm")
                 };
                 instructorApiVM.schedule.Add(lessonApiVM);
             }
