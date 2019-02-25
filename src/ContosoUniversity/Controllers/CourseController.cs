@@ -22,6 +22,7 @@ namespace ContosoUniversity.Controllers
         }
 
         // GET: Course
+        #region Index
         public ActionResult Index(int? SelectedDepartment)
         {
             var departments = db.Departments.OrderBy(q => q.Name).ToList();
@@ -35,7 +36,9 @@ namespace ContosoUniversity.Controllers
             var sql = courses.ToString();
             return View(courses.ToList());
         }
+        #endregion
 
+        #region Details
         // GET: Course/Details/5
         public ActionResult Details(int? id)
         {
@@ -50,8 +53,10 @@ namespace ContosoUniversity.Controllers
             }
             return View(course);
         }
+        #endregion
 
 
+        #region Create
         public ActionResult Create()
         {
             PopulateDepartmentsDropDownList();
@@ -68,7 +73,7 @@ namespace ContosoUniversity.Controllers
                 {
                     db.Courses.Add(course);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction(nameof(CourseController.Index));
                 }
             }
             catch (RetryLimitExceededException /* dex */)
@@ -79,7 +84,9 @@ namespace ContosoUniversity.Controllers
             PopulateDepartmentsDropDownList(course.DepartmentID);
             return View(course);
         }
+        #endregion
 
+        #region Edit
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -111,7 +118,7 @@ namespace ContosoUniversity.Controllers
                 {
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction(nameof(CourseController.Index));
                 }
                 catch (RetryLimitExceededException /* dex */)
                 {
@@ -130,8 +137,10 @@ namespace ContosoUniversity.Controllers
                                    select d;
             ViewBag.DepartmentID = new SelectList(departmentsQuery, "DepartmentID", "Name", selectedDepartment);
         }
+        #endregion
 
 
+        #region Delete
         // GET: Course/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -155,9 +164,11 @@ namespace ContosoUniversity.Controllers
             Course course = db.Courses.Find(id);
             db.Courses.Remove(course);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(CourseController.Index));
         }
+        #endregion
 
+        #region UpdateCourseCredits
         public ActionResult UpdateCourseCredits()
         {
             return View();
@@ -171,7 +182,8 @@ namespace ContosoUniversity.Controllers
                 ViewBag.RowsAffected = db.Database.ExecuteSqlCommand("UPDATE Course SET Credits = Credits * {0}", multiplier);
             }
             return View();
-        }
+        } 
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

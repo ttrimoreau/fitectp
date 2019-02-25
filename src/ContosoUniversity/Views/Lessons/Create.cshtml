@@ -1,4 +1,4 @@
-﻿@model ContosoUniversity.Models.Lessons
+﻿@model ContosoUniversity.ViewModels.LessonsVM
 
 @{
     ViewBag.Title = "Create";
@@ -14,6 +14,8 @@
     <h4>Lessons</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
     <div class="form-group">
         @Html.LabelFor(model => model.CourseID, "CourseID", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">

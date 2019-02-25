@@ -138,6 +138,9 @@
     <Compile Include="BusinessLayer\SessionMessage.cs" />
     <Compile Include="BusinessLayer\AvatarView.cs" />
     <Compile Include="BusinessLayer\UploadImage.cs" />
+    <Compile Include="BusinessLayer\UserSession.cs" />
+    <Compile Include="Controllers\api\AgendaStudentController.cs" />
+    <Compile Include="Controllers\api\InstructorsController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="BusinessLayer\CheckImage.cs" />
     <Compile Include="BusinessLayer\ErrorMessages.cs" />
@@ -192,6 +195,18 @@
     <Compile Include="Migrations\201902221408302_new.Designer.cs">
       <DependentUpon>201902221408302_new.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902231738161_addNavigationLessonsToInstructors.cs" />
+    <Compile Include="Migrations\201902231738161_addNavigationLessonsToInstructors.Designer.cs">
+      <DependentUpon>201902231738161_addNavigationLessonsToInstructors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902232055493_addNavigationLessonsToInstructors1.cs" />
+    <Compile Include="Migrations\201902232055493_addNavigationLessonsToInstructors1.Designer.cs">
+      <DependentUpon>201902232055493_addNavigationLessonsToInstructors1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902250924021_deleteNavigationLessonsToInstructors.cs" />
+    <Compile Include="Migrations\201902250924021_deleteNavigationLessonsToInstructors.Designer.cs">
+      <DependentUpon>201902250924021_deleteNavigationLessonsToInstructors.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
@@ -203,6 +218,9 @@
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ApiVM\InstructorApiVM.cs" />
+    <Compile Include="ViewModels\ApiVM\LessonApiVM.cs" />
+    <Compile Include="ViewModels\ApiVM\StudentAgendaApiVM.cs" />
     <Compile Include="ViewModels\AssignedCourseData.cs" />
     <Compile Include="ViewModels\EnrollmentApiVM.cs" />
     <Compile Include="ViewModels\CourseSubscriptionVM.cs" />
@@ -289,6 +307,7 @@
     <Content Include="Views\Lessons\Create.cshtml" />
     <Content Include="Views\Lessons\Delete.cshtml" />
     <Content Include="Views\Lessons\Edit.cshtml" />
+    <Content Include="Views\Home\InstructorHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -321,6 +340,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902221408302_new.resx">
       <DependentUpon>201902221408302_new.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902231738161_addNavigationLessonsToInstructors.resx">
+      <DependentUpon>201902231738161_addNavigationLessonsToInstructors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902232055493_addNavigationLessonsToInstructors1.resx">
+      <DependentUpon>201902232055493_addNavigationLessonsToInstructors1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902250924021_deleteNavigationLessonsToInstructors.resx">
+      <DependentUpon>201902250924021_deleteNavigationLessonsToInstructors.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

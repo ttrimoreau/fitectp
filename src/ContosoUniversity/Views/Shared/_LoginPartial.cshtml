@@ -1,8 +1,8 @@
 ﻿@using ContosoUniversity.BusinessLayer
 
-@if (Session["UserId"] != null)
+@if (Session[SessionMessage.UserRole] != null)
 {
-   string UserName = Authentication.UserNameFromId((int)Session["UserId"]);
+    string UserName = Authentication.UserNameFromId((int)Session[SessionMessage.UserID]);
     <ul class="nav navbar-nav navbar-right">
         <li>
             @Html.ActionLink("Hello " + UserName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })

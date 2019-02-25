@@ -1,4 +1,5 @@
-﻿@{
+﻿@using ContosoUniversity.BusinessLayer
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -8,6 +9,19 @@
 <div class="row">
     <div class="col-md-3 bloc">
         <h2>Welcome to Contoso University</h2>
+        @if (Session[SessionMessage.UserRole] != null)
+        {
+            Person user = (Person)Session[SessionMessage.User];
+            <p>Hello @user.FirstMidName.ToUpper() @user.LastName.ToUpper()</p>
+            if (user is Student)
+            {
+                <p>You're a Student</p>
+            }
+            else if (user is Instructor)
+            {
+                <p>You're a Instructor</p>
+            }
+        }
         <p>
             Contoso University is a sample application that
             demonstrates how to use Entity Framework 6 in an
@@ -26,7 +40,46 @@
     </div>
     <div class="col-md-8 col-md-offset-1 bloc">
         <h2>Available courses</h2>
-        <p>Add courses...</p>
+        @*<p>Add courses...</p>*@
+        <div>
+
+            <table class="table">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Instructor
+                    </th>
+                    <th>
+                        Launch Date
+                    </th>
+                    <th>
+                        Session Per Week
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (Course course in @ViewBag.Courses)
+                {
+                    <tr>
+                        <td>
+                            @course.Title
+                        </td>
+                        <td>
+                            @course.Instructors.First().FullName
+                        </td>
+                        <td>
+                            @course.StartDate.ToString("yyyy-MM-dd")
+                        </td>
+                        <td>
+                            1
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
         <p><a class="btn btn-default" href="#">Create your account</a></p>
     </div>
 </div>

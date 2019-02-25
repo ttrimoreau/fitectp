@@ -1,13 +1,13 @@
 ﻿@using ContosoUniversity.BusinessLayer
 @using ContosoUniversity.DAL
 
-@if (Session["UserId"] == null)
+@if (Session[SessionMessage.UserID] == null)
 {
     <button type="button" class="btn btn-light pull-right" id="connexion"><i class="fas fa-user-circle"></i> @Html.ActionLink("Connexion", "Login", "Authentication")</button>
 }
-@if (Session["UserId"] != null)
+@if (Session[SessionMessage.UserID] != null)
 {
-    int userId = (int)Session["UserId"]; //will be used several times thereafter
+    int userId = (int)Session[SessionMessage.UserID]; //will be used several times thereafter
 
     if(!AvatarView.userHasAvatar(userId))
     {
@@ -18,8 +18,10 @@
         <li class="small_avatar"><img src="~/File?id=@AvatarView.getImage(userId)" alt="avatar" /></li>
     }
 
-    string UserName = Authentication.UserNameFromId(userId);
-    <li>@Html.ActionLink("Hello " + UserName + " !", "Index", "Home")</li>
+    //string UserName = Authentication.UserNameFromId(userId);
 
-    <button type="button" class="btn btn-light pull-right" id="connexion"><i class="fas fa-sign-out-alt"></i> @Html.ActionLink("Logout ", "Logout", "Authentication")</button>
+    Person person = (Person)Session[SessionMessage.User];
+    <li>@Html.ActionLink("Hello " + person.UserName + " !", "Index", "Home")</li>
+
+    <button type="button" class="btn btn-light pull-right" id="connexion"><i class="fas fa-sign-out-alt"></i> @Html.ActionLink("Logout ", "LogOut", "Authentication")</button>
 }

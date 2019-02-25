@@ -7,12 +7,18 @@ namespace ContosoUniversity.Models
 {
     public class Instructor : Person
     {
+        #region Properties
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Hire Date")]
-        public DateTime HireDate { get; set; }
+        public DateTime HireDate { get; set; } 
+        #endregion
 
+        #region Navigation
         public virtual ICollection<Course> Courses { get; set; }
-        public virtual OfficeAssignment OfficeAssignment { get; set; }
+        public virtual OfficeAssignment OfficeAssignment { get; set; } 
+        #endregion
+
+
     }
 }

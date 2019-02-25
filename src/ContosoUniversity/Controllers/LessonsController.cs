@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ContosoUniversity.BL;
 using ContosoUniversity.BusinessLayer;
 using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
@@ -57,6 +58,7 @@ namespace ContosoUniversity.Controllers
         public ActionResult Create()
         {
             DropDownList();
+            TempData["instructorId"] = Session[SessionMessage.UserID];
             return View();
         }
 
@@ -67,12 +69,45 @@ namespace ContosoUniversity.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Lessons lessons)
+        public ActionResult Create(LessonsApiVM lessons)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+
+                    //Check Instructor can have only one coursesession of the same course
+                    List<Lessons> lessonsListe = new List<Lessons>();
+                    lessonsListe = db.Lessons.ToList();
+                    foreach (var item in lessonsListe)
+                    {
+                        if ((int)TempData["instructorId"] == item.InstructorID && lessons.CourseID == item.CourseID)
+                        {
+                            DropDownList();
+                            TempData["instructorId"] = Session[SessionMessage.UserID];
+                            ViewBag.ErrorMessage = ErrorMessages.ErrorMessageSameCourse;
+                            return View();
+                        }
+                    }
+                    //Check minimal duration of one coursesession
+                    if ((lessons.Duration) < 1)
+                    {
+                        DropDownList();
+                        TempData["instructorId"] = Session[SessionMessage.UserID];
+                        ViewBag.ErrorMessage = ErrorMessages.ErrorMessageNegativeTime;
+                        return View();
+                    }
+
+                    ////Check that the day of course is the same of the date start
+                    //if (lessons.Day.ToString() != lessons.DateTime.DayOfWeek.ToString())
+                    //{
+                    //    DropDownList();
+                    //    TempData["instructorId"] = Session[SessionMessage.UserID];
+                    //    ViewBag.ErrorMessage = ErrorMessages.ErrorMessageNotSameDay;
+                    //    return View();
+                    //}
+
+                    lessons.InstructorID = (int)TempData["InstructorID"];
                     lessonB.AddLesson(lessons);
                     return RedirectToAction("Index");
                 }

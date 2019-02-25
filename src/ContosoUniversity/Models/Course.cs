@@ -7,6 +7,7 @@ namespace ContosoUniversity.Models
 {
     public class Course
     {
+        #region Properties
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "Number")]
         public int CourseID { get; set; }
@@ -19,10 +20,13 @@ namespace ContosoUniversity.Models
 
         public int DepartmentID { get; set; }
         [DataType(DataType.Date)]
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } 
+        #endregion
 
+        #region Navigation
         public virtual Department Department { get; set; }
         public virtual ICollection<Enrollment> Enrollments { get; set; }
-        public virtual ICollection<Instructor> Instructors { get; set; }
+        public virtual ICollection<Instructor> Instructors { get; set; } 
+        #endregion
     }
 }

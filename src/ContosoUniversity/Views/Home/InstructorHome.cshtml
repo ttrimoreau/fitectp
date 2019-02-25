@@ -1,0 +1,46 @@
+﻿@using ContosoUniversity.Models
+@using ContosoUniversity.Enum
+@{
+    ViewBag.Title = "InstructorHome";
+}
+
+<h2>InstructorHome</h2>
+<div class="jumbotron">
+    <h1>Contoso University - Instructor</h1>
+</div>
+<div class="row">
+
+    <div>
+        <table class="table table-striped table-bordered">
+            <thead>
+
+                @if (Session["User"] != null)
+                {
+                    Person user = (Person)Session["User"];
+                    <p class="text-center h3">Agenda - @user.FirstMidName.ToUpper() @user.LastName.ToUpper()</p>
+                }
+            </thead>
+            <tr>
+                <th class="text-center">Hours</th>
+                <th class="text-center ">Monday</th>
+                <th class="text-center">Tuesday</th>
+                <th class="text-center">Wednesday</th>
+                <th class="text-center">Thursday</th>
+                <th class="text-center">Friday</th>
+            </tr>
+            @for (int hours = 8; hours <= 19; hours++)
+            {
+                <tr>
+                    <td class="text-center">@hours h - @(hours + 1) h </td>
+                    <td class="text-center">@ViewBag.Lessons[hours][Day.Monday]</td>
+                    <td class="text-center">@ViewBag.Lessons[hours][Day.Tuesday]</td>
+                    <td class="text-center">@ViewBag.Lessons[hours][Day.Wednesday]</td>
+                    <td class="text-center">@ViewBag.Lessons[hours][Day.Thursday]</td>
+                    <td class="text-center">@ViewBag.Lessons[hours][Day.Friday]</td>
+
+                </tr>
+            }
+        </table>
+    </div>
+
+</div>

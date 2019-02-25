@@ -11,6 +11,7 @@ namespace ContosoUniversity.BusinessLayer
         #region StringSession
         public static string UserID = "UserId";
         public static string UserRole = "UserRole";
+        public static string User = "User";
         #endregion
 
         #region Role
