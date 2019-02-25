@@ -23,6 +23,7 @@ namespace ContosoUniversity.BusinessLayer
             return db.People.Find(id).FirstMidName;
         }
 
+        #region CreateUser
         public static void CreatePerson(RegisterVM vm)
         {
             switch (vm.PersonRole)
@@ -37,6 +38,7 @@ namespace ContosoUniversity.BusinessLayer
                     break;
             }
         }
+
 
         public static void CreateStudent(RegisterVM vm)
         {
@@ -64,9 +66,11 @@ namespace ContosoUniversity.BusinessLayer
             p.UserName = vm.UserName;
             db.Instructors.Add(p);
             db.SaveChanges();
-        }
+        } 
+        #endregion
 
 
+        #region Sha256
 
         //Returns the salted and hashed string of inputString (usual use: salted and hashed password)
         public static string SaltAndHash(string inputString)
@@ -90,7 +94,8 @@ namespace ContosoUniversity.BusinessLayer
             }
 
             return Sb.ToString();
-        }
+        } 
+        #endregion
 
     }
 }

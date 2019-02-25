@@ -11,14 +11,21 @@ namespace ContosoUniversity.Models
     public class Lessons
     {
 
+        #region Properties
         [Key]
         public int ID { get; set; }
         public Day Day { get; set; }
+        public int InstructorID { get; set; }
         public int CourseID { get; set; }
         [DataType(DataType.Time)]
         public DateTime HourStart { get; set; }
-        public int Duration { get; set; }
+        public int Duration { get; set; } 
+        #endregion
 
-        public virtual Course Course { get; set; }
+        #region Navigation
+        public virtual Course Course { get; set; } 
+        #endregion
+
+
     }
 }

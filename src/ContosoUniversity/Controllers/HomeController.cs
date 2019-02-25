@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using ContosoUniversity.BusinessLayer;
 using ContosoUniversity.DAL;
+using ContosoUniversity.Enum;
+using ContosoUniversity.Models;
 using ContosoUniversity.ViewModels;
 
 
@@ -22,6 +24,39 @@ namespace ContosoUniversity.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
+            if (Session[SessionMessage.UserID]!=null)
+            {
+                if (Session[SessionMessage.UserRole].ToString()=="Student")
+                {
+                    return View("StudentIndex");
+                }
+                else if (Session[SessionMessage.UserRole].ToString() == "Instructor")
+                {
+                    int id = (int)Session[SessionMessage.UserID];
+                    Dictionary<int, Dictionary<Day, string>> agenda = new Dictionary<int, Dictionary<Day, string>>();
+                    for (int hour = 8; hour <= 19; hour++)
+                    {
+                        Dictionary<Day, string> HourDay = new Dictionary<Day, string>();
+                        foreach (Day day in (Day[])System.Enum.GetValues(typeof(Day)))
+                        {
+                            string libelle = "";
+                            Lessons lesson = db.Lessons.Where(l => (l.InstructorID == id && l.Day == day))
+                                .Where(l => (l.HourStart.Hour == hour || l.HourStart.Hour < hour && (l.HourStart.Hour+(l.Duration/60) > hour)))
+                                .FirstOrDefault();
+                            if (lesson != null)
+                            {
+                                libelle = lesson.Course.Title;
+                            }
+                            HourDay.Add(day, libelle);
+                        }
+                        agenda.Add(hour, HourDay);
+                    }
+                    ViewBag.Lessons = agenda;
+                    return View("InstructorHome");
+                }
+                
+            }
+            ViewBag.Courses = db.Courses.ToList();
             return View();
         }
 

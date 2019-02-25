@@ -14,6 +14,7 @@ namespace ContosoUniversity.DAL
         public DbSet<OfficeAssignment> OfficeAssignments { get; set; }
         public DbSet<Person> People { get; set; }
 
+        
         public DbSet<FileImage> FileImages { get; set; }
 
         public DbSet<Lessons> Lessons { get; set; }

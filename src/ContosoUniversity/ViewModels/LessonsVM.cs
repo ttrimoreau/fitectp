@@ -8,7 +8,7 @@ using System.Web;
 
 namespace ContosoUniversity.ViewModels
 {
-    public class LessonsVM
+    public class LessonsApiVM
     {
         public int ID { get; set; }
         public Day Day { get; set; }
@@ -18,7 +18,9 @@ namespace ContosoUniversity.ViewModels
 
         public int CourseID { get; set; }
 
-        public virtual Course Course { get; set; }
+        public int InstructorID { get; set; }
+        public DateTime DateTime { get; set; }
+
 
     }
 }
