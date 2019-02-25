@@ -3,7 +3,7 @@ namespace ContosoUniversity.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class MAJ : DbMigration
     {
         public override void Up()
         {
@@ -42,7 +42,7 @@ namespace ContosoUniversity.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         LastName = c.String(nullable: false, maxLength: 50),
-                        FirstName = c.String(nullable: false, maxLength: 50),
+                        FirstMidName = c.String(nullable: false, maxLength: 50),
                         UserName = c.String(nullable: false, maxLength: 15),
                         Password = c.String(nullable: false, maxLength: 64),
                         Email = c.String(nullable: false, maxLength: 30),
@@ -98,13 +98,14 @@ namespace ContosoUniversity.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Day = c.Int(nullable: false),
+                        InstructorID = c.Int(nullable: false),
+                        CourseID = c.Int(nullable: false),
                         HourStart = c.DateTime(nullable: false),
                         Duration = c.Int(nullable: false),
-                        Course_CourseID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Course", t => t.Course_CourseID)
-                .Index(t => t.Course_CourseID);
+                .ForeignKey("dbo.Course", t => t.CourseID, cascadeDelete: true)
+                .Index(t => t.CourseID);
             
             CreateTable(
                 "dbo.CourseInstructor",
@@ -182,7 +183,7 @@ namespace ContosoUniversity.Migrations
             DropStoredProcedure("dbo.Department_Delete");
             DropStoredProcedure("dbo.Department_Update");
             DropStoredProcedure("dbo.Department_Insert");
-            DropForeignKey("dbo.Lessons", "Course_CourseID", "dbo.Course");
+            DropForeignKey("dbo.Lessons", "CourseID", "dbo.Course");
             DropForeignKey("dbo.CourseInstructor", "InstructorID", "dbo.Person");
             DropForeignKey("dbo.CourseInstructor", "CourseID", "dbo.Course");
             DropForeignKey("dbo.Course", "DepartmentID", "dbo.Department");
@@ -193,7 +194,7 @@ namespace ContosoUniversity.Migrations
             DropForeignKey("dbo.FileImage", "PersonID", "dbo.Person");
             DropIndex("dbo.CourseInstructor", new[] { "InstructorID" });
             DropIndex("dbo.CourseInstructor", new[] { "CourseID" });
-            DropIndex("dbo.Lessons", new[] { "Course_CourseID" });
+            DropIndex("dbo.Lessons", new[] { "CourseID" });
             DropIndex("dbo.OfficeAssignment", new[] { "InstructorID" });
             DropIndex("dbo.Enrollment", new[] { "StudentID" });
             DropIndex("dbo.Enrollment", new[] { "CourseID" });

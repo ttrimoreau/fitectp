@@ -168,9 +168,9 @@
     </Compile>
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\Logger.cs" />
-    <Compile Include="Migrations\201902220904506_Initial.cs" />
-    <Compile Include="Migrations\201902220904506_Initial.Designer.cs">
-      <DependentUpon>201902220904506_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201902251045487_MAJ.cs" />
+    <Compile Include="Migrations\201902251045487_MAJ.Designer.cs">
+      <DependentUpon>201902251045487_MAJ.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -285,8 +285,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201902220904506_Initial.resx">
-      <DependentUpon>201902220904506_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902251045487_MAJ.resx">
+      <DependentUpon>201902251045487_MAJ.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
