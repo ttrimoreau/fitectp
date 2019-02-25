@@ -5,7 +5,7 @@
     ViewBag.Title = "Register User";
 }
 
-<div>
+<div class="bloc">
 
     <h2>Register new account</h2>
 
@@ -56,7 +56,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PersonRole, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-12">
-                @Html.EnumDropDownListFor(model => model.PersonRole, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EnumDropDownListFor(model => model.PersonRole, new { onchange = "ToggleHireDateVisibility()", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PersonRole, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -65,7 +65,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-12">
-                @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -75,23 +75,23 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-12">
-                @Html.PasswordFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
             </div>
         </div>
 
         //    HireDate
-        <div class="form-group">
+        <div class="form-group" id="HireDateDiv" visibility: hidden>
             @Html.LabelFor(model => model.HireDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-12">
-                @Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control", Value = DateTime.Now.ToString("yyyy-MM-dd") } })
                 @Html.ValidationMessageFor(model => model.HireDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         //Submit
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-12">
+        <div class="form-group" id="submit">
+            <div class="col-md-offset-2 col-md-12 submit">
                 <input type="submit" value="Register Account" class="btn btn-default" />
             </div>
         </div>
@@ -102,4 +102,25 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+
+        //Sets the default date for input HireDate (required by ViewModel RegisterVM)
+        $(document).ready(function () {
+            var now = new Date();
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            var today = now.getFullYear() + "-" + (month) + "-" + (day);
+            $('#HireDate').val(today);
+        });
+
+        //Shows or hides the visibility of the HireDate section
+        function ToggleHireDateVisibility() {
+            var SelectedRole = PersonRole.options[PersonRole.selectedIndex].text; // Value from DropDown: 'Instructor' or 'Student'
+            if (SelectedRole == 'Instructor') {
+                $("#HireDateDiv").show();
+            } else {
+                $("#HireDateDiv").hide();
+            }
+        }
+</script>
 }

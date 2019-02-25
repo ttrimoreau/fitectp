@@ -4,9 +4,12 @@ using ContosoUniversity.Models;
 using ContosoUniversity.Tests.Tools;
 using Moq;
 using NUnit.Framework;
+using System.IO;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+
 
 namespace ContosoUniversity.Tests.Controllers
 {
@@ -69,13 +72,16 @@ namespace ContosoUniversity.Tests.Controllers
             student.LastName = expectedLastName;
 
             FormDataHelper.PopulateFormData(controllerToTest, student);
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes("whatever"));
 
-            //var result = controllerToTest.EditPost(student.ID) as ViewResult;
+            MyTestPostedFileBase test = new MyTestPostedFileBase(stream, "whatever", "testImage.png");
+
+            var result = controllerToTest.EditPost(student.ID,test) as ViewResult;
 
             Student savedStudent = dbContext.Students.Find(student.ID);
 
-            //Assert.That(result, Is.Not.Null);
-            //Assert.That((result.Model as Student).LastName, Is.EqualTo(expectedLastName));
+            Assert.That(result, Is.Not.Null);
+            Assert.That((result.Model as Student).LastName, Is.EqualTo(expectedLastName));
             Assert.That(savedStudent.LastName, Is.EqualTo(expectedLastName));
         }
     }

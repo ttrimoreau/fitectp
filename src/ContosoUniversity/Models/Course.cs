@@ -18,7 +18,7 @@ namespace ContosoUniversity.Models
         public int Credits { get; set; }
 
         public int DepartmentID { get; set; }
-        //[DataType(DataType.Date)]
+        [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
         public virtual Department Department { get; set; }

@@ -1,12 +1,35 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url("../Images/university.jpg");
+    background-size: cover;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.jumbotron {
+    margin-top: 5px;
+    text-align: center;
+}
+
+.bloc {
+    background-color: white;
+    border-radius: 5px;
+    padding: 0;
+}
+
+.bloc p {
+    padding: 15px;
+}
+
+.bloc h2 {
+    text-align: center;
+    border-bottom: 1px solid grey;
+    padding: 5px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -16,9 +39,97 @@
     white-space: normal;
 }
 
+.navbar {
+    background-color: tan;
+}
+
+.navbar > .container .navbar-brand {
+    color: black;
+    font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: black;
+    font-weight: bold;
+}
+
+#connexion {
+    margin-top: 8px;
+}
+
+#connexion a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
+}
+
+/******** Sign In *********/
+
+#register a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.form-horizontal {
+    margin-top: 20px;
+}
+
+.create {
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+}
+
+.create button{
+    background-color: lightgrey;
+}
+
+.create button:hover {
+    background-color: tan;
+}
+
+.log {
+    margin-right: 50px;
+}
+
+/************ Register ************/
+
+.submit {
+    padding: 0;
+    padding-bottom: 30px;
+}
+
+/*********** Students ***********/
+
+
+
+/********** Edit ************/
+
+#default_avatar img{
+    width: 150px;
+    border-radius: 50%;
+    border: 1px solid lightgrey;
+}
+
+.avatar img{
+    width: 150px;
+    border-radius: 50%;
+}
+
+.small_avatar img {
+    width: 40px;
+    height:40px;
+    border-radius: 50%;
+    margin-top: 5px;
 }
