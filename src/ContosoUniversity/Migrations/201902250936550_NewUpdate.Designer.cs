@@ -7,13 +7,13 @@ namespace ContosoUniversity.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addNavigationLessonsToInstructors : IMigrationMetadata
+    public sealed partial class NewUpdate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addNavigationLessonsToInstructors));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(NewUpdate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201902231738161_addNavigationLessonsToInstructors"; }
+            get { return "201902250936550_NewUpdate"; }
         }
         
         string IMigrationMetadata.Source

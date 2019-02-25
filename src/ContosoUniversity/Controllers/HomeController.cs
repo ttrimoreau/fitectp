@@ -12,7 +12,7 @@ using ContosoUniversity.ViewModels;
 
 namespace ContosoUniversity.Controllers
 {
-    [AuthorizedRoleFilter(Role = "Instructor", Roles ="Student")]
+    [AuthorizedRoleFilter(Role = "Instructor", Roles = "Student")]
     public class HomeController : Controller
     {
         private SchoolContext db = new SchoolContext();
@@ -24,11 +24,12 @@ namespace ContosoUniversity.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            if (Session[SessionMessage.UserID]!=null)
+            ViewBag.Courses = db.Courses.ToList();
+            if (Session[SessionMessage.UserID] != null)
             {
-                if (Session[SessionMessage.UserRole].ToString()=="Student")
+                if (Session[SessionMessage.UserRole].ToString() == "Student")
                 {
-                    return View("StudentIndex");
+                    return View(nameof(HomeController.Index));
                 }
                 else if (Session[SessionMessage.UserRole].ToString() == "Instructor")
                 {
@@ -41,7 +42,7 @@ namespace ContosoUniversity.Controllers
                         {
                             string libelle = "";
                             Lessons lesson = db.Lessons.Where(l => (l.InstructorID == id && l.Day == day))
-                                .Where(l => (l.HourStart.Hour == hour || l.HourStart.Hour < hour && (l.HourStart.Hour+(l.Duration/60) > hour)))
+                                .Where(l => (l.HourStart.Hour == hour || l.HourStart.Hour < hour && (l.HourStart.Hour + (l.Duration / 60) > hour)))
                                 .FirstOrDefault();
                             if (lesson != null)
                             {
@@ -54,9 +55,7 @@ namespace ContosoUniversity.Controllers
                     ViewBag.Lessons = agenda;
                     return View("InstructorHome");
                 }
-                
             }
-            ViewBag.Courses = db.Courses.ToList();
             return View();
         }
 

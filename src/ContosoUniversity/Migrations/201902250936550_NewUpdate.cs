@@ -3,7 +3,7 @@ namespace ContosoUniversity.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class _new : DbMigration
+    public partial class NewUpdate : DbMigration
     {
         public override void Up()
         {
@@ -28,6 +28,7 @@ namespace ContosoUniversity.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Day = c.Int(nullable: false),
+                        InstructorID = c.Int(nullable: false),
                         CourseID = c.Int(nullable: false),
                         HourStart = c.DateTime(nullable: false),
                         Duration = c.Int(nullable: false),

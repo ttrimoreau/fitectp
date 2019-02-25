@@ -40,7 +40,7 @@ namespace ContosoUniversity.Controllers
         // GET: Authentication
         public ActionResult Index()
         {
-            return View(nameof(AuthenticationController.Login),"Authentication");
+            return View(nameof(AuthenticationController.Login));
         }
 
         #region Login
@@ -125,7 +125,7 @@ namespace ContosoUniversity.Controllers
                 else
                 {
                     Authentication.CreatePerson(registerVM);
-                    return RedirectToAction(nameof(AuthenticationController.Login), nameof(AuthenticationController));
+                    return RedirectToAction(nameof(AuthenticationController.Login));
                 }
             }
 
