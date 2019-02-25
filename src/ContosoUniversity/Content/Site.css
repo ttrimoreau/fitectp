@@ -14,11 +14,16 @@
 .jumbotron {
     margin-top: 5px;
     text-align: center;
+    
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
 }
 
 .bloc {
     background-color: white;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     padding: 0;
 }
 

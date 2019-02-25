@@ -3,7 +3,7 @@
 
 @if (Session["UserId"] == null)
 {
-    <button type="button" class="btn btn-light pull-right" id="connexion"><i class="fas fa-user-circle"></i> @Html.ActionLink("Connexion", "Login", "Authentication")</button>
+    <button type="button" class="btn btn-light pull-right" id="connexion" onclick="location.href='@Url.Action("Login", "Authentication")'"><i class="fas fa-user-circle"></i> Connexion</button>
 }
 @if (Session["UserId"] != null)
 {
@@ -11,15 +11,15 @@
 
     if(!AvatarView.userHasAvatar(userId))
     {
-        <li class="small_avatar"><img src="~/Images/default_avatar.png" alt="avatar" /></li>
+        <li class="small_avatar"><img src="~/Images/default_avatar.png" class="img-responsive" alt="avatar" /></li>
     }
     else //if user has avatar
     {
-        <li class="small_avatar"><img src="~/File?id=@AvatarView.getImage(userId)" alt="avatar" /></li>
+        <li class="small_avatar"><img src="~/File?id=@AvatarView.getImage(userId)" class="img-responsive" alt="avatar" /></li>
     }
 
     string UserName = Authentication.UserNameFromId(userId);
     <li>@Html.ActionLink("Hello " + UserName + " !", "Index", "Home")</li>
 
-    <button type="button" class="btn btn-light pull-right" id="connexion"><i class="fas fa-sign-out-alt"></i> @Html.ActionLink("Logout ", "Logout", "Authentication")</button>
+    <button type="button" class="btn btn-light pull-right" id="connexion" onclick="location.href='@Url.Action("Logout", "Authentication")'"><i class="fas fa-sign-out-alt"></i> Logout</button>
 }
