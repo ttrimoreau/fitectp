@@ -5,7 +5,7 @@
     ViewBag.Title = "Register User";
 }
 
-<div>
+<div class="bloc">
 
     <h2>Register new account</h2>
 
@@ -65,7 +65,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-12">
-                @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-12">
-                @Html.PasswordFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -92,8 +92,8 @@
 
 
         //Submit
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-12">
+        <div class="form-group" id="submit">
+            <div class="col-md-offset-2 col-md-12 submit">
                 <input type="submit" value="Register Account" class="btn btn-default" />
             </div>
         </div>
@@ -106,9 +106,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    
-
-    <script type="text/javascript">
+<script type="text/javascript">
 
         //Sets the default date for input HireDate (required by ViewModel RegisterVM)
         $(document).ready(function () {
@@ -128,7 +126,6 @@
                 $("#HireDateDiv").hide();
             }
         }
-    </script>
-
+</script>
 }
 

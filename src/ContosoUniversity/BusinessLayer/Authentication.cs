@@ -19,7 +19,8 @@ namespace ContosoUniversity.BusinessLayer
 
         public static string UserNameFromId(int id)
         {
-            return db.People.Find(id).UserName;
+            
+            return db.People.Find(id).FirstMidName;
         }
 
         public static void CreatePerson(RegisterVM vm)
