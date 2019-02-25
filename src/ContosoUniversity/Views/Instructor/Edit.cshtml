@@ -63,6 +63,11 @@
 
         @Html.Label("Avatar", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
+            <h4>Image file rules :</h4>
+            <ul>
+                <li>The image file can't exceed 100KB</li>
+                <li>The file extension must be ".jpeg" or ".png"</li>
+            </ul>
             <input type="file" id="Avatar" name="upload" />
             <span class="text-danger">@ViewBag.ErrorSize</span>
             <span class="text-danger">@ViewBag.ErrorExtension</span>
