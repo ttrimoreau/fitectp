@@ -6,19 +6,11 @@
 <div class="bloc">
     <h2>Details</h2>
 
-
-    <h4>Student</h4>
-    <hr />
-    
     <dl class="dl-horizontal">
         <dt>
             Avatar
         </dt>
 
-            @*<dd id="default_avatar">
-                <img src="~/Images/default_avatar.png" />
-            </dd>*@
-        
         @if (Model.FileImage.Any(f => f.FileType == ContosoUniversity.Enum.FileType.Avatar))
         {
             <dd class="avatar">
@@ -70,14 +62,16 @@
                 }
             </table>
         </dd>
-        @Html.Partial("_CreatePartial",model:Model)
+        @Html.Partial("_CreatePartial", model: Model)
     </dl>
+    <p>
+        @if (Model.StudentID == (int)Session["UserId"])
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID })
+        }
+        |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
 
-<p>
-    @if (Model.StudentID == (int)Session["UserId"])
-    {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID })
-    }|
-@Html.ActionLink("Back to List", "Index")
-</p>
+
