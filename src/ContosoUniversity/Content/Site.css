@@ -68,6 +68,7 @@ h1, h2, h3 {
     font-weight: bold;
 }
 
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -137,4 +138,10 @@ textarea {
     height:40px;
     border-radius: 50%;
     margin-top: 5px;
+}
+
+/************ Home Instructor *************/
+
+.table tr:nth-child(odd) {
+    background-color: lightgrey;
 }

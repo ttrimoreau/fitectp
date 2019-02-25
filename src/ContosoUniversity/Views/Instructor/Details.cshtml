@@ -3,60 +3,52 @@
 @{
     ViewBag.Title = "Details";
 }
+<div class="bloc">
+    <h2>Details</h2>
 
-<h2>Details</h2>
+    <div>
 
-<div>
-    <h4>Instructor</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        @if (Model.FileImage.Any(f => f.FileType == ContosoUniversity.Enum.FileType.Avatar))
-        {
+        <dl class="dl-horizontal">
+            @if (Model.FileImage.Any(f => f.FileType == ContosoUniversity.Enum.FileType.Avatar))
+            {
+                <dd class="avatar">
+                    <img src="~/File?id=@Model.FileImage.First(f => f.FileType == ContosoUniversity.Enum.FileType.Avatar).ID" alt="avatar"/>
+                </dd>
+            }
+            else
+            {
+                <dd class="avatar">
+                    <img src="~/Images/DefaultAvatar.jpg" class="img-responsive" alt="avatar" />
+                </dd>
+            }
             <dt>
-                Avatar
+                @Html.DisplayNameFor(model => model.OfficeAssignment.Location)
             </dt>
+
             <dd>
-                <img src="~/File?id=@Model.FileImage.First(f => f.FileType == ContosoUniversity.Enum.FileType.Avatar).ID" alt="avatar" style="height:100px" />
+                @Html.DisplayFor(model => model.OfficeAssignment.Location)
             </dd>
-        }
-        <dt>
-            @Html.DisplayNameFor(model => model.OfficeAssignment.Location)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.OfficeAssignment.Location)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.LastName) @Html.DisplayFor(model => model.FirstMidName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.HireDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.HireDate)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstMidName)
-        </dt>
+        </dl>
+    </div>
+    <p>
+        @if (Model.ID == (int)Session["UserId"])
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID })}|
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstMidName)
-        </dd>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HireDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HireDate)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @if (Model.ID == (int)Session["UserId"])
-    {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) }|
-
-@Html.ActionLink("Back to List", "Index")
-</p>
