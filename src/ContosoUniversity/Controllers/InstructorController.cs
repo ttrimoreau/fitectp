@@ -190,7 +190,7 @@ namespace ContosoUniversity.Controllers
 
                         if (extensionIsTrue == false)
                         {
-                            ViewBag.ErrorType = ErrorMessages.ErrorExtension();
+                            ViewBag.ErrorType = CONSTANTS.ErrorExtension;
                             Instructor instructor = db.Instructors
                                                         .Include(s => s.FileImage)
                                                         .Include(i => i.OfficeAssignment)
@@ -206,7 +206,7 @@ namespace ContosoUniversity.Controllers
 
                         if (sizeIsCorrect == false)
                         {
-                            ViewBag.ErrorSize = ErrorMessages.ErrorSize();
+                            ViewBag.ErrorSize = CONSTANTS.ErrorSize;
                             Instructor instructor = db.Instructors
                                                         .Include(s => s.FileImage)
                                                         .Include(i => i.OfficeAssignment)

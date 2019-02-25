@@ -245,7 +245,7 @@ namespace ContosoUniversity.Controllers
 
                         if (extensionIsTrue == false)
                         {
-                            ViewBag.ErrorType = ErrorMessages.ErrorExtension();
+                            ViewBag.ErrorType = CONSTANTS.ErrorExtension;
                             Student student = db.Students.Include(s => s.FileImage).SingleOrDefault(s => s.ID == id);
                             return View(student);
                         }
@@ -255,7 +255,7 @@ namespace ContosoUniversity.Controllers
 
                         if (sizeIsCorrect == false)
                         {
-                            ViewBag.ErrorSize = ErrorMessages.ErrorSize();
+                            ViewBag.ErrorSize = CONSTANTS.ErrorSize;
                             Student student = db.Students.Include(s => s.FileImage).SingleOrDefault(s => s.ID == id);
                             return View(student);
                         }

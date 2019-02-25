@@ -37,23 +37,14 @@ namespace ContosoUniversity.Controllers
         }
         #endregion
 
-        // GET: Authentication
-        public ActionResult Index()
-        {
-            return View("Login","Authentication");
-        }
-
         #region Login
         
         // GET: Authentication
         public ActionResult Login()
         {
             LoginVM viewModel = new LoginVM();
-
             return View(viewModel);
-            
         }
-
 
         
         //POST
@@ -67,32 +58,29 @@ namespace ContosoUniversity.Controllers
                 Person user = db.People.SingleOrDefault(x => x.UserName == vmlogin.UserName && x.Password == HashedAndSaltedPassword);
                 if (user!=null)
                 {
-                    Session[SessionMessage.UserID] = user.ID;
-                    if ((db.Students.FirstOrDefault(p => p.ID == user.ID)) != null)
+                    Session[CONSTANTS.UserID] = user.ID;
+                    if(user is Student)
                     {
-
-                        Session[SessionMessage.UserRole] = SessionMessage.StudentRole;
+                        Session[CONSTANTS.UserRole] = CONSTANTS.StudentRole;
                     }
                     else
                     {
-                        Session[SessionMessage.UserRole] = SessionMessage.InstructorRole;
+                        Session[CONSTANTS.UserRole] = CONSTANTS.InstructorRole;
                     }
                     FormsAuthentication.SetAuthCookie(user.ID.ToString(), false);
                 }
-                
                 else
                 {
-                    ViewData["Error"] = ErrorMessages.LoginMessage;
+                    ViewData["Error"] = CONSTANTS.LoginMessage;
                     return View();
                 }
 
             }
             else
             {
-                ViewData["Error"] = ErrorMessages.LoginMessage;
+                ViewData["Error"] = CONSTANTS.LoginMessage;
                 return View();
             }
-
 
             return RedirectToAction("Index", "Home");
         } 
@@ -115,7 +103,7 @@ namespace ContosoUniversity.Controllers
                 //if UserName is already taken
                 if (db.People.Any(x => x.UserName == registerVM.UserName))
                 {
-                    ViewData["Error"] = "This UserName is already taken";
+                    ViewData["Error"] = CONSTANTS.ErrorRegisterUserNameUnavailable;
                     return View();
                 }
                 else

@@ -16,15 +16,15 @@ namespace ContosoUniversity.BusinessLayer
         {
 
             
-            if (HttpContext.Current.Session[SessionMessage.UserID] == null)
+            if (HttpContext.Current.Session[CONSTANTS.UserID] == null)
             {
                 return false;
             }
-            else if (Role.ToString() == SessionMessage.StudentRole && !(HttpContext.Current.Session[SessionMessage.UserRole].ToString()==SessionMessage.StudentRole))
+            else if (Role.ToString() == CONSTANTS.StudentRole && !(HttpContext.Current.Session[CONSTANTS.UserRole].ToString()== CONSTANTS.StudentRole))
             {
                 return false;
             }
-            else if (Role.ToString() == SessionMessage.InstructorRole && !(HttpContext.Current.Session[SessionMessage.UserRole].ToString()==SessionMessage.InstructorRole))
+            else if (Role.ToString() == CONSTANTS.InstructorRole && !(HttpContext.Current.Session[CONSTANTS.UserRole].ToString()== CONSTANTS.InstructorRole))
             {
                 return false;
             }

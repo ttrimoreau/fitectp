@@ -14,18 +14,18 @@ namespace ContosoUniversity.BusinessLayer
 
     public static class Authentication
     {
+        //The salt used to strengthen password storage
         public const string SALT = "Contoso";
         private static SchoolContext db = new SchoolContext();
 
         public static string UserNameFromId(int id)
         {
-            
             return db.People.Find(id).FirstMidName;
         }
 
+        //At registration time, saves the person's data into the database
         public static void CreatePerson(RegisterVM vm)
         {
-
             switch (vm.PersonRole)
             {
                 case Role.Student:
@@ -38,6 +38,8 @@ namespace ContosoUniversity.BusinessLayer
                     throw new NotImplementedException("Attempting to register a non-Student / non-Instructor");
             }
         }
+
+        //Create a student in Person table
 
         public static void CreateStudent(RegisterVM vm)
         {
@@ -53,6 +55,7 @@ namespace ContosoUniversity.BusinessLayer
             db.SaveChanges();
         }
 
+        //Create a student in Person table
         public static void CreateInstructor(RegisterVM vm)
         {
             Instructor p = new Instructor();
@@ -66,8 +69,6 @@ namespace ContosoUniversity.BusinessLayer
             db.Instructors.Add(p);
             db.SaveChanges();
         }
-
-
 
         //Returns the salted and hashed string of inputString (usual use: salted and hashed password)
         public static string SaltAndHash(string inputString)
@@ -87,7 +88,7 @@ namespace ContosoUniversity.BusinessLayer
                 Byte[] result = hash.ComputeHash(enc.GetBytes(value));
 
                 foreach (Byte b in result)
-                    Sb.Append(b.ToString("x2"));
+                    Sb.Append(b.ToString("x2")); //Conversion to hexadecimal
             }
 
             return Sb.ToString();

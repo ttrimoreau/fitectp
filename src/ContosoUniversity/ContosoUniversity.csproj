@@ -135,12 +135,10 @@
     <Compile Include="BusinessLayer\Authentication.cs" />
     <Compile Include="BusinessLayer\LessonsBusiness.cs" />
     <Compile Include="BusinessLayer\AuthorizedRoleFilter.cs" />
-    <Compile Include="BusinessLayer\SessionMessage.cs" />
     <Compile Include="BusinessLayer\AvatarView.cs" />
     <Compile Include="BusinessLayer\UploadImage.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="BusinessLayer\CheckImage.cs" />
-    <Compile Include="BusinessLayer\ErrorMessages.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessLayer\CONSTANTS.cs" />
     <Compile Include="Controllers\api\StudentsController.cs" />
