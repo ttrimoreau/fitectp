@@ -27,7 +27,7 @@ namespace ContosoUniversity.BusinessLayer
                 .Where(c => !listCourse.HasValue || c.Course.CourseID == courseId)
                 .OrderBy(c => c.ID);
         }
-        public void AddLesson(LessonsVM lessonVM)
+        public void AddLesson(LessonsApiVM lessonVM)
         {
             Lessons lesson = new Lessons
             {

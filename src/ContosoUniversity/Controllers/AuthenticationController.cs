@@ -134,11 +134,17 @@ namespace ContosoUniversity.Controllers
         #endregion
 
         #region LogOut
-        [AuthorizedRoleFilter(Role = "Student", Roles = "Instructor")]
+        //[AuthorizedRoleFilter(Role = "Student", Roles = "Instructor")]
+
         // GET: Authentication
         public ActionResult LogOut()
         {
+            if (Session[SessionMessage.User]==null)
+            {
+                return RedirectToAction(nameof(HomeController.About), "Home");
+            }
             Session.RemoveAll();
+            Session.Clear();
             FormsAuthentication.SignOut();
 
             return RedirectToAction(nameof(HomeController.Index),"Home");

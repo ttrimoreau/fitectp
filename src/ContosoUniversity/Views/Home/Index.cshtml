@@ -11,7 +11,7 @@
         <h2>Welcome to Contoso University</h2>
         @if (Session[SessionMessage.UserRole] != null)
         {
-            Person user = (Person)Session[SessionMessage.UserRole];
+            Person user = (Person)Session[SessionMessage.User];
             <p>Hello @user.FirstMidName.ToUpper() @user.LastName.ToUpper()</p>
             if (user is Student)
             {

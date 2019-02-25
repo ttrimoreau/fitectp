@@ -69,7 +69,7 @@ namespace ContosoUniversity.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(LessonsVM lessons)
+        public ActionResult Create(LessonsApiVM lessons)
         {
             try
             {

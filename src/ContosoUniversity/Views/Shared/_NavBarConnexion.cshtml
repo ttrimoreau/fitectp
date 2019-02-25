@@ -23,5 +23,5 @@
     Person person = (Person)Session[SessionMessage.User];
     <li>@Html.ActionLink("Hello " + person.UserName + " !", "Index", "Home")</li>
 
-    <button type="button" class="btn btn-light pull-right" id="connexion"><i class="fas fa-sign-out-alt"></i> @Html.ActionLink("Logout ", "Logout", "Authentication")</button>
+    <button type="button" class="btn btn-light pull-right" id="connexion"><i class="fas fa-sign-out-alt"></i> @Html.ActionLink("Logout ", "LogOut", "Authentication")</button>
 }
