@@ -19,25 +19,20 @@ namespace ContosoUniversity.Controllers
             set { db = value; }
         }
 
-        [HttpPost]
-        public JsonResult IsAlreadySigned(string username)
-        {
-           System.Threading.Thread.Sleep(1000);
-            UsernameAvailable  user = new UsernameAvailable();
-            bool available = user.UsernameIsAvailable(username);
-            return Json(available);
-            //bool prevUser = !db.People.ToList().Exists(c => c.UserName.Equals(username, StringComparison.CurrentCultureIgnoreCase));
-            //return Json(prevUser);
-
-            //if (prevUser. == username)
-            //{
-            //    return Json(false);
-            //}
-            //else
-            //{
-            //    return Json(true);
-            //}
-        }
+        //[HttpPost]
+        //public JsonResult IsAlreadySigned(string username)
+        //{
+        //    System.Threading.Thread.Sleep(1000);
+        //    var prevUser = db.People.Where(c => c.UserName == username).FirstOrDefault();
+        //    if (prevUser == null)
+        //    {
+        //        return Json(true);
+        //    }
+        //    else
+        //    {
+        //        return Json(false);
+        //    }
+        //}
 
         // GET: Authentication
         public ActionResult Index()

@@ -102,32 +102,43 @@
 </div>
 
 @section Scripts {
- 
+
     <script type="text/javascript">
+
+        function delay(callback, ms) {
+            var timer = 0;
+            return function () {
+                var context = this, args = arguments;
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    callback.apply(context, args);
+                }, ms || 0);
+            };
+        }
+
         $(document).ready(function () {
-            $("#UserName").keyup(function () {
+            $("#UserName").keyup(delay(function () {
                 var username = $("#UserName").val();
-                $.ajax({
-                    type: "POST",
-                    url: "/Authentication/IsAlreadySigned",
-                    data: '{username: "' + username + '" }',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        var message = $("#message");
-                        if (response == true) {
-                            //Email available.
-                            message.css("color", "green");
-                            message.html("UserName is available");
+                    $.ajax({
+                        type: "GET",
+                        url: "/API/IsAlreadySigned/" + username,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            var message = $("#message");
+                            if (response == true) {
+                                //UserName available.
+                                message.css("color", "green");
+                                message.html("UserName is available");
+                            }
+                            else {
+                                //UserName not available.
+                                message.css("color", "red");
+                                message.html("Username is NOT available");
+                            }
                         }
-                        else {
-                            //Email not available.
-                            message.css("color", "red");
-                            message.html("Username is NOT available");
-                        }
-                    }
-                });
-            });
+                    });         
+            },500));
         });
     </script>
 }
