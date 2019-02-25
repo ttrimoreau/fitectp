@@ -28,7 +28,7 @@ namespace ContosoUniversity.Controllers
             {
                 if (Session[SessionMessage.UserRole].ToString()=="Student")
                 {
-                    return View("StudentIndex");
+                    return View(nameof(HomeController.Index));
                 }
                 else if (Session[SessionMessage.UserRole].ToString() == "Instructor")
                 {

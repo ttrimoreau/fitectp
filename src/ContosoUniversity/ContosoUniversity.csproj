@@ -149,6 +149,7 @@
     <Compile Include="Controllers\api\StudentsController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\EnrollmentsController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
@@ -191,21 +192,9 @@
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902221408302_new.cs" />
-    <Compile Include="Migrations\201902221408302_new.Designer.cs">
-      <DependentUpon>201902221408302_new.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902231738161_addNavigationLessonsToInstructors.cs" />
-    <Compile Include="Migrations\201902231738161_addNavigationLessonsToInstructors.Designer.cs">
-      <DependentUpon>201902231738161_addNavigationLessonsToInstructors.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902232055493_addNavigationLessonsToInstructors1.cs" />
-    <Compile Include="Migrations\201902232055493_addNavigationLessonsToInstructors1.Designer.cs">
-      <DependentUpon>201902232055493_addNavigationLessonsToInstructors1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902250924021_deleteNavigationLessonsToInstructors.cs" />
-    <Compile Include="Migrations\201902250924021_deleteNavigationLessonsToInstructors.Designer.cs">
-      <DependentUpon>201902250924021_deleteNavigationLessonsToInstructors.cs</DependentUpon>
+    <Compile Include="Migrations\201902250936550_NewUpdate.cs" />
+    <Compile Include="Migrations\201902250936550_NewUpdate.Designer.cs">
+      <DependentUpon>201902250936550_NewUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -338,17 +327,8 @@
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902221408302_new.resx">
-      <DependentUpon>201902221408302_new.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902231738161_addNavigationLessonsToInstructors.resx">
-      <DependentUpon>201902231738161_addNavigationLessonsToInstructors.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902232055493_addNavigationLessonsToInstructors1.resx">
-      <DependentUpon>201902232055493_addNavigationLessonsToInstructors1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902250924021_deleteNavigationLessonsToInstructors.resx">
-      <DependentUpon>201902250924021_deleteNavigationLessonsToInstructors.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902250936550_NewUpdate.resx">
+      <DependentUpon>201902250936550_NewUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
